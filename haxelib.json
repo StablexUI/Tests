@@ -1,0 +1,14 @@
+{
+    "name"         : "stablexui-tests",
+    "url"          : "https://github.com/RealyUniqueName/StablexUI-Tests",
+    "license"      : "MIT",
+    "tags"         : ["stablexui"],
+    "description"  : "Unit tests for StablexUI.",
+    "version"      : "0.1.0",
+    "releasenote"  : "Initial release. ",
+    "classPath"    : "src",
+    "contributors" : ["RealyUniqueName"],
+    "dependencies" : {
+        "hunit" : ""
+    }
+}
