@@ -9,6 +9,7 @@
     "classPath"    : "src",
     "contributors" : ["RealyUniqueName"],
     "dependencies" : {
-        "hunit" : ""
+        "hunit"          : "",
+        "stablexui-core" : ""
     }
 }

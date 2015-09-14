@@ -1,5 +1,2 @@
--lib stablexui-core
--lib exception
--lib hunit
 -dce full
 -debug
