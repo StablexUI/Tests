@@ -115,7 +115,7 @@ class SignalTest extends TestCase
 
 
     @test
-    public function dispatch_noListenersRemovalDuringDispatch_allListenersCalled () : Void
+    public function dispatch_listenersListIsNotChangedDuringDispatch_allListenersCalled () : Void
     {
         var signal = new Signal<Widget->Void>();
         var listenersCalled = 0;
@@ -155,6 +155,23 @@ class SignalTest extends TestCase
 
 
     @test
+    public function dispatch_someListenersAddedDuringDispatch_newListenersNotCalled () : Void
+    {
+        var signal = new Signal<Widget->Void>();
+        var newListenerCalled = false;
+        var newListener = function(w) newListenerCalled = true;
+
+        for (i in 0...2) {
+            signal.invoke(function(w) signal.invoke(newListener));
+        }
+
+        signal.dispatch(new Widget());
+
+        assert.isFalse(newListenerCalled);
+    }
+
+
+    @test
     public function bubbleDispatch_severalLevelsDeepDisplayList_listenersCalledWithCorrectArguments () : Void
     {
         var root   = new Widget();
@@ -181,7 +198,7 @@ class SignalTest extends TestCase
 
 
 private class BubbleTestWidget extends Widget {
-    public var onBubble : Signal<Widget->Widget->Void>;
+    public var onBubble : Signal<BubbleTestWidget->BubbleTestWidget->Void>;
 
     public function new ()
     {
