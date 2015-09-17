@@ -901,7 +901,7 @@ class WidgetTest extends TestCase
 
 
     @test
-    public function right_dependsOnParentResize_backendNotified () : Void
+    public function right_selectedWhileParentWidthChanged_backendNotified () : Void
     {
         var parent = new Widget();
         var widget = mock(Widget).create();
@@ -911,7 +911,7 @@ class WidgetTest extends TestCase
 
         expect(backend).widgetMoved().exactly(2);
 
-        widget.right.pct = 10;
+        widget.right.px  = 10;
         parent.width.dip = 100;
     }
 
@@ -933,7 +933,7 @@ class WidgetTest extends TestCase
 
 
     @test
-    public function bottom_dependsOnParentResize_backendNotified () : Void
+    public function bottom_selectedWhileParentHeightChanged_backendNotified () : Void
     {
         var parent = new Widget();
         var widget = mock(Widget).create();
@@ -943,7 +943,7 @@ class WidgetTest extends TestCase
 
         expect(backend).widgetMoved().exactly(2);
 
-        widget.bottom.pct = 10;
+        widget.bottom.px  = 10;
         parent.height.dip = 100;
     }
 
