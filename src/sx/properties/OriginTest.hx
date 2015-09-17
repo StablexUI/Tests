@@ -25,6 +25,39 @@ class OriginTest extends TestCase
 
 
     @test
+    public function constructor_correctlyPairsProperties () : Void
+    {
+        var width = new Size();
+        var height = new Size();
+
+        var origin = new Origin(
+            function() return width,
+            function() return height
+        );
+
+        assert.equal(origin.right, origin.left.pair());
+        assert.isNull(origin.left.ownerSize);
+        assert.equal(width, origin.left.pctSource());
+        assert.isTrue(origin.left.selected);
+
+        assert.equal(origin.left, origin.right.pair());
+        assert.isNull(origin.right.ownerSize);
+        assert.equal(width, origin.right.pctSource());
+        assert.isFalse(origin.right.selected);
+
+        assert.equal(origin.bottom, origin.top.pair());
+        assert.isNull(origin.top.ownerSize);
+        assert.equal(height, origin.top.pctSource());
+        assert.isTrue(origin.top.selected);
+
+        assert.equal(origin.top, origin.bottom.pair());
+        assert.isNull(origin.bottom.ownerSize);
+        assert.equal(height, origin.bottom.pctSource());
+        assert.isFalse(origin.bottom.selected);
+    }
+
+
+    @test
     public function set_valuesBetween0And1_treatedAsPercent () : Void
     {
         var origin = new Origin(

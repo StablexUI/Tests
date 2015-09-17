@@ -1,8 +1,10 @@
 package sx.widgets;
 
 import hunit.TestCase;
+import sx.backend.Backend;
 import sx.exceptions.NotChildException;
 import sx.exceptions.OutOfBoundsException;
+import sx.skins.Skin;
 import sx.widgets.Widget;
 
 
@@ -79,11 +81,11 @@ class WidgetTest extends TestCase
     @test
     public function addChild_firstChild_numChildrenIsOne () : Void
     {
-        var w = new Widget();
+        var widget = new Widget();
 
-        w.addChild(new Widget());
+        widget.addChild(new Widget());
 
-        assert.equal(1, w.numChildren);
+        assert.equal(1, widget.numChildren);
     }
 
 
@@ -139,21 +141,21 @@ class WidgetTest extends TestCase
     @test
     public function removeChild_theOnlyChild_numChildrenIsZero () : Void
     {
-        var w = new Widget();
-        var child = w.addChild(new Widget());
+        var widget = new Widget();
+        var child = widget.addChild(new Widget());
 
-        w.removeChild(child);
+        widget.removeChild(child);
 
-        assert.equal(0, w.numChildren);
+        assert.equal(0, widget.numChildren);
     }
 
 
     @test
     public function contains_checkWidgetItself_returnsTrue () : Void
     {
-        var w = new Widget();
+        var widget = new Widget();
 
-        var contains = w.contains(w);
+        var contains = widget.contains(widget);
 
         assert.isTrue(contains);
     }
@@ -187,9 +189,9 @@ class WidgetTest extends TestCase
     public function contains_checkedWidgetIsNotContainedByChecker_returnsFalse () : Void
     {
         var parent = new Widget();
-        var w = new Widget();
+        var widget = new Widget();
 
-        var contains = parent.contains(w);
+        var contains = parent.contains(widget);
 
         assert.isFalse(contains);
     }
@@ -199,11 +201,11 @@ class WidgetTest extends TestCase
     public function getChildIndex_widgetIsNotAChild_throwsNotChildException () : Void
     {
         var parent = new Widget();
-        var w = new Widget();
+        var widget = new Widget();
 
         expectException(match.type(NotChildException));
 
-        parent.getChildIndex(w);
+        parent.getChildIndex(widget);
     }
 
 
@@ -555,11 +557,11 @@ class WidgetTest extends TestCase
     public function setChildIndex_widgetIsNotChild_throwsNotChildException () : Void
     {
         var parent = new Widget();
-        var w = new Widget();
+        var widget = new Widget();
 
         expectException(match.type(NotChildException));
 
-        parent.setChildIndex(w, 0);
+        parent.setChildIndex(widget, 0);
     }
 
 
@@ -608,11 +610,11 @@ class WidgetTest extends TestCase
     {
         var parent = new Widget();
         var child  = parent.addChild(new Widget());
-        var w      = new Widget();
+        var widget      = new Widget();
 
         expectException(match.type(NotChildException));
 
-        parent.swapChildren(w, child);
+        parent.swapChildren(widget, child);
     }
 
 
@@ -696,24 +698,30 @@ class WidgetTest extends TestCase
 
 
     @test
-    public function width_widthChanged_onResizeInvoked () : Void
+    public function size_changed_invokesOnResize () : Void
     {
-        var w = mock(Widget).create();
+        var resized = 0;
+        var widget = new Widget();
+        widget.onResize.invoke(function (w) resized++);
 
-        expect(w).__resized(w.width).once();
+        widget.width.dip = 10;
+        widget.height.dip = 10;
 
-        w.width.dip = 100;
+        assert.equal(2, resized);
     }
 
 
     @test
-    public function height_heightChanged_onResizeInvoked () : Void
+    public function size_changed_backendNotified () : Void
     {
-        var w = mock(Widget).create();
+        var widget = mock(Widget).create();
+        var backend = mock(Backend).create(widget);
+        modify(widget).backend = backend;
 
-        expect(w).__resized(w.height).once();
+        expect(backend).widgetResized().exactly(2);
 
-        w.height.dip = 100;
+        widget.width.px = 100;
+        widget.height.px = 10;
     }
 
 
@@ -721,118 +729,150 @@ class WidgetTest extends TestCase
     public function coordinates_widgetCreation_coordinatesInitializedCorrectly () : Void
     {
         var parent = new Widget();
-        var w = mock(Widget).create();
-        parent.addChild(w);
+        var widget = mock(Widget).create();
+        parent.addChild(widget);
 
-        assert.equal(w.right, w.left.pair());
-        assert.equal(w.width, w.left.ownerSize());
-        assert.equal(parent.width, w.left.pctSource());
-        assert.isTrue(w.left.selected);
+        assert.equal(widget.right, widget.left.pair());
+        assert.equal(widget.width, widget.left.ownerSize());
+        assert.equal(parent.width, widget.left.pctSource());
+        assert.isTrue(widget.left.selected);
 
-        assert.equal(w.left, w.right.pair());
-        assert.equal(w.width, w.right.ownerSize());
-        assert.equal(parent.width, w.right.pctSource());
-        assert.isFalse(w.right.selected);
+        assert.equal(widget.left, widget.right.pair());
+        assert.equal(widget.width, widget.right.ownerSize());
+        assert.equal(parent.width, widget.right.pctSource());
+        assert.isFalse(widget.right.selected);
 
-        assert.equal(w.bottom, w.top.pair());
-        assert.equal(w.height, w.top.ownerSize());
-        assert.equal(parent.height, w.top.pctSource());
-        assert.isTrue(w.top.selected);
+        assert.equal(widget.bottom, widget.top.pair());
+        assert.equal(widget.height, widget.top.ownerSize());
+        assert.equal(parent.height, widget.top.pctSource());
+        assert.isTrue(widget.top.selected);
 
-        assert.equal(w.top, w.bottom.pair());
-        assert.equal(w.height, w.bottom.ownerSize());
-        assert.equal(parent.height, w.bottom.pctSource());
-        assert.isFalse(w.bottom.selected);
-
-        expect(w).__moved().exactly(4);
-
-        w.left.dip   = 1;
-        w.right.dip  = 1;
-        w.top.dip    = 1;
-        w.bottom.dip = 1;
+        assert.equal(widget.top, widget.bottom.pair());
+        assert.equal(widget.height, widget.bottom.ownerSize());
+        assert.equal(parent.height, widget.bottom.pctSource());
+        assert.isFalse(widget.bottom.selected);
     }
 
 
     @test
     public function size_widgetCreation_sizeInitializedCorrectly () : Void
     {
-        var parent = new Widget();
-        var w = mock(Widget).create();
-        parent.addChild(w);
+        var parent  = new Widget();
+        var widget  = new Widget();
+        parent.addChild(widget);
 
-        assert.equal(parent.width, w.left.pctSource());
-        assert.equal(parent.height, w.height.pctSource());
-
-        expect(w).__resized().exactly(2);
-
-        w.width.dip  = 1;
-        w.height.dip = 1;
+        assert.equal(parent.width, widget.left.pctSource());
+        assert.equal(parent.height, widget.height.pctSource());
     }
 
 
     @test
-    public function width_changed_invokesOnResize () : Void
+    public function position_changed_invokesOnMove () : Void
     {
-        var w = mock(Widget).create();
+        var moved = 0;
+        var widget = new Widget();
+        widget.onMove.invoke(function (w) moved++);
 
-        expect(w).__resized().once();
+        widget.left.dip   = 10;
+        widget.right.dip  = 10;
+        widget.top.dip    = 10;
+        widget.bottom.dip = 10;
 
-        w.width.dip = 10;
+        assert.equal(4, moved);
     }
 
 
     @test
-    public function height_changed_invokesOnResize () : Void
+    public function position_changed_backendNotified () : Void
     {
-        var w = mock(Widget).create();
+        var widget = mock(Widget).create();
+        var backend = mock(Backend).create(widget);
+        modify(widget).backend = backend;
 
-        expect(w).__resized().once();
+        expect(backend).widgetMoved().exactly(4);
 
-        w.height.dip = 10;
+        widget.left.dip   = 10;
+        widget.right.dip  = 10;
+        widget.top.dip    = 10;
+        widget.bottom.dip = 10;
     }
 
 
     @test
-    public function left_changed_invokesOnMove () : Void
+    public function origin_originChanged_backendNotified () : Void
     {
-        var w = mock(Widget).create();
+        var widget = mock(Widget).create();
+        var backend = mock(Backend).create(widget);
+        modify(widget).backend = backend;
 
-        expect(w).__moved().once();
+        expect(backend).widgetOriginChanged().once();
 
-        w.left.dip = 10;
+        widget.origin.set(0.5, 0.5);
     }
 
 
     @test
-    public function right_changed_invokesOnMove () : Void
+    public function scaleX_changed_backendNotified () : Void
     {
-        var w = mock(Widget).create();
+        var widget = mock(Widget).create();
+        var backend = mock(Backend).create(widget);
+        modify(widget).backend = backend;
 
-        expect(w).__moved().once();
+        expect(backend).widgetScaledX().once();
 
-        w.right.dip = 10;
+        widget.scaleX = 0.5;
     }
 
 
     @test
-    public function top_changed_invokesOnMove () : Void
+    public function scaleY_changed_backendNotified () : Void
     {
-        var w = mock(Widget).create();
+        var widget = mock(Widget).create();
+        var backend = mock(Backend).create(widget);
+        modify(widget).backend = backend;
 
-        expect(w).__moved().once();
+        expect(backend).widgetScaledY().once();
 
-        w.top.dip = 10;
+        widget.scaleY = 0.5;
     }
 
 
     @test
-    public function bottom_changed_invokesOnMove () : Void
+    public function rotation_changed_backendNotified () : Void
     {
-        var w = mock(Widget).create();
+        var widget = mock(Widget).create();
+        var backend = mock(Backend).create(widget);
+        modify(widget).backend = backend;
 
-        expect(w).__moved().once();
+        expect(backend).widgetRotated().once();
 
-        w.bottom.dip = 10;
+        widget.rotation = 0.5;
+    }
+
+
+    @test
+    public function alpha_changed_backendNotified () : Void
+    {
+        var widget = mock(Widget).create();
+        var backend = mock(Backend).create(widget);
+        modify(widget).backend = backend;
+
+        expect(backend).widgetAlphaChanged().once();
+
+        widget.alpha = 0.5;
+    }
+
+
+    @test
+    public function visible_changed_backendNotified () : Void
+    {
+        var widget = mock(Widget).create();
+        var backend = mock(Backend).create(widget);
+        modify(widget).backend = backend;
+
+        expect(backend).widgetVisibilityChanged().once();
+
+        widget.visible = false;
     }
 
 
@@ -862,4 +902,48 @@ class WidgetTest extends TestCase
     }
 
 
+    @test
+    public function skin_setSkin_invokesSkinChanged () : Void
+    {
+        var widget = mock(Widget).create();
+
+        expect(widget).__skinChanged().once();
+
+        widget.skin = new Skin();
+    }
+
+
+    @test
+    public function skin_removeSkin_invokesSkinChanged () : Void
+    {
+        var widget = mock(Widget).create();
+
+        expect(widget).__skinChanged().once();
+
+        widget.skin = null;
+    }
+
+
+    @test
+    public function skin_currentSkinModified_invokesSkinChanged () : Void
+    {
+        var widget = mock(Widget).create();
+        var skin = new DummyWidgetTestSkin();
+
+        expect(widget).__skinChanged().exactly(2);
+
+        widget.skin = skin;
+        skin.pretendChanged();
+    }
+
+
+
+
 }//class WidgetTest
+
+
+
+private class DummyWidgetTestSkin extends Skin
+{
+    public function pretendChanged () if (onChange != null) onChange();
+}
