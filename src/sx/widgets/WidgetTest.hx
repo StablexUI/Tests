@@ -1053,34 +1053,65 @@ class WidgetTest extends TestCase
 
 
     @test
-    public function skin_setSkin_invokesSkinChanged () : Void
+    public function skin_setSkin_backendNotified () : Void
     {
         var widget = mock(Widget).create();
+        var backend = mock(Backend).create(widget);
+        modify(widget).backend = backend;
 
-        expect(widget).__skinChanged().once();
+        expect(backend).widgetSkinChanged().once();
 
         widget.skin = new Skin();
     }
 
 
     @test
-    public function skin_removeSkin_invokesSkinChanged () : Void
+    public function skin_setSkin_invokesSkinUsedBy () : Void
+    {
+        var widget = new Widget();
+        var skin = mock(Skin).create();
+
+        expect(skin).usedBy(widget).once();
+
+        widget.skin = skin;
+    }
+
+
+    @test
+    public function skin_removeSkin_backendNotified () : Void
     {
         var widget = mock(Widget).create();
+        var backend = mock(Backend).create(widget);
+        modify(widget).backend = backend;
 
-        expect(widget).__skinChanged().once();
+        expect(backend).widgetSkinChanged().once();
 
         widget.skin = null;
     }
 
 
     @test
-    public function skin_currentSkinModified_invokesSkinChanged () : Void
+    public function skin_removeSkin_invokesSkinRemoved () : Void
+    {
+        var widget = new Widget();
+        var skin = mock(Skin).create();
+        widget.skin = skin;
+
+        expect(skin).removed().once();
+
+        widget.skin = null;
+    }
+
+
+    @test
+    public function skin_currentSkinModified_backendNotified () : Void
     {
         var widget = mock(Widget).create();
+        var backend = mock(Backend).create(widget);
+        modify(widget).backend = backend;
         var skin = new DummyWidgetTestSkin();
 
-        expect(widget).__skinChanged().exactly(2);
+        expect(backend).widgetSkinChanged().exactly(2);
 
         widget.skin = skin;
         skin.pretendChanged();
