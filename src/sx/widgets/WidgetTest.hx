@@ -479,6 +479,20 @@ class WidgetTest extends TestCase
 
 
     @test
+    public function removeChildren_childrenRemoved_decreasesNumChildrenCorrectly () : Void
+    {
+        var widget = new Widget();
+        for (i in 0...5) widget.addChild(new Widget());
+        var numChildren = widget.numChildren;
+
+        widget.removeChildren(0, 2);
+
+        var expected = numChildren - 3;
+        assert.equal(expected, widget.numChildren);
+    }
+
+
+    @test
     public function removeChildren_defaultIndexes_removesAllChildren () : Void
     {
         var parent = new Widget();
@@ -684,17 +698,44 @@ class WidgetTest extends TestCase
     }
 
 
-    // @test
-    // public function width_parentWidthChangedWhilePercentageUnits_invokesOnResize () : Void
-    // {
-    //     var parent = new Widget();
-    //     var child = parent.addChild(new Widget());
-    //     parent.width.dip = 50;
+    @test
+    public function onResize_parentWidthChangeWhileWidthPercent_dispatchedOnceWithWidth () : Void
+    {
+        var callAmount = 0;
+        var withWidth  = false;
+        var parent = new Widget();
+        var child = parent.addChild(new Widget());
+        child.width.pct = 20;
+        child.onResize.invoke(function(w,s,u,p) {
+            callAmount ++;
+            withWidth = (s == child.width);
+        });
 
-    //     child.width.pct = 20;
+        parent.width.dip = 50;
 
-    //     assert.equal(10., child.width.dip);
-    // }
+        assert.equal(1, callAmount);
+        assert.isTrue(withWidth);
+    }
+
+
+    @test
+    public function onResize_parentHeightChangeWhileHeightPercent_dispatchedOnceWithHeight () : Void
+    {
+        var callAmount = 0;
+        var withHeight  = false;
+        var parent = new Widget();
+        var child = parent.addChild(new Widget());
+        child.height.pct = 20;
+        child.onResize.invoke(function(w,s,u,p) {
+            callAmount ++;
+            withHeight = (s == child.height);
+        });
+
+        parent.height.dip = 50;
+
+        assert.equal(1, callAmount);
+        assert.isTrue(withHeight);
+    }
 
 
     @test
@@ -780,19 +821,51 @@ class WidgetTest extends TestCase
 
 
     @test
-    public function position_changed_invokesOnMove () : Void
+    public function width_dependsOnParentResize_backendNotified () : Void
     {
-        var moved = 0;
-        var widget = new Widget();
-        widget.onMove.invoke(function (w,s,u,v) moved++);
+        var parent = new Widget();
+        var widget = mock(Widget).create();
+        var backend = mock(Backend).create(widget);
+        modify(widget).backend = backend;
+        parent.addChild(widget);
 
-        widget.left.dip   = 10;
-        widget.right.dip  = 10;
-        widget.top.dip    = 10;
-        widget.bottom.dip = 10;
+        expect(backend).widgetResized().exactly(2);
 
-        assert.equal(4, moved);
+        widget.width.pct = 10;
+        parent.width.dip = 100;
     }
+
+
+    @test
+    public function height_dependsOnParentResize_backendNotified () : Void
+    {
+        var parent = new Widget();
+        var widget = mock(Widget).create();
+        var backend = mock(Backend).create(widget);
+        modify(widget).backend = backend;
+        parent.addChild(widget);
+
+        expect(backend).widgetResized().exactly(2);
+
+        widget.height.pct = 10;
+        parent.height.dip = 100;
+    }
+
+
+    // @test
+    // public function position_changed_invokesOnMove () : Void
+    // {
+    //     var moved = 0;
+    //     var widget = new Widget();
+    //     widget.onMove.invoke(function (w,s,u,v) moved++);
+
+    //     widget.left.dip   = 10;
+    //     widget.right.dip  = 10;
+    //     widget.top.dip    = 10;
+    //     widget.bottom.dip = 10;
+
+    //     assert.equal(4, moved);
+    // }
 
 
     @test
@@ -808,6 +881,70 @@ class WidgetTest extends TestCase
         widget.right.dip  = 10;
         widget.top.dip    = 10;
         widget.bottom.dip = 10;
+    }
+
+
+    @test
+    public function left_dependsOnParentResize_backendNotified () : Void
+    {
+        var parent = new Widget();
+        var widget = mock(Widget).create();
+        var backend = mock(Backend).create(widget);
+        modify(widget).backend = backend;
+        parent.addChild(widget);
+
+        expect(backend).widgetMoved().exactly(2);
+
+        widget.left.pct = 10;
+        parent.width.dip = 100;
+    }
+
+
+    @test
+    public function right_dependsOnParentResize_backendNotified () : Void
+    {
+        var parent = new Widget();
+        var widget = mock(Widget).create();
+        var backend = mock(Backend).create(widget);
+        modify(widget).backend = backend;
+        parent.addChild(widget);
+
+        expect(backend).widgetMoved().exactly(2);
+
+        widget.right.pct = 10;
+        parent.width.dip = 100;
+    }
+
+
+    @test
+    public function top_dependsOnParentResize_backendNotified () : Void
+    {
+        var parent = new Widget();
+        var widget = mock(Widget).create();
+        var backend = mock(Backend).create(widget);
+        modify(widget).backend = backend;
+        parent.addChild(widget);
+
+        expect(backend).widgetMoved().exactly(2);
+
+        widget.top.pct = 10;
+        parent.height.dip = 100;
+    }
+
+
+    @test
+    public function bottom_dependsOnParentResize_backendNotified () : Void
+    {
+        var parent = new Widget();
+        var widget = mock(Widget).create();
+        var backend = mock(Backend).create(widget);
+        modify(widget).backend = backend;
+        parent.addChild(widget);
+
+        expect(backend).widgetMoved().exactly(2);
+
+        widget.bottom.pct = 10;
+        parent.height.dip = 100;
     }
 
 
@@ -948,9 +1085,6 @@ class WidgetTest extends TestCase
         widget.skin = skin;
         skin.pretendChanged();
     }
-
-
-
 
 }//class WidgetTest
 
