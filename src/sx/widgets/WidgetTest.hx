@@ -684,6 +684,19 @@ class WidgetTest extends TestCase
     }
 
 
+    // @test
+    // public function width_parentWidthChangedWhilePercentageUnits_invokesOnResize () : Void
+    // {
+    //     var parent = new Widget();
+    //     var child = parent.addChild(new Widget());
+    //     parent.width.dip = 50;
+
+    //     child.width.pct = 20;
+
+    //     assert.equal(10., child.width.dip);
+    // }
+
+
     @test
     public function height_percentageUnits_calculatedCorrectly () : Void
     {
@@ -702,7 +715,7 @@ class WidgetTest extends TestCase
     {
         var resized = 0;
         var widget = new Widget();
-        widget.onResize.invoke(function (w) resized++);
+        widget.onResize.invoke(function (w,s,u,v) resized++);
 
         widget.width.dip = 10;
         widget.height.dip = 10;
@@ -771,7 +784,7 @@ class WidgetTest extends TestCase
     {
         var moved = 0;
         var widget = new Widget();
-        widget.onMove.invoke(function (w) moved++);
+        widget.onMove.invoke(function (w,s,u,v) moved++);
 
         widget.left.dip   = 10;
         widget.right.dip  = 10;

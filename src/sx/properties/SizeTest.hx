@@ -1,6 +1,7 @@
 package sx.properties;
 
 import hunit.TestCase;
+import sx.geom.Orientation;
 import sx.geom.Unit;
 import sx.properties.Size;
 
@@ -14,11 +15,55 @@ class SizeTest extends TestCase
 {
 
     @test
+    public function isVertical_vertical_returnsTrue () : Void
+    {
+        var size = new Size(Vertical);
+
+        var isVertical = size.isVertical();
+
+        assert.isTrue(isVertical);
+    }
+
+
+    @test
+    public function isVertical_nonVertical_returnsFalse () : Void
+    {
+        var size = new Size(Horizontal);
+
+        var isVertical = size.isVertical();
+
+        assert.isFalse(isVertical);
+    }
+
+
+    @test
+    public function isHorizontal_horizontal_returnsTrue () : Void
+    {
+        var size = new Size(Horizontal);
+
+        var isHorizontal = size.isHorizontal();
+
+        assert.isTrue(isHorizontal);
+    }
+
+
+    @test
+    public function isHorizontal_nonHorizontal_returnsFalse () : Void
+    {
+        var size = new Size(Vertical);
+
+        var isHorizontal = size.isHorizontal();
+
+        assert.isFalse(isHorizontal);
+    }
+
+
+    @test
     public function onChange_anySetter_alwaysInvokesOnChange () : Void
     {
         var size = new Size();
         var callCounter = 0;
-        size.onChange = function() callCounter++;
+        size.onChange = function(p,u,v) callCounter++;
 
         size.px  = 1;
         size.dip = 1;
@@ -138,72 +183,72 @@ class SizeTest extends TestCase
     }
 
 
-    // @test
-    // public function dip_set_onChangeWithCorrectArguments () : Void
-    // {
-    //     var property : Size = null;
-    //     var units = Percent;
-    //     var value = 0.;
+    @test
+    public function dip_set_onChangeWithCorrectArguments () : Void
+    {
+        var property : Size = null;
+        var units = Percent;
+        var value = 0.;
 
-    //     var size = new Size();
-    //     size.px  = 10;
-    //     size.onChange = function (p, u, v) {
-    //         property = p;
-    //         units    = u;
-    //         value    = v;
-    //     }
+        var size = new Size();
+        size.px  = 10;
+        size.onChange = function (p, u, v) {
+            property = p;
+            units    = u;
+            value    = v;
+        }
 
-    //     size.dip = 5;
+        size.dip = 5;
 
-    //     assert.equal(size, property);
-    //     assert.equal(Pixel, units);
-    //     assert.equal(10., value);
-    // }
-
-
-    // @test
-    // public function px_set_onChangeWithCorrectArguments () : Void
-    // {
-    //     var property : Size = null;
-    //     var units = Percent;
-    //     var value = 0.;
-
-    //     var size = new Size();
-    //     size.dip  = 10;
-    //     size.onChange = function (p, u, v) {
-    //         property = p;
-    //         units    = u;
-    //         value    = v;
-    //     }
-
-    //     size.px = 5;
-
-    //     assert.equal(size, property);
-    //     assert.equal(Dip, units);
-    //     assert.equal(10., value);
-    // }
+        assert.equal(size, property);
+        assert.equal(Pixel, units);
+        assert.equal(10., value);
+    }
 
 
-    // @test
-    // public function pct_set_onChangeWithCorrectArguments () : Void
-    // {
-    //     var property : Size = null;
-    //     var units = Dip;
-    //     var value = 0.;
+    @test
+    public function px_set_onChangeWithCorrectArguments () : Void
+    {
+        var property : Size = null;
+        var units = Percent;
+        var value = 0.;
 
-    //     var size = new Size();
-    //     size.px  = 10;
-    //     size.onChange = function (p, u, v) {
-    //         property = p;
-    //         units    = u;
-    //         value    = v;
-    //     }
+        var size = new Size();
+        size.dip  = 10;
+        size.onChange = function (p, u, v) {
+            property = p;
+            units    = u;
+            value    = v;
+        }
 
-    //     size.pct = 5;
+        size.px = 5;
 
-    //     assert.equal(size, property);
-    //     assert.equal(Pixel, units);
-    //     assert.equal(10., value);
-    // }
+        assert.equal(size, property);
+        assert.equal(Dip, units);
+        assert.equal(10., value);
+    }
+
+
+    @test
+    public function pct_set_onChangeWithCorrectArguments () : Void
+    {
+        var property : Size = null;
+        var units = Dip;
+        var value = 0.;
+
+        var size = new Size();
+        size.px  = 10;
+        size.onChange = function (p, u, v) {
+            property = p;
+            units    = u;
+            value    = v;
+        }
+
+        size.pct = 5;
+
+        assert.equal(size, property);
+        assert.equal(Pixel, units);
+        assert.equal(10., value);
+    }
 
 }//class SizeTest
