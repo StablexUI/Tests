@@ -24,6 +24,7 @@ class StablexUITests
     {
         var suite = new hunit.TestSuite();
         suite.addDirectory('sx');
+        HUnit.addTestsFromHUnitFlag(suite);
         suite.run();
     }
 
