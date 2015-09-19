@@ -37,11 +37,11 @@ class AutoSizeTest extends TestCase
 
 
     @test
-    public function set_always_invokesOnChange () : Void
+    public function set_always_invokesOnChangeWithTrueTrue () : Void
     {
         var onChangeInvoked = false;
         var autoSize = new AutoSize(false);
-        autoSize.onChange = function () onChangeInvoked = true;
+        autoSize.onChange = function (w,h) onChangeInvoked = (w && h);
 
         autoSize.set(false);
 
@@ -50,11 +50,11 @@ class AutoSizeTest extends TestCase
 
 
     @test
-    public function width_changed_invokesOnChange () : Void
+    public function width_changed_invokesOnChangeWithTrueFalse () : Void
     {
         var onChangeInvoked = false;
         var autoSize = new AutoSize();
-        autoSize.onChange = function () onChangeInvoked = true;
+        autoSize.onChange = function (w,h) onChangeInvoked = (w && !h);
 
         autoSize.width = true;
 
@@ -63,11 +63,11 @@ class AutoSizeTest extends TestCase
 
 
     @test
-    public function height_changed_invokesOnChange () : Void
+    public function height_changed_invokesOnChangeWithFalseTrue () : Void
     {
         var onChangeInvoked = false;
         var autoSize = new AutoSize();
-        autoSize.onChange = function () onChangeInvoked = true;
+        autoSize.onChange = function (w,h) onChangeInvoked = (!w && h);
 
         autoSize.height = true;
 
