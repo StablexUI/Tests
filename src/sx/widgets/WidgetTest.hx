@@ -828,10 +828,10 @@ class WidgetTest extends TestCase
         var backend = mock(Backend).create(widget);
         modify(widget).backend = backend;
         parent.addChild(widget);
-
-        expect(backend).widgetResized().exactly(2);
-
         widget.width.pct = 10;
+
+        expect(backend).widgetResized().once();
+
         parent.width.dip = 100;
     }
 
@@ -844,10 +844,10 @@ class WidgetTest extends TestCase
         var backend = mock(Backend).create(widget);
         modify(widget).backend = backend;
         parent.addChild(widget);
-
-        expect(backend).widgetResized().exactly(2);
-
         widget.height.pct = 10;
+
+        expect(backend).widgetResized().once();
+
         parent.height.dip = 100;
     }
 
@@ -892,10 +892,10 @@ class WidgetTest extends TestCase
         var backend = mock(Backend).create(widget);
         modify(widget).backend = backend;
         parent.addChild(widget);
-
-        expect(backend).widgetMoved().exactly(2);
-
         widget.left.pct = 10;
+
+        expect(backend).widgetMoved().once();
+
         parent.width.dip = 100;
     }
 
@@ -908,10 +908,10 @@ class WidgetTest extends TestCase
         var backend = mock(Backend).create(widget);
         modify(widget).backend = backend;
         parent.addChild(widget);
+        widget.right.px = 10;
 
-        expect(backend).widgetMoved().exactly(2);
+        expect(backend).widgetMoved().once();
 
-        widget.right.px  = 10;
         parent.width.dip = 100;
     }
 
@@ -924,10 +924,10 @@ class WidgetTest extends TestCase
         var backend = mock(Backend).create(widget);
         modify(widget).backend = backend;
         parent.addChild(widget);
-
-        expect(backend).widgetMoved().exactly(2);
-
         widget.top.pct = 10;
+
+        expect(backend).widgetMoved().once();
+
         parent.height.dip = 100;
     }
 
@@ -940,10 +940,10 @@ class WidgetTest extends TestCase
         var backend = mock(Backend).create(widget);
         modify(widget).backend = backend;
         parent.addChild(widget);
+        widget.bottom.px = 10;
 
-        expect(backend).widgetMoved().exactly(2);
+        expect(backend).widgetMoved().once();
 
-        widget.bottom.px  = 10;
         parent.height.dip = 100;
     }
 
@@ -1110,10 +1110,10 @@ class WidgetTest extends TestCase
         var backend = mock(Backend).create(widget);
         modify(widget).backend = backend;
         var skin = new DummyWidgetTestSkin();
-
-        expect(backend).widgetSkinChanged().exactly(2);
-
         widget.skin = skin;
+
+        expect(backend).widgetSkinChanged().once();
+
         skin.pretendChanged();
     }
 

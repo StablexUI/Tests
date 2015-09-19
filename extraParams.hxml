@@ -1,3 +1,4 @@
+-main StablexUITests
 --no-inline
 -dce full
 -debug
