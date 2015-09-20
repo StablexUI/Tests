@@ -949,6 +949,34 @@ class WidgetTest extends TestCase
 
 
     @test
+    public function position_setByRightWidthChanged_invokesBackendWidgetMoved () : Void
+    {
+        var widget = mock(Widget).create();
+        var backend = mock(Backend).create(widget);
+        modify(widget).backend = backend;
+        widget.right.px = 10;
+
+        expect(backend).widgetMoved().once();
+
+        widget.width.px = 100;
+    }
+
+
+    @test
+    public function position_setByBottomHeightChanged_invokesBackendWidgetMoved () : Void
+    {
+        var widget = mock(Widget).create();
+        var backend = mock(Backend).create(widget);
+        modify(widget).backend = backend;
+        widget.right.px = 10;
+
+        expect(backend).widgetMoved().once();
+
+        widget.width.px = 100;
+    }
+
+
+    @test
     public function origin_originChanged_backendNotified () : Void
     {
         var widget = mock(Widget).create();
