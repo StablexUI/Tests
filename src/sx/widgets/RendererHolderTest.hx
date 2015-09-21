@@ -35,7 +35,7 @@ class RendererHolderTest extends TestCase
 
 
     @test
-    public function autoSize_autoSizeIsFalseRendererResized_widgetNotResized () : Void
+    public function autoSize_autoSizeIsFalseRendererResized_rendererOnResizeListenerIsDisabled () : Void
     {
         var renderer = mock(Renderer).create();
         var rendererResized = null;
@@ -44,11 +44,7 @@ class RendererHolderTest extends TestCase
         var holder = new TestingRendererHolder(renderer);
         holder.autoSize.set(false);
 
-        //simulate callback invokation by renderer
-        rendererResized(100, 200);
-
-        assert.equal(0., holder.width.px);
-        assert.equal(0., holder.height.px);
+        assert.isNull(rendererResized);
     }
 
 
