@@ -13,34 +13,9 @@ import sx.properties.metric.Units;
 class PaddingTest extends TestCase
 {
 
-    @test
-    public function dip_set_changeAllComponentsToDipsAndCallOnChangeWithTrueTrueOnce () : Void
-    {
-        var callCount = 0;
-        var onChangeWithTrueTrue = false;
-        var padding = new Padding();
-        padding.onChange = function (h, v) {
-            callCount ++;
-            onChangeWithTrueTrue = (h && v);
-        }
-
-        padding.dip = 10;
-
-        assert.equal(1, callCount);
-        assert.isTrue(onChangeWithTrueTrue);
-        assert.equal(Dip, padding.left.units);
-        assert.equal(Dip, padding.right.units);
-        assert.equal(Dip, padding.top.units);
-        assert.equal(Dip, padding.bottom.units);
-        assert.equal(10., padding.left.dip);
-        assert.equal(10., padding.right.dip);
-        assert.equal(10., padding.top.dip);
-        assert.equal(10., padding.bottom.dip);
-    }
-
 
     @test
-    public function px_set_changeAllComponentsToDipsAndCallOnChangeWithTrueTrueOnce () : Void
+    public function set_all_changeAllComponentsToDipsAndCallOnChangeWithTrueTrueOnce () : Void
     {
         var callCount = 0;
         var onChangeWithTrueTrue = false;
@@ -66,29 +41,46 @@ class PaddingTest extends TestCase
 
 
     @test
-    public function pct_set_changeAllComponentsToDipsAndCallOnChangeWithTrueTrueOnce () : Void
+    public function horizontal_set_changeLeftAndRightAndCallOnChangeWithTrueFalseOnce () : Void
     {
         var callCount = 0;
-        var onChangeWithTrueTrue = false;
+        var onChangeWithTrueFalse = false;
         var padding = new Padding();
         padding.onChange = function (h, v) {
             callCount ++;
-            onChangeWithTrueTrue = (h && v);
+            onChangeWithTrueFalse = (h && !v);
         }
 
-        padding.pct = 10;
+        padding.horizontal.pct = 10;
 
         assert.equal(1, callCount);
-        assert.isTrue(onChangeWithTrueTrue);
+        assert.isTrue(onChangeWithTrueFalse);
         assert.equal(Percent, padding.left.units);
         assert.equal(Percent, padding.right.units);
-        assert.equal(Percent, padding.top.units);
-        assert.equal(Percent, padding.bottom.units);
         assert.equal(10., padding.left.pct);
         assert.equal(10., padding.right.pct);
+    }
+
+
+    @test
+    public function vertical_set_changeLeftAndRightAndCallOnChangeWithFalseTrueOnce () : Void
+    {
+        var callCount = 0;
+        var onChangeWithFalseTrue = false;
+        var padding = new Padding();
+        padding.onChange = function (h, v) {
+            callCount ++;
+            onChangeWithFalseTrue = (!h && v);
+        }
+
+        padding.vertical.pct = 10;
+
+        assert.equal(1, callCount);
+        assert.isTrue(onChangeWithFalseTrue);
+        assert.equal(Percent, padding.top.units);
+        assert.equal(Percent, padding.bottom.units);
         assert.equal(10., padding.top.pct);
         assert.equal(10., padding.bottom.pct);
     }
-
 
 }//class PaddingTest
