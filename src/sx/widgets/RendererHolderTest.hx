@@ -104,6 +104,30 @@ class RendererHolderTest extends TestCase
         assert.equal(200., holder.height.px);
     }
 
+
+    @test
+    public function width_setWidthDirectly_changesAutoSizeWidthToFalse () : Void
+    {
+        var holder = new TestingRendererHolder(mock(Renderer).create());
+        holder.autoSize.width = true;
+
+        holder.width.px = 100;
+
+        assert.isFalse(holder.autoSize.width);
+    }
+
+
+    @test
+    public function height_setHeightDirectly_changesAutoSizeHeightToFalse () : Void
+    {
+        var holder = new TestingRendererHolder(mock(Renderer).create());
+        holder.autoSize.height = true;
+
+        holder.height.px = 100;
+
+        assert.isFalse(holder.autoSize.height);
+    }
+
 }//class RendererHolderTest
 
 
