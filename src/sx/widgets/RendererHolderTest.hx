@@ -1,8 +1,8 @@
 package sx.widgets;
 
 import hunit.TestCase;
+import sx.properties.metric.Units;
 import sx.backend.Renderer;
-import sx.geom.Unit;
 import sx.widgets.RendererHolder;
 
 

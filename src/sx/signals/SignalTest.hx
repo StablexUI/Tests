@@ -1,7 +1,6 @@
 package sx.signals;
 
 import hunit.TestCase;
-import sx.geom.Unit;
 import sx.widgets.Widget;
 
 

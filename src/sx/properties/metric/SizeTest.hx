@@ -1,9 +1,9 @@
-package sx.properties;
+package sx.properties.metric;
 
 import hunit.TestCase;
-import sx.geom.Orientation;
-import sx.geom.Unit;
-import sx.properties.Size;
+import sx.properties.Orientation;
+import sx.properties.metric.Units;
+import sx.properties.metric.Size;
 
 
 

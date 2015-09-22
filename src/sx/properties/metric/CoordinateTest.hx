@@ -1,4 +1,4 @@
-package sx.properties;
+package sx.properties.metric;
 
 import hunit.TestCase;
 
