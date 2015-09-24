@@ -127,7 +127,7 @@ class RendererHolderTest extends TestCase
         var holder = new TestingRendererHolder(renderer);
         holder.padding.horizontal.px = 10;
 
-        expect(renderer).setAvailableAreaWidth(80.).once();
+        expect(renderer).setAvailableAreaWidth(match.equal(80.)).once();
 
         holder.width.px = 100;
     }
@@ -152,7 +152,7 @@ class RendererHolderTest extends TestCase
         var holder = new TestingRendererHolder(renderer);
         holder.padding.vertical.px = 10;
 
-        expect(renderer).setAvailableAreaHeight(80.).once();
+        expect(renderer).setAvailableAreaHeight(match.equal(80.)).once();
 
         holder.height.px = 100;
     }
@@ -166,13 +166,13 @@ class RendererHolderTest extends TestCase
         holder.autoSize.width = false;
         holder.width.px = 100;
 
-        expect(renderer).setAvailableAreaWidth(80.).once();
+        expect(renderer).setAvailableAreaWidth(match.equal(80.)).once();
 
         holder.padding.horizontal.px = 10;
     }
 
 
-    @test
+    @test @group('inc')
     public function paddingVertical_changedWhileAutoSizeHeightIsFalse_invokesRendererSetAvailableAreaHeight () : Void
     {
         var renderer = mock(Renderer).create();
@@ -180,7 +180,7 @@ class RendererHolderTest extends TestCase
         holder.autoSize.height = false;
         holder.height.px = 100;
 
-        expect(renderer).setAvailableAreaHeight(80.).once();
+        expect(renderer).setAvailableAreaHeight(match.equal(80.)).once();
 
         holder.padding.vertical.px = 10;
     }
