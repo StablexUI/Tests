@@ -109,6 +109,21 @@ class RendererHolderTest extends TestCase
 
 
     @test
+    public function autoSize_changedToFalse_invokesRendererSetAvailableArea () : Void
+    {
+        var renderer = mock(Renderer).create();
+        var holder = new TestingRendererHolder(renderer);
+        holder.width.px = 100;
+        holder.height.px = 50;
+
+        expect(renderer).setAvailableAreaWidth(100.).once();
+        expect(renderer).setAvailableAreaHeight(50.).once();
+
+        holder.autoSize.set(false);
+    }
+
+
+    @test
     public function width_setWidthDirectly_changesAutoSizeWidthToFalse () : Void
     {
         var holder = new TestingRendererHolder(mock(Renderer).create());
