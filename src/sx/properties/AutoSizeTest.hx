@@ -41,7 +41,7 @@ class AutoSizeTest extends TestCase
     {
         var onChangeInvoked = false;
         var autoSize = new AutoSize(false);
-        autoSize.onChange = function (w,h) onChangeInvoked = (w && h);
+        autoSize.onChange.add(function (w,h) onChangeInvoked = (w && h));
 
         autoSize.set(false);
 
@@ -54,7 +54,7 @@ class AutoSizeTest extends TestCase
     {
         var onChangeInvoked = false;
         var autoSize = new AutoSize();
-        autoSize.onChange = function (w,h) onChangeInvoked = (w && !h);
+        autoSize.onChange.add(function (w,h) onChangeInvoked = (w && !h));
 
         autoSize.width = true;
 
@@ -67,7 +67,7 @@ class AutoSizeTest extends TestCase
     {
         var onChangeInvoked = false;
         var autoSize = new AutoSize();
-        autoSize.onChange = function (w,h) onChangeInvoked = (!w && h);
+        autoSize.onChange.add(function (w,h) onChangeInvoked = (!w && h));
 
         autoSize.height = true;
 

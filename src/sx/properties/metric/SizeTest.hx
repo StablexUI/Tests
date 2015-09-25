@@ -63,7 +63,7 @@ class SizeTest extends TestCase
     {
         var size = new Size();
         var callCounter = 0;
-        size.onChange = function(p,u,v) callCounter++;
+        size.onChange.add(function(p,u,v) callCounter++);
 
         size.px  = 1;
         size.dip = 1;
@@ -192,11 +192,11 @@ class SizeTest extends TestCase
 
         var size = new Size();
         size.px  = 10;
-        size.onChange = function (p, u, v) {
+        size.onChange.add(function (p, u, v) {
             property = p;
             units    = u;
             value    = v;
-        }
+        });
 
         size.dip = 5;
 
@@ -215,11 +215,11 @@ class SizeTest extends TestCase
 
         var size = new Size();
         size.dip  = 10;
-        size.onChange = function (p, u, v) {
+        size.onChange.add(function (p, u, v) {
             property = p;
             units    = u;
             value    = v;
-        }
+        });
 
         size.px = 5;
 
@@ -238,11 +238,11 @@ class SizeTest extends TestCase
 
         var size = new Size();
         size.px  = 10;
-        size.onChange = function (p, u, v) {
+        size.onChange.add(function (p, u, v) {
             property = p;
             units    = u;
             value    = v;
-        }
+        });
 
         size.pct = 5;
 

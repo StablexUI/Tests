@@ -20,10 +20,10 @@ class AlignTest extends TestCase
         var callCount   = 0;
         var bothChanged = false;
         var align       = new Align();
-        align.onChange  = function (h, v) {
+        align.onChange.add(function (h, v) {
             callCount ++;
             bothChanged = (v && h);
-        }
+        });
 
         align.set(Left, Top);
 
@@ -38,10 +38,10 @@ class AlignTest extends TestCase
         var callCount = 0;
         var calledWithTrueFalse = false;
         var align = new Align();
-        align.onChange = function (h, v) {
+        align.onChange.add(function (h, v) {
             callCount ++;
             calledWithTrueFalse = (h && !v);
-        }
+        });
 
         align.horizontal = Left;
 
@@ -56,10 +56,10 @@ class AlignTest extends TestCase
         var callCount = 0;
         var calledWithFalseTrue = false;
         var align = new Align();
-        align.onChange = function (h, v) {
+        align.onChange.add(function (h, v) {
             callCount ++;
             calledWithFalseTrue = (!h && v);
-        }
+        });
 
         align.vertical = Top;
 
