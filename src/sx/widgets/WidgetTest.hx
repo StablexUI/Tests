@@ -706,7 +706,7 @@ class WidgetTest extends TestCase
         var parent = new Widget();
         var child = parent.addChild(new Widget());
         child.width.pct = 20;
-        child.onResize.invoke(function(w,s,u,p) {
+        child.onResize.add(function(w,s,u,p) {
             callAmount ++;
             withWidth = (s == child.width);
         });
@@ -726,7 +726,7 @@ class WidgetTest extends TestCase
         var parent = new Widget();
         var child = parent.addChild(new Widget());
         child.height.pct = 20;
-        child.onResize.invoke(function(w,s,u,p) {
+        child.onResize.add(function(w,s,u,p) {
             callAmount ++;
             withHeight = (s == child.height);
         });
@@ -756,7 +756,7 @@ class WidgetTest extends TestCase
     {
         var resized = 0;
         var widget = new Widget();
-        widget.onResize.invoke(function (w,s,u,v) resized++);
+        widget.onResize.add(function (w,s,u,v) resized++);
 
         widget.width.dip = 10;
         widget.height.dip = 10;
@@ -857,7 +857,7 @@ class WidgetTest extends TestCase
     // {
     //     var moved = 0;
     //     var widget = new Widget();
-    //     widget.onMove.invoke(function (w,s,u,v) moved++);
+    //     widget.onMove.add(function (w,s,u,v) moved++);
 
     //     widget.left.dip   = 10;
     //     widget.right.dip  = 10;

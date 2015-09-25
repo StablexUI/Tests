@@ -43,7 +43,7 @@ class SignalTest extends TestCase
         var listener = function(w) {};
         var signal   = new Signal<Widget->Void>();
 
-        signal.invoke(listener);
+        signal.add(listener);
 
         assert.equal(1, signal.listenersCount);
     }
@@ -54,9 +54,9 @@ class SignalTest extends TestCase
     {
         var listener = function(w) {};
         var signal   = new Signal<Widget->Void>();
-        signal.invoke(listener);
+        signal.add(listener);
 
-        signal.invoke(listener);
+        signal.add(listener);
 
         assert.equal(2, signal.listenersCount);
     }
@@ -67,9 +67,9 @@ class SignalTest extends TestCase
     {
         var listener = function(w) {};
         var signal   = new Signal<Widget->Void>();
-        signal.invoke(function(w) {});
+        signal.add(function(w) {});
 
-        signal.dontInvoke(listener);
+        signal.remove(listener);
 
         assert.equal(1, signal.listenersCount);
     }
@@ -80,9 +80,9 @@ class SignalTest extends TestCase
     {
         var listener = function(w) {};
         var signal   = new Signal<Widget->Void>();
-        signal.invoke(listener);
+        signal.add(listener);
 
-        signal.dontInvoke(listener);
+        signal.remove(listener);
 
         assert.equal(0, signal.listenersCount);
     }
@@ -93,9 +93,9 @@ class SignalTest extends TestCase
     {
         var listener = function(w) {};
         var signal   = new Signal<Widget->Void>();
-        signal.invoke(listener);
+        signal.add(listener);
 
-        var willInvoke = signal.willInvoke(listener);
+        var willInvoke = signal.will(listener);
 
         assert.isTrue(willInvoke);
     }
@@ -107,7 +107,7 @@ class SignalTest extends TestCase
         var listener = function(w) {};
         var signal   = new Signal<Widget->Void>();
 
-        var willInvoke = signal.willInvoke(listener);
+        var willInvoke = signal.will(listener);
 
         assert.isFalse(willInvoke);
     }
@@ -119,7 +119,7 @@ class SignalTest extends TestCase
         var signal = new Signal<Widget->Void>();
         var listenersCalled = 0;
         for (i in 0...10) {
-            signal.invoke(function(dispatcher:Widget) listenersCalled++);
+            signal.add(function(dispatcher:Widget) listenersCalled++);
         }
 
         signal.dispatch(new Widget());
@@ -140,11 +140,11 @@ class SignalTest extends TestCase
                 function(w) {
                     listenersCalled++;
                     if (listenersCalled % 2 == 0) {
-                        signal.dontInvoke(listeners[listeners.length - listenersCalled]);
+                        signal.remove(listeners[listeners.length - listenersCalled]);
                     }
                 }
             );
-            signal.invoke(listeners[i]);
+            signal.add(listeners[i]);
         }
 
         signal.dispatch(new Widget());
@@ -161,7 +161,7 @@ class SignalTest extends TestCase
         var newListener = function(w) newListenerCalled = true;
 
         for (i in 0...2) {
-            signal.invoke(function(w) signal.invoke(newListener));
+            signal.add(function(w) signal.add(newListener));
         }
 
         signal.dispatch(new Widget());
@@ -179,11 +179,11 @@ class SignalTest extends TestCase
         root.addChild(parent);
         parent.addChild(child);
 
-        parent.onBubble.invoke(function (processor, dispatcher) {
+        parent.onBubble.add(function (processor, dispatcher) {
             assert.equal(processor, parent);
             assert.equal(dispatcher, child);
         });
-        child.onBubble.invoke(function (processor, dispatcher) {
+        child.onBubble.add(function (processor, dispatcher) {
             assert.equal(processor, child);
             assert.equal(dispatcher, child);
         });

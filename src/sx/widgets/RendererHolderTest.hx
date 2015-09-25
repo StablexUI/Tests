@@ -209,7 +209,7 @@ class RendererHolderTest extends TestCase
         stub(renderer).getWidth().returns(100);
         var holder = new TestingRendererHolder(renderer);
         holder.autoSize.width = true;
-        holder.onResize.invoke(function(w, s, u, v) {
+        holder.onResize.add(function(w, s, u, v) {
             if (s == holder.width) dispatched ++;
         });
 
@@ -228,7 +228,7 @@ class RendererHolderTest extends TestCase
         stub(renderer).getHeight().returns(100);
         var holder = new TestingRendererHolder(renderer);
         holder.autoSize.height = true;
-        holder.onResize.invoke(function(w, s, u, v) {
+        holder.onResize.add(function(w, s, u, v) {
             if (s == holder.height) dispatched ++;
         });
 
