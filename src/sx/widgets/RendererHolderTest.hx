@@ -259,19 +259,6 @@ class RendererHolderTest extends TestCase
     }
 
 
-    @test
-    public function padding_changed_invokesRendererSetPosition () : Void
-    {
-        var renderer = mock(Renderer).create();
-        var holder = new TestingRendererHolder(renderer);
-
-        expect(renderer).setPosition(10., 0.).once();
-        expect(renderer).setPosition(10., 20.).once();
-
-        holder.padding.horizontal.px = 10;
-        holder.padding.vertical.px = 20;
-    }
-
 }//class RendererHolderTest
 
 
