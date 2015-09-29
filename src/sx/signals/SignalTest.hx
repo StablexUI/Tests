@@ -174,34 +174,21 @@ class SignalTest extends TestCase
     public function bubbleDispatch_severalLevelsDeepDisplayList_listenersCalledWithCorrectArguments () : Void
     {
         var root   = new Widget();
-        var parent = new BubbleTestWidget();
-        var child  = new BubbleTestWidget();
+        var parent = new Widget();
+        var child  = new Widget();
         root.addChild(parent);
         parent.addChild(child);
 
-        parent.onBubble.add(function (processor, dispatcher) {
+        parent.onPointerPress.add(function (processor, dispatcher) {
             assert.equal(processor, parent);
             assert.equal(dispatcher, child);
         });
-        child.onBubble.add(function (processor, dispatcher) {
+        child.onPointerPress.add(function (processor, dispatcher) {
             assert.equal(processor, child);
             assert.equal(dispatcher, child);
         });
 
-        child.onBubble.bubbleDispatch(onBubble, child);
+        child.onPointerPress.bubbleDispatch(onPointerPress, child);
     }
 
 }//class SignalTest
-
-
-
-
-private class BubbleTestWidget extends Widget {
-    public var onBubble : Signal<BubbleTestWidget->BubbleTestWidget->Void>;
-
-    public function new ()
-    {
-        super();
-        onBubble = new Signal();
-    }
-}
