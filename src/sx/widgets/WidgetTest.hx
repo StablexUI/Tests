@@ -1159,6 +1159,17 @@ class WidgetTest extends TestCase
         skin.pretendChanged();
     }
 
+
+    @test
+    public function disposed_afterDisposeWasCalled_disposedEqualsTrue () : Void
+    {
+        var widget = new Widget();
+
+        widget.dispose();
+
+        assert.isTrue(widget.disposed);
+    }
+
 }//class WidgetTest
 
 
