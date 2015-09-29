@@ -5,6 +5,7 @@ import sx.backend.Backend;
 import sx.exceptions.NotChildException;
 import sx.exceptions.OutOfBoundsException;
 import sx.skins.Skin;
+import sx.Sx;
 import sx.widgets.Widget;
 
 
@@ -1077,6 +1078,19 @@ class WidgetTest extends TestCase
         expect(child).dispose().once();
 
         parent.dispose();
+    }
+
+
+    @test
+    public function skin_setByName_usesRegisteredSkin () : Void
+    {
+        var name = 'test';
+        Sx.registerSkin(name, function () return new Skin());
+        var widget = new Widget();
+
+        widget.skin = name;
+
+        assert.notNull(widget.skin);
     }
 
 
