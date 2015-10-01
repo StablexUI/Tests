@@ -26,4 +26,14 @@ class LayoutTest extends TestCase
     }
 
 
+    @test
+    public function usedBy_always_invokesArrangeChildren () : Void
+    {
+        var layout = mock(Layout).create();
+
+        expect(layout).arrangeChildren().once();
+
+        layout.usedBy(new Widget());
+    }
+
 }//class LayoutTest
