@@ -191,4 +191,15 @@ class SignalTest extends TestCase
         child.onPointerPress.bubbleDispatch(onPointerPress, child);
     }
 
+
+    @test
+    public function dispatch_signalIsNull_doesNothing () : Void
+    {
+        var signal : Signal<Void->Void> = null;
+
+        signal.dispatch();
+
+        assert.isNull(signal);
+    }
+
 }//class SignalTest
