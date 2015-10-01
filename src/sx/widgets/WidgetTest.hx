@@ -1303,19 +1303,6 @@ class WidgetTest extends TestCase
 
 
     @test
-    public function skin_setSkin_backendNotified () : Void
-    {
-        var widget = mock(Widget).create();
-        var backend = mock(Backend).create(widget);
-        modify(widget).backend = backend;
-
-        expect(backend).widgetSkinChanged().once();
-
-        widget.skin = new Skin();
-    }
-
-
-    @test
     public function skin_setSkin_invokesSkinUsedBy () : Void
     {
         var widget = new Widget();
@@ -1324,19 +1311,6 @@ class WidgetTest extends TestCase
         expect(skin).usedBy(widget).once();
 
         widget.skin = skin;
-    }
-
-
-    @test
-    public function skin_removeSkin_backendNotified () : Void
-    {
-        var widget = mock(Widget).create();
-        var backend = mock(Backend).create(widget);
-        modify(widget).backend = backend;
-
-        expect(backend).widgetSkinChanged().once();
-
-        widget.skin = null;
     }
 
 
@@ -1354,21 +1328,6 @@ class WidgetTest extends TestCase
 
 
     @test
-    public function skin_currentSkinModified_backendNotified () : Void
-    {
-        var widget = mock(Widget).create();
-        var backend = mock(Backend).create(widget);
-        modify(widget).backend = backend;
-        var skin = new DummyWidgetTestSkin();
-        widget.skin = skin;
-
-        expect(backend).widgetSkinChanged().once();
-
-        skin.pretendChanged();
-    }
-
-
-    @test
     public function disposed_afterDisposeWasCalled_disposedEqualsTrue () : Void
     {
         var widget = new Widget();
@@ -1379,10 +1338,3 @@ class WidgetTest extends TestCase
     }
 
 }//class WidgetTest
-
-
-
-private class DummyWidgetTestSkin extends Skin
-{
-    public function pretendChanged () if (onChange != null) onChange();
-}
