@@ -105,6 +105,58 @@ class WidgetTest extends TestCase
 
 
     @test
+    public function addChild_always_dispatchesOnChildAddedWithCorrectArguments () : Void
+    {
+        var correct : {
+            parent : Bool,
+            child  : Bool,
+            index  : Bool
+        } = null;
+        var parent = new Widget();
+        var child  = new Widget();
+        parent.onChildAdded.add(function (p, c, i) {
+            correct = {
+                parent : (p == parent),
+                child  : (c == child),
+                index  : (i == 0)
+            }
+        });
+
+        parent.addChild(child);
+
+        assert.isTrue(correct.parent, 'Incorrect parent in onChildAdded signal');
+        assert.isTrue(correct.child, 'Incorrect child in onChildAdded signal');
+        assert.isTrue(correct.index, 'Incorrect index in onChildAdded signal');
+    }
+
+
+    @test
+    public function addChild_always_dispatchesOnParentChangedWithCorrectArguments () : Void
+    {
+        var correct : {
+            parent : Bool,
+            child  : Bool,
+            index  : Bool
+        } = null;
+        var parent = new Widget();
+        var child  = new Widget();
+        child.onParentChanged.add(function (p, c, i) {
+            correct = {
+                parent : (p == parent),
+                child  : (c == child),
+                index  : (i == 0)
+            }
+        });
+
+        parent.addChild(child);
+
+        assert.isTrue(correct.parent, 'Incorrect parent in onParentChanged signal');
+        assert.isTrue(correct.child, 'Incorrect child in onParentChanged signal');
+        assert.isTrue(correct.index, 'Incorrect index in onParentChanged signal');
+    }
+
+
+    @test
     public function removeChild_widgetToRemoveIsNotAChild_returnsNull () : Void
     {
         var parent = new Widget();
@@ -148,6 +200,58 @@ class WidgetTest extends TestCase
         widget.removeChild(child);
 
         assert.equal(0, widget.numChildren);
+    }
+
+
+    @test
+    public function removeChild_always_dispatchesOnChildRemovedWithCorrectArguments () : Void
+    {
+        var correct : {
+            parent : Bool,
+            child  : Bool,
+            index  : Bool
+        } = null;
+        var parent = new Widget();
+        var child  = parent.addChild(new Widget());
+        parent.onChildRemoved.add(function (p, c, i) {
+            correct = {
+                parent : (p == parent),
+                child  : (c == child),
+                index  : (i == 0)
+            }
+        });
+
+        parent.removeChild(child);
+
+        assert.isTrue(correct.parent, 'Incorrect parent in onChildRemoved signal');
+        assert.isTrue(correct.child, 'Incorrect child in onChildRemoved signal');
+        assert.isTrue(correct.index, 'Incorrect index in onChildRemoved signal');
+    }
+
+
+    @test
+    public function removeChild_always_dispatchesOnParentChangedWithCorrectArguments () : Void
+    {
+        var correct : {
+            parent : Bool,
+            child  : Bool,
+            index  : Bool
+        } = null;
+        var parent = new Widget();
+        var child  = parent.addChild(new Widget());
+        child.onParentChanged.add(function (p, c, i) {
+            correct = {
+                parent : (p == null),
+                child  : (c == child),
+                index  : (i == 0)
+            }
+        });
+
+        parent.removeChild(child);
+
+        assert.isTrue(correct.parent, 'Incorrect parent in onParentChanged signal');
+        assert.isTrue(correct.child, 'Incorrect child in onParentChanged signal');
+        assert.isTrue(correct.index, 'Incorrect index in onParentChanged signal');
     }
 
 
@@ -313,6 +417,58 @@ class WidgetTest extends TestCase
 
 
     @test
+    public function addChildAt_always_dispatchesOnChildAddedWithCorrectArguments () : Void
+    {
+        var correct : {
+            parent : Bool,
+            child  : Bool,
+            index  : Bool
+        } = null;
+        var parent = new Widget();
+        var child  = new Widget();
+        parent.onChildAdded.add(function (p, c, i) {
+            correct = {
+                parent : (p == parent),
+                child  : (c == child),
+                index  : (i == 0)
+            }
+        });
+
+        parent.addChildAt(child, 10);
+
+        assert.isTrue(correct.parent, 'Incorrect parent in onChildAdded signal');
+        assert.isTrue(correct.child, 'Incorrect child in onChildAdded signal');
+        assert.isTrue(correct.index, 'Incorrect index in onChildAdded signal');
+    }
+
+
+    @test
+    public function addChildAt_always_dispatchesOnParentChangedWithCorrectArguments () : Void
+    {
+        var correct : {
+            parent : Bool,
+            child  : Bool,
+            index  : Bool
+        } = null;
+        var parent = new Widget();
+        var child  = new Widget();
+        child.onParentChanged.add(function (p, c, i) {
+            correct = {
+                parent : (p == parent),
+                child  : (c == child),
+                index  : (i == 0)
+            }
+        });
+
+        parent.addChildAt(child, 10);
+
+        assert.isTrue(correct.parent, 'Incorrect parent in onParentChanged signal');
+        assert.isTrue(correct.child, 'Incorrect child in onParentChanged signal');
+        assert.isTrue(correct.index, 'Incorrect index in onParentChanged signal');
+    }
+
+
+    @test
     public function removeChildAt_indexOutOfBounds_returnsNull () : Void
     {
         var parent = new Widget();
@@ -384,6 +540,58 @@ class WidgetTest extends TestCase
         var removed = parent.removeChildAt(-2);
 
         assert.equal(child, removed);
+    }
+
+
+    @test
+    public function removeChildAt_always_dispatchesOnChildRemovedWithCorrectArguments () : Void
+    {
+        var correct : {
+            parent : Bool,
+            child  : Bool,
+            index  : Bool
+        } = null;
+        var parent = new Widget();
+        var child  = parent.addChild(new Widget());
+        parent.onChildRemoved.add(function (p, c, i) {
+            correct = {
+                parent : (p == parent),
+                child  : (c == child),
+                index  : (i == 0)
+            }
+        });
+
+        parent.removeChildAt(0);
+
+        assert.isTrue(correct.parent, 'Incorrect parent in onChildRemoved signal');
+        assert.isTrue(correct.child, 'Incorrect child in onChildRemoved signal');
+        assert.isTrue(correct.index, 'Incorrect index in onChildRemoved signal');
+    }
+
+
+    @test
+    public function removeChildAt_always_dispatchesOnParentChangedWithCorrectArguments () : Void
+    {
+        var correct : {
+            parent : Bool,
+            child  : Bool,
+            index  : Bool
+        } = null;
+        var parent = new Widget();
+        var child  = parent.addChild(new Widget());
+        child.onParentChanged.add(function (p, c, i) {
+            correct = {
+                parent : (p == null),
+                child  : (c == child),
+                index  : (i == 0)
+            }
+        });
+
+        parent.removeChildAt(0);
+
+        assert.isTrue(correct.parent, 'Incorrect parent in onParentChanged signal');
+        assert.isTrue(correct.child, 'Incorrect child in onParentChanged signal');
+        assert.isTrue(correct.index, 'Incorrect index in onParentChanged signal');
     }
 
 
