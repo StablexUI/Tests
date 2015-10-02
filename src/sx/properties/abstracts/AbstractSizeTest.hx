@@ -35,6 +35,12 @@ class AbstractSizeTest extends TestCase
 
         var result = 10. + size + 10 + size + size + 10;
         assert.equal(180., result);
+
+        size += 10;
+        assert.equal(60., size);
+
+        size ++;
+        assert.equal(61., size);
     }
 
 
@@ -51,6 +57,12 @@ class AbstractSizeTest extends TestCase
 
         var result = 10. - size - 10 - size - size - 10;
         assert.equal(-160., result);
+
+        size -= 10;
+        assert.equal(40., size);
+
+        size --;
+        assert.equal(39., size);
     }
 
 
@@ -67,6 +79,9 @@ class AbstractSizeTest extends TestCase
 
         var result = 10. * size * 10 * size * size * 10;
         assert.equal(125000., result);
+
+        size *= 2;
+        assert.equal(10., size);
     }
 
 
@@ -83,6 +98,9 @@ class AbstractSizeTest extends TestCase
 
         var result = 10. / size / 10 / size / size / 10;
         assert.equal(0.0001, result);
+
+        size /= 2;
+        assert.equal(5., size);
     }
 
 }//class AbstractSizeTest
