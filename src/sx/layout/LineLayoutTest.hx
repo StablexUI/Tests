@@ -1,7 +1,6 @@
 package sx.layout;
 
-import sx.properties.VerticalAlign;
-import sx.properties.HorizontalAlign;
+import sx.properties.Align;
 import sx.properties.Orientation;
 import hunit.TestCase;
 import sx.layout.LineLayout;
