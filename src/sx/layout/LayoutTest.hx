@@ -36,4 +36,19 @@ class LayoutTest extends TestCase
         layout.usedBy(new Widget());
     }
 
+
+    @test
+    public function widget_resized_arrangeChildrenCalled () : Void
+    {
+        var widget = new Widget();
+        var layout = mock(Layout).create();
+        widget.layout = layout;
+
+        expect(layout).arrangeChildren().exactly(2);
+
+        widget.width.px = 100;
+        widget.height.px = 200;
+    }
+
+
 }//class LayoutTest
