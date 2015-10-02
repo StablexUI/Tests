@@ -4,6 +4,8 @@ import hunit.TestCase;
 import sx.backend.Backend;
 import sx.exceptions.NotChildException;
 import sx.exceptions.OutOfBoundsException;
+import sx.properties.metric.Size;
+import sx.properties.metric.Coordinate;
 import sx.skins.Skin;
 import sx.Sx;
 import sx.widgets.Widget;
@@ -995,24 +997,24 @@ class WidgetTest extends TestCase
         var widget = mock(Widget).create();
         parent.addChild(widget);
 
-        assert.equal(widget.right, widget.left.pair());
-        assert.equal(widget.width, widget.left.ownerSize());
-        assert.equal(parent.width, widget.left.pctSource());
+        assert.equal(widget.right, (widget.left:Coordinate).pair());
+        assert.equal(widget.width, (widget.left:Coordinate).ownerSize());
+        assert.equal(parent.width, (widget.left:Coordinate).pctSource());
         assert.isTrue(widget.left.selected);
 
-        assert.equal(widget.left, widget.right.pair());
-        assert.equal(widget.width, widget.right.ownerSize());
-        assert.equal(parent.width, widget.right.pctSource());
+        assert.equal(widget.left, (widget.right:Coordinate).pair());
+        assert.equal(widget.width, (widget.right:Coordinate).ownerSize());
+        assert.equal(parent.width, (widget.right:Coordinate).pctSource());
         assert.isFalse(widget.right.selected);
 
-        assert.equal(widget.bottom, widget.top.pair());
-        assert.equal(widget.height, widget.top.ownerSize());
-        assert.equal(parent.height, widget.top.pctSource());
+        assert.equal(widget.bottom, (widget.top:Coordinate).pair());
+        assert.equal(widget.height, (widget.top:Coordinate).ownerSize());
+        assert.equal(parent.height, (widget.top:Coordinate).pctSource());
         assert.isTrue(widget.top.selected);
 
-        assert.equal(widget.top, widget.bottom.pair());
-        assert.equal(widget.height, widget.bottom.ownerSize());
-        assert.equal(parent.height, widget.bottom.pctSource());
+        assert.equal(widget.top, (widget.bottom:Coordinate).pair());
+        assert.equal(widget.height, (widget.bottom:Coordinate).ownerSize());
+        assert.equal(parent.height, (widget.bottom:Coordinate).pctSource());
         assert.isFalse(widget.bottom.selected);
     }
 
@@ -1024,8 +1026,8 @@ class WidgetTest extends TestCase
         var widget  = new Widget();
         parent.addChild(widget);
 
-        assert.equal(parent.width, widget.left.pctSource());
-        assert.equal(parent.height, widget.height.pctSource());
+        assert.equal(parent.width, (widget.left:Coordinate).pctSource());
+        assert.equal(parent.height, (widget.height:Size).pctSource());
     }
 
 
