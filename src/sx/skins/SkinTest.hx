@@ -38,4 +38,17 @@ class SkinTest extends TestCase
     }
 
 
+    @test
+    public function widget_resized_callsSkinRefresh () : Void
+    {
+        var widget = new Widget();
+        var skin = mock(Skin).create();
+        widget.skin = skin;
+
+        expect(skin).refresh().exactly(2);
+
+        widget.width.px = 100;
+        widget.height.px = 200;
+    }
+
 }//class SkinTest

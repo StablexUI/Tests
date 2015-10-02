@@ -1364,18 +1364,4 @@ class WidgetTest extends TestCase
         assert.isTrue(widget.disposed);
     }
 
-
-    @test
-    public function skin_widgetResized_callsSkinRefresh () : Void
-    {
-        var widget = new Widget();
-        var skin = mock(Skin).create();
-        widget.skin = skin;
-
-        expect(skin).refresh().exactly(2);
-
-        widget.width.px = 100;
-        widget.height.px = 200;
-    }
-
 }//class WidgetTest
