@@ -13,6 +13,19 @@ import sx.widgets.RendererHolder;
  */
 class RendererHolderTest extends TestCase
 {
+    @test
+    public function constructor_rendererHasInitialSize_setHolderInitialSize () : Void
+    {
+        var renderer = mock(Renderer).create();
+        stub(renderer).getWidth().returns(100);
+        stub(renderer).getHeight().returns(200);
+
+        var holder = new TestingRendererHolder(renderer);
+
+        assert.equal(100., holder.width.px);
+        assert.equal(200., holder.height.px);
+    }
+
 
     @test
     public function autoSize_autoSizeIsTrueRendererResized_widgetResized () : Void
@@ -70,8 +83,6 @@ class RendererHolderTest extends TestCase
     public function autoSize_onlyWidthIsTrueRendererResized_onlyWidgetWidthChanged () : Void
     {
         var renderer = mock(Renderer).create();
-        stub(renderer).getWidth().returns(100);
-        stub(renderer).getHeight().returns(200);
         var rendererResized = null;
         stub(renderer).onResize().implement(function (callback) rendererResized = callback);
 
@@ -91,8 +102,6 @@ class RendererHolderTest extends TestCase
     public function autoSize_onlyHeightIsTrueRendererResized_onlyWidgetHeightChanged () : Void
     {
         var renderer = mock(Renderer).create();
-        stub(renderer).getWidth().returns(100);
-        stub(renderer).getHeight().returns(200);
         var rendererResized = null;
         stub(renderer).onResize().implement(function (callback) rendererResized = callback);
 
