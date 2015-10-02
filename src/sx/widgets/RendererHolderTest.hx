@@ -196,7 +196,7 @@ class RendererHolderTest extends TestCase
     }
 
 
-    @test @group('inc')
+    @test
     public function paddingVertical_changedWhileAutoSizeHeightIsFalse_invokesRendererSetAvailableAreaHeight () : Void
     {
         var renderer = mock(Renderer).create();
