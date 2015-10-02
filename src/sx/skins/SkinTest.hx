@@ -28,29 +28,13 @@ class SkinTest extends TestCase
 
 
     @test
-    public function skin_usedBy_invokesWidgetBackendWidgetSkinChanged () : Void
+    public function usedBy_always_invokesRefresh () : Void
     {
-        var widget = mock(Widget).create();
-        var backend = mock(Backend).create(widget);
-        modify(widget).backend = backend;
+        var skin = mock(Skin).create();
 
-        expect(backend).widgetSkinChanged().once();
+        expect(skin).refresh().once();
 
-        widget.skin = new Skin();
-    }
-
-
-    @test
-    public function skin_removed_invokesWidgetBackendWidgetSkinChanged () : Void
-    {
-        var widget = mock(Widget).create();
-        var backend = mock(Backend).create(widget);
-        modify(widget).backend = backend;
-        widget.skin = new Skin();
-
-        expect(backend).widgetSkinChanged().once();
-
-        widget.skin = null;
+        skin.usedBy(new Widget());
     }
 
 

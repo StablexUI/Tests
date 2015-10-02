@@ -1328,6 +1328,33 @@ class WidgetTest extends TestCase
 
 
     @test
+    public function skin_setSkin_invokesBackendWidgetSkinChanged () : Void
+    {
+        var widget = mock(Widget).create();
+        var backend = mock(Backend).create(widget);
+        modify(widget).backend = backend;
+
+        expect(backend).widgetSkinChanged().once();
+
+        widget.skin = new Skin();
+    }
+
+
+    @test
+    public function skin_setNullWhileHasSkin_invokesBackendWidgetSkinChanged () : Void
+    {
+        var widget = mock(Widget).create();
+        var backend = mock(Backend).create(widget);
+        modify(widget).backend = backend;
+        widget.skin = new Skin();
+
+        expect(backend).widgetSkinChanged().once();
+
+        widget.skin = null;
+    }
+
+
+    @test
     public function disposed_afterDisposeWasCalled_disposedEqualsTrue () : Void
     {
         var widget = new Widget();
@@ -1335,6 +1362,20 @@ class WidgetTest extends TestCase
         widget.dispose();
 
         assert.isTrue(widget.disposed);
+    }
+
+
+    @test
+    public function skin_widgetResized_callsSkinRefresh () : Void
+    {
+        var widget = new Widget();
+        var skin = mock(Skin).create();
+        widget.skin = skin;
+
+        expect(skin).refresh().exactly(2);
+
+        widget.width.px = 100;
+        widget.height.px = 200;
     }
 
 }//class WidgetTest
