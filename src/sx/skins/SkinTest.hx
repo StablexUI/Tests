@@ -11,6 +11,10 @@ import sx.backend.Backend;
  * sx.skins.Skin
  *
  */
+@:access(sx.skins.Skin.usedBy)
+@:access(sx.skins.Skin.removed)
+@:access(sx.skins.base.SkinBase.usedBy)
+@:access(sx.skins.base.SkinBase.removed)
 class SkinTest extends TestCase
 {
 

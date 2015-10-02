@@ -10,6 +10,8 @@ import sx.widgets.Widget;
  * sx.layout.Layout
  *
  */
+@:access(sx.layout.Layout.usedBy)
+@:access(sx.layout.Layout.removed)
 class LayoutTest extends TestCase
 {
 
