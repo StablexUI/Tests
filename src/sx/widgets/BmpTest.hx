@@ -49,8 +49,8 @@ class BmpTest extends TestCase
         stub(renderer).getBitmapDataWidth().returns(10.);
         stub(renderer).getBitmapDataHeight().returns(20.);
         modify(bmp).renderer = renderer;
-        bmp.autoSize.height  = false;
-        bmp.keepAspect       = true;
+        bmp.autoSize   = false;
+        bmp.keepAspect = true;
 
         expect(renderer).setScale(1., 1.).once();
 
@@ -66,8 +66,8 @@ class BmpTest extends TestCase
         stub(renderer).getBitmapDataWidth().returns(10.);
         stub(renderer).getBitmapDataHeight().returns(20.);
         modify(bmp).renderer = renderer;
-        bmp.autoSize.width  = false;
-        bmp.keepAspect       = true;
+        bmp.autoSize   = false;
+        bmp.keepAspect = true;
 
         expect(renderer).setScale(1., 1.).once();
 
