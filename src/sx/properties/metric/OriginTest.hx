@@ -35,24 +35,24 @@ class OriginTest extends TestCase
             function() return height
         );
 
-        assert.equal(origin.right, origin.left.pair());
-        assert.isNull(origin.left.ownerSize);
-        assert.equal(width, origin.left.pctSource());
+        assert.equal(origin.right, (origin.left:Coordinate).pair());
+        assert.isNull((origin.left:Coordinate).ownerSize);
+        assert.equal(width, (origin.left:Coordinate).pctSource());
         assert.isTrue(origin.left.selected);
 
-        assert.equal(origin.left, origin.right.pair());
-        assert.isNull(origin.right.ownerSize);
-        assert.equal(width, origin.right.pctSource());
+        assert.equal(origin.left, (origin.right:Coordinate).pair());
+        assert.isNull((origin.right:Coordinate).ownerSize);
+        assert.equal(width, (origin.right:Coordinate).pctSource());
         assert.isFalse(origin.right.selected);
 
-        assert.equal(origin.bottom, origin.top.pair());
-        assert.isNull(origin.top.ownerSize);
-        assert.equal(height, origin.top.pctSource());
+        assert.equal(origin.bottom, (origin.top:Coordinate).pair());
+        assert.isNull((origin.top:Coordinate).ownerSize);
+        assert.equal(height, (origin.top:Coordinate).pctSource());
         assert.isTrue(origin.top.selected);
 
-        assert.equal(origin.top, origin.bottom.pair());
-        assert.isNull(origin.bottom.ownerSize);
-        assert.equal(height, origin.bottom.pctSource());
+        assert.equal(origin.top, (origin.bottom:Coordinate).pair());
+        assert.isNull((origin.bottom:Coordinate).ownerSize);
+        assert.equal(height, (origin.bottom:Coordinate).pctSource());
         assert.isFalse(origin.bottom.selected);
     }
 
