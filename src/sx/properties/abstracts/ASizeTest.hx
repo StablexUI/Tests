@@ -1,22 +1,22 @@
 package sx.properties.abstracts;
 
 import hunit.TestCase;
-import sx.properties.abstracts.AbstractSize;
+import sx.properties.abstracts.ASize;
 import sx.properties.metric.Size;
 
 
 
 /**
- * sx.properties.AbstractSize
+ * sx.properties.ASize
  *
  */
-class AbstractSizeTest extends TestCase
+class ASizeTest extends TestCase
 {
 
     @test
     public function instantiate_fromNumber_createsWeakInstance () : Void
     {
-        var size : AbstractSize = 50;
+        var size : ASize = 50;
 
         assert.isTrue((size:Size).weak);
     }
@@ -25,7 +25,7 @@ class AbstractSizeTest extends TestCase
     @test
     public function plus () : Void
     {
-        var size : AbstractSize = 50;
+        var size : ASize = 50;
 
         var result = 10 + size;
         assert.equal(60., result);
@@ -47,7 +47,7 @@ class AbstractSizeTest extends TestCase
     @test
     public function minus () : Void
     {
-        var size : AbstractSize = 50;
+        var size : ASize = 50;
 
         var result = 10 - size;
         assert.equal(-40., result);
@@ -69,7 +69,7 @@ class AbstractSizeTest extends TestCase
     @test
     public function multiply () : Void
     {
-        var size : AbstractSize = 5;
+        var size : ASize = 5;
 
         var result = 10 * size;
         assert.equal(50., result);
@@ -88,7 +88,7 @@ class AbstractSizeTest extends TestCase
     @test
     public function divide () : Void
     {
-        var size : AbstractSize = 10;
+        var size : ASize = 10;
 
         var result = 10 / size;
         assert.equal(1., result);
@@ -103,4 +103,4 @@ class AbstractSizeTest extends TestCase
         assert.equal(5., size);
     }
 
-}//class AbstractSizeTest
+}//class ASizeTest

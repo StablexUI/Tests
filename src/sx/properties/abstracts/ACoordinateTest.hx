@@ -1,22 +1,22 @@
 package sx.properties.abstracts;
 
 import hunit.TestCase;
-import sx.properties.abstracts.AbstractCoordinate;
+import sx.properties.abstracts.ACoordinate;
 import sx.properties.metric.Coordinate;
 
 
 
 /**
- * sx.properties.AbstractCoordinate
+ * sx.properties.ACoordinate
  *
  */
-class AbstractCoordinateTest extends TestCase
+class ACoordinateTest extends TestCase
 {
 
     @test
     public function instantiate_fromNumber_createsWeakInstance () : Void
     {
-        var coord : AbstractCoordinate = 50;
+        var coord : ACoordinate = 50;
 
         assert.isTrue((coord:Coordinate).weak);
     }
@@ -25,7 +25,7 @@ class AbstractCoordinateTest extends TestCase
     @test
     public function plus () : Void
     {
-        var coord : AbstractCoordinate = 50;
+        var coord : ACoordinate = 50;
 
         var result = 10 + coord;
         assert.equal(60., result);
@@ -47,7 +47,7 @@ class AbstractCoordinateTest extends TestCase
     @test
     public function minus () : Void
     {
-        var coord : AbstractCoordinate = 50;
+        var coord : ACoordinate = 50;
 
         var result = 10 - coord;
         assert.equal(-40., result);
@@ -69,7 +69,7 @@ class AbstractCoordinateTest extends TestCase
     @test
     public function multiply () : Void
     {
-        var coord : AbstractCoordinate = 5;
+        var coord : ACoordinate = 5;
 
         var result = 10 * coord;
         assert.equal(50., result);
@@ -88,7 +88,7 @@ class AbstractCoordinateTest extends TestCase
     @test
     public function divide () : Void
     {
-        var coord : AbstractCoordinate = 10;
+        var coord : ACoordinate = 10;
 
         var result = 10 / coord;
         assert.equal(1., result);
@@ -103,4 +103,4 @@ class AbstractCoordinateTest extends TestCase
         assert.equal(5., coord);
     }
 
-}//class AbstractCoordinateTest
+}//class ACoordinateTest
