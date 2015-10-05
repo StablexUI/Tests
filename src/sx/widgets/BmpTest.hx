@@ -90,7 +90,7 @@ class BmpTest extends TestCase
         expect(renderer).setScale(2., 1.).once();
         bmp.width.px = 30;
 
-        expect(renderer).setScale(1., 3.).once();
+        expect(renderer).setScale(2., 3.).once();
         bmp.height.px = 40;
     }
 

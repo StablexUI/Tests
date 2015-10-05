@@ -160,9 +160,6 @@ class LineLayoutTest extends TestCase
     }
 
 
-    //--------------
-
-
     @test
     public function arrangeChildren_verticalOrientationTopAlign_childrenArrangedCorrectly () : Void
     {
