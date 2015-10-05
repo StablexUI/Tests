@@ -25,7 +25,7 @@ class LineLayoutTest extends TestCase
         child2.width.px = 70;
 
         var layout = new LineLayout();
-        layout.autoSize.set(true);
+        layout.autoSize.set(true, true);
         layout.align.horizontal = Left;
         layout.orientation = Horizontal;
         layout.padding.left.px = 5;
@@ -50,7 +50,7 @@ class LineLayoutTest extends TestCase
         child2.width.px = 70;
 
         var layout = new LineLayout();
-        layout.autoSize.set(true);
+        layout.autoSize.set(true, true);
         layout.align.horizontal = Right;
         layout.orientation = Horizontal;
         layout.padding.left.px = 5;
@@ -76,7 +76,7 @@ class LineLayoutTest extends TestCase
         widget.width.px = 200;
 
         var layout = new LineLayout();
-        layout.autoSize.set(false);
+        layout.autoSize.set(false, false);
         layout.align.horizontal = Center;
         layout.orientation = Horizontal;
         layout.gap.px = 5;
@@ -100,7 +100,7 @@ class LineLayoutTest extends TestCase
         child2.width.px = 70;
 
         var layout = new LineLayout();
-        layout.autoSize.set(true);
+        layout.autoSize.set(true, true);
         layout.align.horizontal = Left;
         layout.orientation = Vertical;
         layout.padding.left.px = 5;
@@ -123,7 +123,7 @@ class LineLayoutTest extends TestCase
         child2.width.px = 70;
 
         var layout = new LineLayout();
-        layout.autoSize.set(true);
+        layout.autoSize.set(true, true);
         layout.align.horizontal = Right;
         layout.orientation = Vertical;
         layout.padding.right.px = 5;
@@ -146,7 +146,7 @@ class LineLayoutTest extends TestCase
         child2.width.px = 70;
 
         var layout = new LineLayout();
-        layout.autoSize.set(true);
+        layout.autoSize.set(true, true);
         layout.align.horizontal = Center;
         layout.orientation = Vertical;
         layout.padding.left.px = 5;
@@ -174,7 +174,7 @@ class LineLayoutTest extends TestCase
         child2.height.px = 70;
 
         var layout = new LineLayout();
-        layout.autoSize.set(true);
+        layout.autoSize.set(true, true);
         layout.align.vertical = Top;
         layout.orientation = Vertical;
         layout.padding.top.px = 5;
@@ -199,7 +199,7 @@ class LineLayoutTest extends TestCase
         child2.height.px = 70;
 
         var layout = new LineLayout();
-        layout.autoSize.set(true);
+        layout.autoSize.set(true, true);
         layout.align.vertical = Bottom;
         layout.orientation = Vertical;
         layout.padding.top.px = 5;
@@ -225,7 +225,7 @@ class LineLayoutTest extends TestCase
         widget.height.px = 200;
 
         var layout = new LineLayout();
-        layout.autoSize.set(false);
+        layout.autoSize.set(false, false);
         layout.align.vertical = Middle;
         layout.orientation = Vertical;
         layout.gap.px = 5;
@@ -249,7 +249,7 @@ class LineLayoutTest extends TestCase
         child2.height.px = 70;
 
         var layout = new LineLayout();
-        layout.autoSize.set(true);
+        layout.autoSize.set(true, true);
         layout.align.vertical = Top;
         layout.orientation = Horizontal;
         layout.padding.top.px = 5;
@@ -272,7 +272,7 @@ class LineLayoutTest extends TestCase
         child2.height.px = 70;
 
         var layout = new LineLayout();
-        layout.autoSize.set(true);
+        layout.autoSize.set(true, true);
         layout.align.vertical = Bottom;
         layout.orientation = Horizontal;
         layout.padding.bottom.px = 5;
@@ -295,7 +295,7 @@ class LineLayoutTest extends TestCase
         child2.height.px = 70;
 
         var layout = new LineLayout();
-        layout.autoSize.set(true);
+        layout.autoSize.set(true, true);
         layout.align.vertical = Middle;
         layout.orientation = Horizontal;
         layout.padding.top.px = 5;

@@ -30,6 +30,7 @@ class BmpTest extends TestCase
     public function autoSize_setBothTrue_invokesRendererSetScaleWidthCorrectArgs () : Void
     {
         var bmp = mock(Bmp).create();
+        bmp.autoSize.set(false, false);
         var renderer = mock(BitmapRenderer).create(bmp);
         stub(renderer).getBitmapDataWidth().returns(10.);
         stub(renderer).getBitmapDataHeight().returns(10.);
@@ -37,7 +38,7 @@ class BmpTest extends TestCase
 
         expect(renderer).setScale(1., 1.).once();
 
-        bmp.autoSize.set(true);
+        bmp.autoSize.set(true, true);
     }
 
 
@@ -75,7 +76,7 @@ class BmpTest extends TestCase
     }
 
 
-    @test
+    @test @group('inc')
     public function autoSize_setBothFalseWhileKeepAspectFalse_invokesRendererSetScaleWidthCorrectArgs () : Void
     {
         var bmp = mock(Bmp).create();
@@ -83,14 +84,14 @@ class BmpTest extends TestCase
         stub(renderer).getBitmapDataWidth().returns(10.);
         stub(renderer).getBitmapDataHeight().returns(10.);
         modify(bmp).renderer = renderer;
-        bmp.width.px   = 30;
-        bmp.height.px  = 40;
         bmp.padding.px = 5;
         bmp.keepAspect = false;
 
-        expect(renderer).setScale(2., 3.).once();
+        expect(renderer).setScale(2., 1.).once();
+        bmp.width.px = 30;
 
-        bmp.autoSize.set(false);
+        expect(renderer).setScale(1., 3.).once();
+        bmp.height.px = 40;
     }
 
 

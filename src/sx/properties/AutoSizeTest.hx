@@ -17,7 +17,7 @@ class AutoSizeTest extends TestCase
     {
         var autoSize = new AutoSize(true);
 
-        autoSize.set(false);
+        autoSize.set(false, false);
 
         assert.isFalse(autoSize.width);
         assert.isFalse(autoSize.height);
@@ -29,7 +29,7 @@ class AutoSizeTest extends TestCase
     {
         var autoSize = new AutoSize(false);
 
-        autoSize.set(true);
+        autoSize.set(true, true);
 
         assert.isTrue(autoSize.width);
         assert.isTrue(autoSize.height);
@@ -37,13 +37,14 @@ class AutoSizeTest extends TestCase
 
 
     @test
-    public function set_always_invokesOnChangeWithTrueTrue () : Void
+    public function set_bothChanged_invokesOnChangeWithTrueTrue () : Void
     {
         var onChangeInvoked = false;
-        var autoSize = new AutoSize(false);
+        var autoSize = new AutoSize(true);
+
         autoSize.onChange.add(function (w,h) onChangeInvoked = (w && h));
 
-        autoSize.set(false);
+        autoSize.set(false, false);
 
         assert.isTrue(onChangeInvoked);
     }

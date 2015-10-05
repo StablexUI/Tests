@@ -38,7 +38,7 @@ class RendererHolderTest extends TestCase
 
         var holder = new TestingRendererHolder(renderer);
         holder.padding.px = 10;
-        holder.autoSize.set(true);
+        holder.autoSize.set(true, true);
 
         //simulate callback invokation by renderer
         rendererResized(renderer.getWidth(), renderer.getHeight());
@@ -58,7 +58,7 @@ class RendererHolderTest extends TestCase
         stub(renderer).onResize().implement(function (callback) rendererResized = callback);
 
         var holder = new TestingRendererHolder(renderer);
-        holder.autoSize.set(false);
+        holder.autoSize.set(false, false);
 
         assert.isNull(rendererResized);
     }
@@ -72,7 +72,7 @@ class RendererHolderTest extends TestCase
         stub(renderer).getHeight().returns(200);
         var holder = new TestingRendererHolder(renderer);
 
-        holder.autoSize.set(true);
+        holder.autoSize.set(true, true);
 
         assert.equal(100., holder.width.px);
         assert.equal(200., holder.height.px);
@@ -121,14 +121,14 @@ class RendererHolderTest extends TestCase
     public function autoSize_changedToFalse_invokesRendererSetAvailableArea () : Void
     {
         var renderer = mock(Renderer).create();
+        stub(renderer).getWidth().returns(100);
+        stub(renderer).getHeight().returns(50);
         var holder = new TestingRendererHolder(renderer);
-        holder.width.px = 100;
-        holder.height.px = 50;
 
         expect(renderer).setAvailableAreaWidth(100.).once();
         expect(renderer).setAvailableAreaHeight(50.).once();
 
-        holder.autoSize.set(false);
+        holder.autoSize.set(false, false);
     }
 
 
@@ -255,7 +255,7 @@ class RendererHolderTest extends TestCase
         stub(renderer).getWidth().returns(800);
         stub(renderer).getHeight().returns(40);
         var holder = new TestingRendererHolder(renderer);
-        holder.autoSize.set(true);
+        holder.autoSize.set(true, true);
 
         holder.padding.pct = 10;
 
