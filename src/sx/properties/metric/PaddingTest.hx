@@ -20,7 +20,7 @@ class PaddingTest extends TestCase
         var callCount = 0;
         var onChangeWithTrueTrue = false;
         var padding = new Padding();
-        padding.onChange.add(function (h, v) {
+        padding.onComponentsChange.add(function (h, v) {
             callCount ++;
             onChangeWithTrueTrue = (h && v);
         });
@@ -46,7 +46,7 @@ class PaddingTest extends TestCase
         var callCount = 0;
         var onChangeWithTrueFalse = false;
         var padding = new Padding();
-        padding.onChange.add(function (h, v) {
+        padding.onComponentsChange.add(function (h, v) {
             callCount ++;
             onChangeWithTrueFalse = (h && !v);
         });
@@ -68,7 +68,7 @@ class PaddingTest extends TestCase
         var callCount = 0;
         var onChangeWithFalseTrue = false;
         var padding = new Padding();
-        padding.onChange.add(function (h, v) {
+        padding.onComponentsChange.add(function (h, v) {
             callCount ++;
             onChangeWithFalseTrue = (!h && v);
         });

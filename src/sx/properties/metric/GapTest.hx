@@ -20,7 +20,7 @@ class GapTest extends TestCase
         var callCount = 0;
         var onChangeWithTrueTrue = false;
         var gap = new Gap();
-        gap.onChange.add(function (h, v) {
+        gap.onComponentsChange.add(function (h, v) {
             callCount ++;
             onChangeWithTrueTrue = (h && v);
         });
@@ -42,7 +42,7 @@ class GapTest extends TestCase
         var callCount = 0;
         var onChangeWithTrueFalse = false;
         var gap = new Gap();
-        gap.onChange.add(function (h, v) {
+        gap.onComponentsChange.add(function (h, v) {
             callCount ++;
             onChangeWithTrueFalse = (h && !v);
         });
@@ -62,7 +62,7 @@ class GapTest extends TestCase
         var callCount = 0;
         var onChangeWithFalseTrue = false;
         var gap = new Gap();
-        gap.onChange.add(function (h, v) {
+        gap.onComponentsChange.add(function (h, v) {
             callCount ++;
             onChangeWithFalseTrue = (!h && v);
         });
