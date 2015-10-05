@@ -76,7 +76,7 @@ class BmpTest extends TestCase
     }
 
 
-    @test @group('inc')
+    @test
     public function autoSize_setBothFalseWhileKeepAspectFalse_invokesRendererSetScaleWidthCorrectArgs () : Void
     {
         var bmp = mock(Bmp).create();

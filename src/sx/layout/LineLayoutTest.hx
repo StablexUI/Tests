@@ -306,4 +306,28 @@ class LineLayoutTest extends TestCase
     }
 
 
+    @test
+    public function child_resizedAutoSizeTrueAndChildSizeDoesNotDependOnParent_invokesArrangeChildren () : Void
+    {
+        var widget = new Widget();
+        var child1 = widget.addChild(new Widget());
+        var child2 = widget.addChild(new Widget());
+
+        child1.width.px = 100;
+        child2.width.px = 70;
+
+        var layout = new LineLayout();
+        layout.autoSize = true;
+        layout.align = Left;
+        layout.orientation = Horizontal;
+        layout.padding = 5;
+
+        widget.layout = layout;
+
+        child1.width.px = 50;
+
+        assert.equal(5., child1.left.px);
+        assert.equal(5. + 50, child2.left.px);
+    }
+
 }//class LineLayoutTest
