@@ -15,87 +15,67 @@ class ButtonTest extends TestCase
 {
 
     @test
-    public function ico_assignIcon_iconAddedToDisplayList () : Void
+    public function ico_assignIconToActiveState_iconAddedToDisplayList () : Void
     {
         var button = new Button();
-        var ico = new Widget();
+        button.setState(button.down);
 
-        button.ico = ico;
+        button.down.ico = new Widget();
 
-        assert.equal((button:Widget), ico.parent);
+        assert.equal((button:Widget), button.down.ico.parent);
     }
 
 
     @test
-    public function ico_assignNewIcon_oldIconRemovedFromDisplayList () : Void
+    public function ico_assignNewIconToActiveState_oldIconRemovedFromDisplayList () : Void
     {
         var button = new Button();
+        button.setState(button.down);
         var oldIco = new Widget();
-        button.ico = oldIco;
+        button.down.ico = oldIco;
 
-        button.ico = new Widget();
+        button.down.ico = new Widget();
 
         assert.isNull(oldIco.parent);
     }
 
 
     @test
-    public function hasLabel_noLabelOrTextAssigned_returnsFalse () : Void
+    public function label_assignLabelnToActiveState_LabelnAddedToDisplayList () : Void
     {
         var button = new Button();
+        button.setState(button.down);
 
-        var hasLabel = button.hasLabel();
+        button.down.label = new Text();
 
-        assert.isFalse(hasLabel);
+        assert.equal((button:Widget), button.down.label.parent);
     }
 
 
     @test
-    public function hasLabel_textAssigned_returnsTrue () : Void
+    public function label_assignNewLabelnToActiveState_oldLabelnRemovedFromDisplayList () : Void
     {
         var button = new Button();
-        button.text = 'Hello';
-
-        var hasLabel = button.hasLabel();
-
-        assert.isTrue(hasLabel);
-    }
-
-
-    @test
-    public function label_assignLabel_labelAddedToDisplayList () : Void
-    {
-        var button = new Button();
-        var label = new Text();
-
-        button.label = label;
-
-        assert.equal((button:Widget), label.parent);
-    }
-
-
-    @test
-    public function label_assignNewLabel_oldLabelRemovedFromDisplayList () : Void
-    {
-        var button = new Button();
+        button.setState(button.down);
         var oldLabel = new Text();
-        button.label = oldLabel;
+        button.down.label = oldLabel;
 
-        button.label = new Text();
+        button.down.label = new Text();
 
         assert.isNull(oldLabel.parent);
     }
 
 
     @test
-    public function label_accessLabel_automaticallyCreatesDefaultTextWidget () : Void
+    public function text_assignTextToActiveStateWithoutLabel_defaultLabelReceivesNewText () : Void
     {
         var button = new Button();
+        button.setState(button.down);
 
-        button.label.padding = 10;
+        //own state has no label, so doefault label should be used (which is label of up state)
+        button.down.text = 'Hello';
 
-        assert.isTrue(button.hasLabel());
-        assert.equal((button:Widget), button.label.parent);
+        assert.equal(button.down.text, button.up.label.text);
     }
 
 
