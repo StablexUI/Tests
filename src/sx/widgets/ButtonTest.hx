@@ -106,4 +106,92 @@ class ButtonTest extends TestCase
         assert.type(LineLayout, button.layout);
     }
 
+
+    @test
+    public function pressed_userPressedPointerOverButton_pressedIsTrue () : Void
+    {
+        var button = new Button();
+
+        button.onPointerPress.dispatch(button, button);
+
+        assert.isTrue(button.pressed);
+    }
+
+
+    @test
+    public function pressed_userPressedAndReleasedPointerOverButton_pressedIsFalse () : Void
+    {
+        var button = new Button();
+        button.onPointerPress.dispatch(button, button);
+
+        button.onPointerRelease.dispatch(button, button);
+
+        assert.isFalse(button.pressed);
+    }
+
+
+    @test
+    public function pressed_userPressedAndMovedPointerOutOfButton_pressedIsFalse () : Void
+    {
+        var button = new Button();
+        button.onPointerPress.dispatch(button, button);
+
+        button.onPointerOut.dispatch(button, button);
+
+        assert.isFalse(button.pressed);
+    }
+
+
+    @test
+    public function hovered_userMovedPointerOverButton_hoveredIsTrue () : Void
+    {
+        var button = new Button();
+
+        button.onPointerOver.dispatch(button, button);
+
+        assert.isTrue(button.hovered);
+    }
+
+
+    @test
+    public function hovered_userMovedPointerOverAndOutOfButton_hoveredIsFalse () : Void
+    {
+        var button = new Button();
+        button.onPointerOver.dispatch(button, button);
+
+        button.onPointerOut.dispatch(button, button);
+
+        assert.isFalse(button.hovered);
+    }
+
+
+    @test
+    public function onTrigger_userPressedAndReleasedPointerOverButton_dispatchesTriggerSignal () : Void
+    {
+        var dispatched = false;
+        var button = new Button();
+        button.onTrigger.add(function(b) dispatched = true);
+
+        button.onPointerPress.dispatch(button, button);
+        button.onPointerRelease.dispatch(button, button);
+
+        assert.isTrue(dispatched);
+    }
+
+
+    @test
+    public function onTrigger_userPressedPointerMovedOutMovedOverAndReleased_doesNotDispatchTriggerSignal () : Void
+    {
+        var dispatched = false;
+        var button = new Button();
+        button.onTrigger.add(function(b) dispatched = true);
+
+        button.onPointerPress.dispatch(button, button);
+        button.onPointerOut.dispatch(button, button);
+        button.onPointerOver.dispatch(button, button);
+        button.onPointerRelease.dispatch(button, button);
+
+        assert.isFalse(dispatched);
+    }
+
 }//class ButtonTest
