@@ -1,14 +1,14 @@
-package sx.widgets;
+package sx.widgets.base;
 
 import hunit.TestCase;
 import sx.properties.metric.Units;
 import sx.backend.Renderer;
-import sx.widgets.RendererHolder;
+import sx.widgets.base.RendererHolder;
 
 
 
 /**
- * sx.widgets.RendererHolder
+ * sx.widgets.base.RendererHolder
  *
  */
 class RendererHolderTest extends TestCase
