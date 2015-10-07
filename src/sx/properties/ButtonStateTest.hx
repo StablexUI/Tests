@@ -2,6 +2,7 @@ package sx.properties;
 
 import hunit.TestCase;
 import sx.properties.ButtonState;
+import sx.skins.Skin;
 import sx.widgets.Text;
 import sx.widgets.Widget;
 
@@ -153,6 +154,42 @@ class ButtonStateTest extends TestCase
         state.ico = null;
 
         var has = state.hasIco();
+
+        assert.isFalse(has);
+    }
+
+
+    @test
+    public function hasSkin_rightAfterCreation_returnsFalse () : Void
+    {
+        var state = new ButtonState();
+
+        var has = state.hasSkin();
+
+        assert.isFalse(has);
+    }
+
+
+    @test
+    public function hasSkin_afterAssigningSkin_returnsTrue () : Void
+    {
+        var state = new ButtonState();
+        state.skin = new Skin();
+
+        var has = state.hasSkin();
+
+        assert.isTrue(has);
+    }
+
+
+    @test
+    public function hasSkin_afterAssigningNullSkin_returnsFalse () : Void
+    {
+        var state = new ButtonState();
+        state.skin = new Skin();
+        state.skin = null;
+
+        var has = state.hasSkin();
 
         assert.isFalse(has);
     }

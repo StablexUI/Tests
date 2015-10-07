@@ -68,6 +68,31 @@ class PointerManagerTest extends TestCase
 
 
     @test
+    public function pressed_initialWidgetDisabled_startsDispatchingFromFirstEnabledWidget () : Void
+    {
+        var widget1 = new Widget();
+        var widget2 = widget1.addChild(new Widget());
+        var widget3 = widget2.addChild(new Widget());
+        widget2.enabled = false;
+
+        var dispatchOrder : Array<{processor:Widget, dispatcher:Widget}> = [];
+        var callback = function (p, d) dispatchOrder.push({processor:p, dispatcher:d});
+        widget1.onPointerPress.add(callback);
+        widget2.onPointerPress.add(callback);
+        widget3.onPointerPress.add(callback);
+
+        PointerManager.pressed(widget3);
+
+        assert.similar(
+            [
+                {processor:widget1, dispatcher:widget1}
+            ],
+            dispatchOrder
+        );
+    }
+
+
+    @test
     public function released_widgetReleased_bubblesOnReleaseSignal () : Void
     {
         var widget1 = new Widget();
@@ -153,6 +178,31 @@ class PointerManagerTest extends TestCase
 
 
     @test
+    public function released_initialWidgetDisabled_startsDispatchingFromFirstEnabledWidget () : Void
+    {
+        var widget1 = new Widget();
+        var widget2 = widget1.addChild(new Widget());
+        var widget3 = widget2.addChild(new Widget());
+        widget2.enabled = false;
+
+        var dispatchOrder : Array<{processor:Widget, dispatcher:Widget}> = [];
+        var callback = function (p, d) dispatchOrder.push({processor:p, dispatcher:d});
+        widget1.onPointerRelease.add(callback);
+        widget2.onPointerRelease.add(callback);
+        widget3.onPointerRelease.add(callback);
+
+        PointerManager.released(widget3);
+
+        assert.similar(
+            [
+                {processor:widget1, dispatcher:widget1}
+            ],
+            dispatchOrder
+        );
+    }
+
+
+    @test
     public function moved_overNotPreviouslyHoveredWidgets_bubblesOnPointerOver () : Void
     {
         var widget1 = new Widget();
@@ -172,6 +222,31 @@ class PointerManagerTest extends TestCase
                 {processor:widget3, dispatcher:widget3},
                 {processor:widget2, dispatcher:widget3},
                 {processor:widget1, dispatcher:widget3},
+            ],
+            dispatchOrder
+        );
+    }
+
+
+    @test
+    public function moved_initialWidgetDisabled_startsDispatchingFromFirstEnabledWidget () : Void
+    {
+        var widget1 = new Widget();
+        var widget2 = widget1.addChild(new Widget());
+        var widget3 = widget2.addChild(new Widget());
+        widget2.enabled = false;
+
+        var dispatchOrder : Array<{processor:Widget, dispatcher:Widget}> = [];
+        var callback = function (p, d) dispatchOrder.push({processor:p, dispatcher:d});
+        widget1.onPointerOver.add(callback);
+        widget2.onPointerOver.add(callback);
+        widget3.onPointerOver.add(callback);
+
+        PointerManager.moved(widget3);
+
+        assert.similar(
+            [
+                {processor:widget1, dispatcher:widget1}
             ],
             dispatchOrder
         );

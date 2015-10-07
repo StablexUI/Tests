@@ -2,6 +2,7 @@ package sx.widgets;
 
 import hunit.TestCase;
 import sx.layout.LineLayout;
+import sx.skins.Skin;
 import sx.widgets.Button;
 import sx.widgets.Text;
 
@@ -76,6 +77,18 @@ class ButtonTest extends TestCase
         button.down.text = 'Hello';
 
         assert.equal(button.down.text, button.up.label.text);
+    }
+
+
+    @test
+    public function skin_assignSkinToActiveState_skinApplied () : Void
+    {
+        var button = new Button();
+        button.setState(button.down);
+
+        button.down.skin = new Skin();
+
+        assert.equal(button.skin, button.down.skin);
     }
 
 
@@ -180,6 +193,21 @@ class ButtonTest extends TestCase
 
 
     @test
+    public function onTrigger_userClickedWhileButtonDisabled_dispatchesTriggerSignal () : Void
+    {
+        var dispatched = false;
+        var button = new Button();
+        button.enabled = false;
+        button.onTrigger.add(function(b) dispatched = true);
+
+        button.onPointerPress.dispatch(button, button);
+        button.onPointerRelease.dispatch(button, button);
+
+        assert.isFalse(dispatched);
+    }
+
+
+    @test
     public function onTrigger_userPressedPointerMovedOutMovedOverAndReleased_doesNotDispatchTriggerSignal () : Void
     {
         var dispatched = false;
@@ -190,6 +218,20 @@ class ButtonTest extends TestCase
         button.onPointerOut.dispatch(button, button);
         button.onPointerOver.dispatch(button, button);
         button.onPointerRelease.dispatch(button, button);
+
+        assert.isFalse(dispatched);
+    }
+
+
+    @test
+    public function trigger_buttonDisabled_doesNotDispatchOnTriggerSignal () : Void
+    {
+        var dispatched = false;
+        var button = new Button();
+        button.enabled = false;
+        button.onTrigger.add(function(b) dispatched = true);
+
+        button.trigger();
 
         assert.isFalse(dispatched);
     }

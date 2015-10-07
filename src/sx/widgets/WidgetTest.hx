@@ -1366,4 +1366,56 @@ class WidgetTest extends TestCase
         assert.isTrue(widget.disposed);
     }
 
+
+    @test
+    public function enabled_changedToFalse_dispatchesOnDisableSignal () : Void
+    {
+        var dispatched = false;
+        var widget = new Widget();
+        widget.enabled = true;
+        widget.onDisable.add(function(w) dispatched = true);
+
+        widget.enabled = false;
+
+        assert.isTrue(dispatched);
+    }
+
+
+    @test
+    public function enabled_changedToTrue_dispatchesOnEnableSignal () : Void
+    {
+        var dispatched = false;
+        var widget = new Widget();
+        widget.enabled = false;
+        widget.onEnable.add(function(w) dispatched = true);
+
+        widget.enabled = true;
+
+        assert.isTrue(dispatched);
+    }
+
+
+    @test
+    public function isEnabled_allParentsAreEnabled_returnsTrue () : Void
+    {
+        var level3 = new Widget().addChild(new Widget()).addChild(new Widget());
+
+        var enabled = level3.isEnabled();
+
+        assert.isTrue(enabled);
+    }
+
+
+    @test
+    public function isEnabled_oneOfParentsIsDisabled_returnsFalse () : Void
+    {
+        var root = new Widget();
+        var level3 = root.addChild(new Widget()).addChild(new Widget());
+        root.enabled = false;
+
+        var enabled = level3.isEnabled();
+
+        assert.isFalse(enabled);
+    }
+
 }//class WidgetTest
