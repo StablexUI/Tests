@@ -236,4 +236,19 @@ class ButtonTest extends TestCase
         assert.isFalse(dispatched);
     }
 
+
+    @test
+    public function layoutAutoSize_buttonWidthSpecifiedBeforeLayoutAssigned_layoutInitializedWithAutoSizeFalse () : Void
+    {
+        var button = new Button();
+        button.width.dip  = 100;
+        button.height.dip = 50;
+
+        var layout : LineLayout = cast button.layout;
+
+        assert.isTrue(layout.autoSize.neither());
+        assert.equal(100., button.width.dip);
+        assert.equal(50., button.height.dip);
+    }
+
 }//class ButtonTest
