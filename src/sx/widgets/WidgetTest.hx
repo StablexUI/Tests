@@ -1066,20 +1066,20 @@ class WidgetTest extends TestCase
     }
 
 
-    // @test
-    // public function position_changed_invokesOnMove () : Void
-    // {
-    //     var moved = 0;
-    //     var widget = new Widget();
-    //     widget.onMove.add(function (w,s,u,v) moved++);
+    @test
+    public function position_changed_invokesOnMove () : Void
+    {
+        var moved = 0;
+        var widget = new Widget();
+        widget.onMove.add(function (w,c,u,v) moved++);
 
-    //     widget.left.dip   = 10;
-    //     widget.right.dip  = 10;
-    //     widget.top.dip    = 10;
-    //     widget.bottom.dip = 10;
+        widget.left.dip   = 10;
+        widget.right.dip  = 10;
+        widget.top.dip    = 10;
+        widget.bottom.dip = 10;
 
-    //     assert.equal(4, moved);
-    // }
+        assert.equal(4, moved);
+    }
 
 
     @test
