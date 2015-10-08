@@ -13,17 +13,45 @@ import sx.widgets.Widget;
  */
 class LineLayoutTest extends TestCase
 {
+    /** Parent widget, which will be used to assign layout to  */
+    private var widget : Widget;
+    /** Children which will be arranged by layout */
+    private var child1 : Widget;
+    private var child2 : Widget;
 
-    @test
-    public function arrangeChildren_horizontalOrientationLeftAlign_childrenArrangedCorrectly () : Void
+
+    /**
+     * Setup test.
+     */
+    override public function setup () : Void
     {
-        var widget = new Widget();
-        var child1 = widget.addChild(new Widget());
-        var child2 = widget.addChild(new Widget());
+        widget = new Widget();
+        child1 = widget.addChild(new Widget());
+        child2 = widget.addChild(new Widget());
 
         child1.width.px = 100;
         child2.width.px = 70;
 
+        widget.initialize();
+    }
+
+
+    /**
+     * Clean up test environment.
+     */
+    override public function tearDown () : Void
+    {
+        widget.dispose();
+
+        widget = null;
+        child1 = null;
+        child2 = null;
+    }
+
+
+    @test
+    public function arrangeChildren_horizontalOrientationLeftAlign_childrenArrangedCorrectly () : Void
+    {
         var layout = new LineLayout();
         layout.autoSize.set(true, true);
         layout.align.horizontal = Left;
@@ -42,13 +70,6 @@ class LineLayoutTest extends TestCase
     @test
     public function arrangeChildren_horizontalOrientationRightAlign_childrenArrangedCorrectly () : Void
     {
-        var widget = new Widget();
-        var child1 = widget.addChild(new Widget());
-        var child2 = widget.addChild(new Widget());
-
-        child1.width.px = 100;
-        child2.width.px = 70;
-
         var layout = new LineLayout();
         layout.autoSize.set(true, true);
         layout.align.horizontal = Right;
@@ -66,14 +87,7 @@ class LineLayoutTest extends TestCase
 
     @test
     public function arrangeChildren_horizontalOrientationCenterAlign_childrenArrangedCorrectly () : Void
-    {
-        var widget = new Widget();
-        var child1 = widget.addChild(new Widget());
-        var child2 = widget.addChild(new Widget());
-
-        child1.width.px = 100;
-        child2.width.px = 70;
-        widget.width.px = 200;
+    {        widget.width.px = 200;
 
         var layout = new LineLayout();
         layout.autoSize.set(false, false);
@@ -92,13 +106,6 @@ class LineLayoutTest extends TestCase
     @test
     public function arrangeChildren_verticalOrientationLeftAlign_childrenArrangedCorrectly () : Void
     {
-        var widget = new Widget();
-        var child1 = widget.addChild(new Widget());
-        var child2 = widget.addChild(new Widget());
-
-        child1.width.px = 100;
-        child2.width.px = 70;
-
         var layout = new LineLayout();
         layout.autoSize.set(true, true);
         layout.align.horizontal = Left;
@@ -115,13 +122,6 @@ class LineLayoutTest extends TestCase
     @test
     public function arrangeChildren_verticalOrientationRightAlign_childrenArrangedCorrectly () : Void
     {
-        var widget = new Widget();
-        var child1 = widget.addChild(new Widget());
-        var child2 = widget.addChild(new Widget());
-
-        child1.width.px = 100;
-        child2.width.px = 70;
-
         var layout = new LineLayout();
         layout.autoSize.set(true, true);
         layout.align.horizontal = Right;
@@ -138,13 +138,6 @@ class LineLayoutTest extends TestCase
     @test
     public function arrangeChildren_verticalOrientationCenterAlign_childrenArrangedCorrectly () : Void
     {
-        var widget = new Widget();
-        var child1 = widget.addChild(new Widget());
-        var child2 = widget.addChild(new Widget());
-
-        child1.width.px = 100;
-        child2.width.px = 70;
-
         var layout = new LineLayout();
         layout.autoSize.set(true, true);
         layout.align.horizontal = Center;
@@ -166,6 +159,7 @@ class LineLayoutTest extends TestCase
         var widget = new Widget();
         var child1 = widget.addChild(new Widget());
         var child2 = widget.addChild(new Widget());
+        widget.initialize();
 
         child1.height.px = 100;
         child2.height.px = 70;
@@ -191,6 +185,7 @@ class LineLayoutTest extends TestCase
         var widget = new Widget();
         var child1 = widget.addChild(new Widget());
         var child2 = widget.addChild(new Widget());
+        widget.initialize();
 
         child1.height.px = 100;
         child2.height.px = 70;
@@ -216,6 +211,7 @@ class LineLayoutTest extends TestCase
         var widget = new Widget();
         var child1 = widget.addChild(new Widget());
         var child2 = widget.addChild(new Widget());
+        widget.initialize();
 
         child1.height.px = 100;
         child2.height.px = 70;
@@ -241,6 +237,7 @@ class LineLayoutTest extends TestCase
         var widget = new Widget();
         var child1 = widget.addChild(new Widget());
         var child2 = widget.addChild(new Widget());
+        widget.initialize();
 
         child1.height.px = 100;
         child2.height.px = 70;
@@ -264,6 +261,7 @@ class LineLayoutTest extends TestCase
         var widget = new Widget();
         var child1 = widget.addChild(new Widget());
         var child2 = widget.addChild(new Widget());
+        widget.initialize();
 
         child1.height.px = 100;
         child2.height.px = 70;
@@ -287,6 +285,7 @@ class LineLayoutTest extends TestCase
         var widget = new Widget();
         var child1 = widget.addChild(new Widget());
         var child2 = widget.addChild(new Widget());
+        widget.initialize();
 
         child1.height.px = 100;
         child2.height.px = 70;
@@ -309,13 +308,6 @@ class LineLayoutTest extends TestCase
     @test
     public function child_resizedAutoSizeTrueAndChildSizeDoesNotDependOnParent_invokesArrangeChildren () : Void
     {
-        var widget = new Widget();
-        var child1 = widget.addChild(new Widget());
-        var child2 = widget.addChild(new Widget());
-
-        child1.width.px = 100;
-        child2.width.px = 70;
-
         var layout = new LineLayout();
         layout.autoSize = true;
         layout.align = Left;

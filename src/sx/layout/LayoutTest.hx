@@ -29,13 +29,40 @@ class LayoutTest extends TestCase
 
 
     @test
-    public function usedBy_always_invokesArrangeChildren () : Void
+    public function usedBy_notInitializedWidget_doesNotArrangeChildren () : Void
     {
         var layout = mock(Layout).create();
+        var widget = new Widget();
+
+        expect(layout).arrangeChildren().never();
+
+        layout.usedBy(widget);
+    }
+
+
+    @test
+    public function usedBy_notInitializedWidget_arrangeChildrenOnWidgetInitialization () : Void
+    {
+        var layout = mock(Layout).create();
+        var widget = new Widget();
+        layout.usedBy(widget);
 
         expect(layout).arrangeChildren().once();
 
-        layout.usedBy(new Widget());
+        widget.initialize();
+    }
+
+
+    @test
+    public function usedBy_initializedWidget_invokesArrangeChildren () : Void
+    {
+        var layout = mock(Layout).create();
+        var widget = new Widget();
+        widget.initialize();
+
+        expect(layout).arrangeChildren().once();
+
+        layout.usedBy(widget);
     }
 
 
@@ -44,6 +71,7 @@ class LayoutTest extends TestCase
     {
         var widget = new Widget();
         var layout = mock(Layout).create();
+        widget.initialize();
         widget.layout = layout;
 
         expect(layout).arrangeChildren().exactly(2);
