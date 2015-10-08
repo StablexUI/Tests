@@ -32,13 +32,15 @@ class SkinTest extends TestCase
 
 
     @test
-    public function usedBy_always_invokesRefresh () : Void
+    public function usedBy_assignedToInitializedWidget_invokesRefresh () : Void
     {
         var skin = mock(Skin).create();
+        var widget = new Widget();
+        widget.initialize();
 
         expect(skin).refresh().once();
 
-        skin.usedBy(new Widget());
+        skin.usedBy(widget);
     }
 
 
@@ -48,6 +50,7 @@ class SkinTest extends TestCase
         var widget = new Widget();
         var skin = mock(Skin).create();
         widget.skin = skin;
+        widget.initialize();
 
         expect(skin).refresh().exactly(2);
 

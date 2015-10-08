@@ -982,6 +982,7 @@ class WidgetTest extends TestCase
         var widget = mock(Widget).create();
         var backend = mock(Backend).create(widget);
         modify(widget).backend = backend;
+        widget.initialize();
 
         expect(backend).widgetResized().exactly(2);
 
@@ -1040,6 +1041,7 @@ class WidgetTest extends TestCase
         modify(widget).backend = backend;
         parent.addChild(widget);
         widget.width.pct = 10;
+        parent.initialize();
 
         expect(backend).widgetResized().once();
 
@@ -1056,6 +1058,7 @@ class WidgetTest extends TestCase
         modify(widget).backend = backend;
         parent.addChild(widget);
         widget.height.pct = 10;
+        parent.initialize();
 
         expect(backend).widgetResized().once();
 
@@ -1085,6 +1088,7 @@ class WidgetTest extends TestCase
         var widget = mock(Widget).create();
         var backend = mock(Backend).create(widget);
         modify(widget).backend = backend;
+        widget.initialize();
 
         expect(backend).widgetMoved().exactly(4);
 
@@ -1104,6 +1108,7 @@ class WidgetTest extends TestCase
         modify(widget).backend = backend;
         parent.addChild(widget);
         widget.left.pct = 10;
+        parent.initialize();
 
         expect(backend).widgetMoved().once();
 
@@ -1120,6 +1125,7 @@ class WidgetTest extends TestCase
         modify(widget).backend = backend;
         parent.addChild(widget);
         widget.right.px = 10;
+        parent.initialize();
 
         expect(backend).widgetMoved().once();
 
@@ -1136,6 +1142,7 @@ class WidgetTest extends TestCase
         modify(widget).backend = backend;
         parent.addChild(widget);
         widget.top.pct = 10;
+        parent.initialize();
 
         expect(backend).widgetMoved().once();
 
@@ -1152,6 +1159,7 @@ class WidgetTest extends TestCase
         modify(widget).backend = backend;
         parent.addChild(widget);
         widget.bottom.px = 10;
+        parent.initialize();
 
         expect(backend).widgetMoved().once();
 
@@ -1166,6 +1174,7 @@ class WidgetTest extends TestCase
         var backend = mock(Backend).create(widget);
         modify(widget).backend = backend;
         widget.right.px = 10;
+        widget.initialize();
 
         expect(backend).widgetMoved().once();
 
@@ -1180,6 +1189,7 @@ class WidgetTest extends TestCase
         var backend = mock(Backend).create(widget);
         modify(widget).backend = backend;
         widget.right.px = 10;
+        widget.initialize();
 
         expect(backend).widgetMoved().once();
 
@@ -1193,6 +1203,7 @@ class WidgetTest extends TestCase
         var widget = mock(Widget).create();
         var backend = mock(Backend).create(widget);
         modify(widget).backend = backend;
+        widget.initialize();
 
         expect(backend).widgetOriginChanged().once();
 
@@ -1206,6 +1217,7 @@ class WidgetTest extends TestCase
         var widget = mock(Widget).create();
         var backend = mock(Backend).create(widget);
         modify(widget).backend = backend;
+        widget.initialize();
 
         expect(backend).widgetScaledX().once();
 
@@ -1219,6 +1231,7 @@ class WidgetTest extends TestCase
         var widget = mock(Widget).create();
         var backend = mock(Backend).create(widget);
         modify(widget).backend = backend;
+        widget.initialize();
 
         expect(backend).widgetScaledY().once();
 
@@ -1232,6 +1245,7 @@ class WidgetTest extends TestCase
         var widget = mock(Widget).create();
         var backend = mock(Backend).create(widget);
         modify(widget).backend = backend;
+        widget.initialize();
 
         expect(backend).widgetRotated().once();
 
@@ -1245,6 +1259,7 @@ class WidgetTest extends TestCase
         var widget = mock(Widget).create();
         var backend = mock(Backend).create(widget);
         modify(widget).backend = backend;
+        widget.initialize();
 
         expect(backend).widgetAlphaChanged().once();
 
@@ -1258,6 +1273,7 @@ class WidgetTest extends TestCase
         var widget = mock(Widget).create();
         var backend = mock(Backend).create(widget);
         modify(widget).backend = backend;
+        widget.initialize();
 
         expect(backend).widgetVisibilityChanged().once();
 
@@ -1335,6 +1351,7 @@ class WidgetTest extends TestCase
         var widget = mock(Widget).create();
         var backend = mock(Backend).create(widget);
         modify(widget).backend = backend;
+        widget.initialize();
 
         expect(backend).widgetSkinChanged().once();
 
@@ -1349,6 +1366,7 @@ class WidgetTest extends TestCase
         var backend = mock(Backend).create(widget);
         modify(widget).backend = backend;
         widget.skin = new Skin();
+        widget.initialize();
 
         expect(backend).widgetSkinChanged().once();
 
