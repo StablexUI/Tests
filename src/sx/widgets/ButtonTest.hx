@@ -125,7 +125,7 @@ class ButtonTest extends TestCase
     {
         var button = new Button();
 
-        button.onPointerPress.dispatch(button, button);
+        button.onPointerPress.dispatch(button, button, 0);
 
         assert.isTrue(button.pressed);
     }
@@ -135,9 +135,9 @@ class ButtonTest extends TestCase
     public function pressed_userPressedAndReleasedPointerOverButton_pressedIsFalse () : Void
     {
         var button = new Button();
-        button.onPointerPress.dispatch(button, button);
+        button.onPointerPress.dispatch(button, button, 0);
 
-        button.onPointerRelease.dispatch(button, button);
+        button.onPointerRelease.dispatch(button, button, 0);
 
         assert.isFalse(button.pressed);
     }
@@ -147,9 +147,9 @@ class ButtonTest extends TestCase
     public function pressed_userPressedAndMovedPointerOutOfButton_pressedIsFalse () : Void
     {
         var button = new Button();
-        button.onPointerPress.dispatch(button, button);
+        button.onPointerPress.dispatch(button, button, 0);
 
-        button.onPointerOut.dispatch(button, button);
+        button.onPointerOut.dispatch(button, button, 0);
 
         assert.isFalse(button.pressed);
     }
@@ -160,7 +160,7 @@ class ButtonTest extends TestCase
     {
         var button = new Button();
 
-        button.onPointerOver.dispatch(button, button);
+        button.onPointerOver.dispatch(button, button, 0);
 
         assert.isTrue(button.hovered);
     }
@@ -170,9 +170,9 @@ class ButtonTest extends TestCase
     public function hovered_userMovedPointerOverAndOutOfButton_hoveredIsFalse () : Void
     {
         var button = new Button();
-        button.onPointerOver.dispatch(button, button);
+        button.onPointerOver.dispatch(button, button, 0);
 
-        button.onPointerOut.dispatch(button, button);
+        button.onPointerOut.dispatch(button, button, 0);
 
         assert.isFalse(button.hovered);
     }
@@ -185,8 +185,8 @@ class ButtonTest extends TestCase
         var button = new Button();
         button.onTrigger.add(function(b) dispatched = true);
 
-        button.onPointerPress.dispatch(button, button);
-        button.onPointerRelease.dispatch(button, button);
+        button.onPointerPress.dispatch(button, button, 0);
+        button.onPointerRelease.dispatch(button, button, 0);
 
         assert.isTrue(dispatched);
     }
@@ -200,8 +200,8 @@ class ButtonTest extends TestCase
         button.enabled = false;
         button.onTrigger.add(function(b) dispatched = true);
 
-        button.onPointerPress.dispatch(button, button);
-        button.onPointerRelease.dispatch(button, button);
+        button.onPointerPress.dispatch(button, button, 0);
+        button.onPointerRelease.dispatch(button, button, 0);
 
         assert.isFalse(dispatched);
     }
@@ -214,10 +214,10 @@ class ButtonTest extends TestCase
         var button = new Button();
         button.onTrigger.add(function(b) dispatched = true);
 
-        button.onPointerPress.dispatch(button, button);
-        button.onPointerOut.dispatch(button, button);
-        button.onPointerOver.dispatch(button, button);
-        button.onPointerRelease.dispatch(button, button);
+        button.onPointerPress.dispatch(button, button, 0);
+        button.onPointerOut.dispatch(button, button, 0);
+        button.onPointerOver.dispatch(button, button, 0);
+        button.onPointerRelease.dispatch(button, button, 0);
 
         assert.isFalse(dispatched);
     }

@@ -179,16 +179,16 @@ class SignalTest extends TestCase
         root.addChild(parent);
         parent.addChild(child);
 
-        parent.onPointerPress.add(function (processor, dispatcher) {
+        parent.onPointerPress.add(function (processor, dispatcher, touchId) {
             assert.equal(processor, parent);
             assert.equal(dispatcher, child);
         });
-        child.onPointerPress.add(function (processor, dispatcher) {
+        child.onPointerPress.add(function (processor, dispatcher, touchId) {
             assert.equal(processor, child);
             assert.equal(dispatcher, child);
         });
 
-        child.onPointerPress.bubbleDispatch(onPointerPress, child);
+        child.onPointerPress.bubbleDispatch(onPointerPress, child, 0);
     }
 
 

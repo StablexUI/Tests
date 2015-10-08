@@ -21,7 +21,7 @@ class PointerManagerTest extends TestCase
         var widget3 = widget2.addChild(new Widget());
 
         var dispatchOrder : Array<{processor:Widget, dispatcher:Widget}> = [];
-        var callback = function (p, d) dispatchOrder.push({processor:p, dispatcher:d});
+        var callback = function (p, d, i) dispatchOrder.push({processor:p, dispatcher:d});
         widget1.onPointerPress.add(callback);
         widget2.onPointerPress.add(callback);
         widget3.onPointerPress.add(callback);
@@ -47,7 +47,7 @@ class PointerManagerTest extends TestCase
         var widget3 = widget2.addChild(new Widget());
 
         var dispatchOrder : Array<{processor:Widget, dispatcher:Widget}> = [];
-        var callback = function (p, d) {
+        var callback = function (p, d, i) {
             dispatchOrder.push({processor:p, dispatcher:d});
             if (p == widget2) PointerManager.stopCurrentSignal();
         }
@@ -76,7 +76,7 @@ class PointerManagerTest extends TestCase
         widget2.enabled = false;
 
         var dispatchOrder : Array<{processor:Widget, dispatcher:Widget}> = [];
-        var callback = function (p, d) dispatchOrder.push({processor:p, dispatcher:d});
+        var callback = function (p, d, i) dispatchOrder.push({processor:p, dispatcher:d});
         widget1.onPointerPress.add(callback);
         widget2.onPointerPress.add(callback);
         widget3.onPointerPress.add(callback);
@@ -100,7 +100,7 @@ class PointerManagerTest extends TestCase
         var widget3 = widget2.addChild(new Widget());
 
         var dispatchOrder : Array<{processor:Widget, dispatcher:Widget}> = [];
-        var callback = function (p, d) dispatchOrder.push({processor:p, dispatcher:d});
+        var callback = function (p, d, i) dispatchOrder.push({processor:p, dispatcher:d});
         widget1.onPointerRelease.add(callback);
         widget2.onPointerRelease.add(callback);
         widget3.onPointerRelease.add(callback);
@@ -126,7 +126,7 @@ class PointerManagerTest extends TestCase
         var widget3 = widget2.addChild(new Widget());
 
         var dispatchOrder : Array<{processor:Widget, dispatcher:Widget}> = [];
-        var callback = function (p, d) {
+        var callback = function (p, d, i) {
             dispatchOrder.push({processor:p, dispatcher:d});
             if (p == widget2) PointerManager.stopCurrentSignal();
         }
@@ -158,7 +158,7 @@ class PointerManagerTest extends TestCase
         root2.addChild(child1);
 
         var dispatchOrder : Array<{processor:Widget, dispatcher:Widget}> = [];
-        var callback = function (p, d) dispatchOrder.push({processor:p, dispatcher:d});
+        var callback = function (p, d, i) dispatchOrder.push({processor:p, dispatcher:d});
         root1.onPointerTap.add(callback);
         root2.onPointerTap.add(callback);
         child1.onPointerTap.add(callback);
@@ -186,7 +186,7 @@ class PointerManagerTest extends TestCase
         widget2.enabled = false;
 
         var dispatchOrder : Array<{processor:Widget, dispatcher:Widget}> = [];
-        var callback = function (p, d) dispatchOrder.push({processor:p, dispatcher:d});
+        var callback = function (p, d, i) dispatchOrder.push({processor:p, dispatcher:d});
         widget1.onPointerRelease.add(callback);
         widget2.onPointerRelease.add(callback);
         widget3.onPointerRelease.add(callback);
@@ -210,7 +210,7 @@ class PointerManagerTest extends TestCase
         var widget3 = widget2.addChild(new Widget());
 
         var dispatchOrder : Array<{processor:Widget, dispatcher:Widget}> = [];
-        var callback = function (p, d) dispatchOrder.push({processor:p, dispatcher:d});
+        var callback = function (p, d, i) dispatchOrder.push({processor:p, dispatcher:d});
         widget1.onPointerOver.add(callback);
         widget2.onPointerOver.add(callback);
         widget3.onPointerOver.add(callback);
@@ -237,7 +237,7 @@ class PointerManagerTest extends TestCase
         widget2.enabled = false;
 
         var dispatchOrder : Array<{processor:Widget, dispatcher:Widget}> = [];
-        var callback = function (p, d) dispatchOrder.push({processor:p, dispatcher:d});
+        var callback = function (p, d, i) dispatchOrder.push({processor:p, dispatcher:d});
         widget1.onPointerOver.add(callback);
         widget2.onPointerOver.add(callback);
         widget3.onPointerOver.add(callback);
@@ -261,7 +261,7 @@ class PointerManagerTest extends TestCase
         var widget3 = widget2.addChild(new Widget());
 
         var dispatchOrder : Array<{processor:Widget, dispatcher:Widget}> = [];
-        var callback = function (p, d) {
+        var callback = function (p, d, i) {
             dispatchOrder.push({processor:p, dispatcher:d});
             if (p == widget2) PointerManager.stopCurrentSignal();
         }
@@ -290,7 +290,7 @@ class PointerManagerTest extends TestCase
         PointerManager.moved(widget3);
 
         var dispatchOrder : Array<{processor:Widget, dispatcher:Widget}> = [];
-        var callback = function (p, d) dispatchOrder.push({processor:p, dispatcher:d});
+        var callback = function (p, d, i) dispatchOrder.push({processor:p, dispatcher:d});
         widget1.onPointerOut.add(callback);
         widget2.onPointerOut.add(callback);
         widget3.onPointerOut.add(callback);
@@ -317,7 +317,7 @@ class PointerManagerTest extends TestCase
         PointerManager.moved(widget3);
 
         var dispatchOrder : Array<{processor:Widget, dispatcher:Widget}> = [];
-        var callback = function (p, d) {
+        var callback = function (p, d, i) {
             dispatchOrder.push({processor:p, dispatcher:d});
             if (p == widget2) PointerManager.stopCurrentSignal();
         }
@@ -345,7 +345,7 @@ class PointerManagerTest extends TestCase
         var widget3 = widget2.addChild(new Widget());
 
         var dispatchOrder : Array<{processor:Widget, dispatcher:Widget}> = [];
-        var callback = function (p, d) dispatchOrder.push({processor:p, dispatcher:d});
+        var callback = function (p, d, i) dispatchOrder.push({processor:p, dispatcher:d});
         widget1.onPointerMove.add(callback);
         widget2.onPointerMove.add(callback);
         widget3.onPointerMove.add(callback);
@@ -371,7 +371,7 @@ class PointerManagerTest extends TestCase
         var widget3 = widget2.addChild(new Widget());
 
         var dispatchOrder : Array<{processor:Widget, dispatcher:Widget}> = [];
-        var callback = function (p, d) {
+        var callback = function (p, d, i) {
             dispatchOrder.push({processor:p, dispatcher:d});
             if (p == widget2) PointerManager.stopCurrentSignal();
         }
