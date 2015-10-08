@@ -1212,6 +1212,20 @@ class WidgetTest extends TestCase
 
 
     @test
+    public function offset_offsetChanged_backendNotified () : Void
+    {
+        var widget = mock(Widget).create();
+        var backend = mock(Backend).create(widget);
+        modify(widget).backend = backend;
+        widget.initialize();
+
+        expect(backend).widgetOffsetChanged().once();
+
+        widget.offset.left.dip = 2;
+    }
+
+
+    @test
     public function scaleX_changed_backendNotified () : Void
     {
         var widget = mock(Widget).create();
