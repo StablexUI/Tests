@@ -390,4 +390,24 @@ class PointerManagerTest extends TestCase
         );
     }
 
+
+    @test
+    public function touchId_generatedForMouse_TouchIdKeptTheSameFromPressTillRelease () : Void
+    {
+        var touchId = 0;
+        var keptTheSame = true;
+        var widget = new Widget();
+        widget.onPointerPress.add(function (p, d, id) touchId = id);
+        widget.onPointerMove.add(function (p, d, id) keptTheSame = (touchId == id));
+        widget.onPointerRelease.add(function (p, d, id) keptTheSame = (touchId == id));
+
+        //mouse events allowed to not pass touchId to PointerManager
+        PointerManager.pressed(widget);
+        PointerManager.moved(widget);
+        PointerManager.released(widget);
+
+        assert.isTrue(keptTheSame);
+        assert.notEqual(0, touchId);
+    }
+
 }//class PointerManagerTest
