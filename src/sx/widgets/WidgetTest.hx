@@ -1418,4 +1418,56 @@ class WidgetTest extends TestCase
         assert.isFalse(enabled);
     }
 
+
+    @test
+    public function initialize_calledFirstTime_dispatchesOnInitializeSignal () : Void
+    {
+        var dispatched = false;
+        var widget = new Widget();
+        widget.onInitialize.add(function (w) dispatched = true);
+
+        widget.initialize();
+
+        assert.isTrue(dispatched);
+    }
+
+
+    @test
+    public function initialize_calledSecondTime_doesNotDispatchOnInitializeSignal () : Void
+    {
+        var dispatched = false;
+        var widget = new Widget();
+        widget.initialize();
+        widget.onInitialize.add(function (w) dispatched = true);
+
+        widget.initialize();
+
+        assert.isFalse(dispatched);
+    }
+
+
+    @test
+    public function initialized_widgetWasInitialized_initializedIsTrue () : Void
+    {
+        var widget = new Widget();
+        assert.isFalse(widget.initialized);
+
+        widget.initialize();
+
+        assert.isTrue(widget.initialized);
+    }
+
+
+    @test
+    public function initialized_notInitializedChildAddedToInitializedParent_childBecomesInitialized () : Void
+    {
+        var parent = new Widget();
+        parent.initialize();
+        var child = new Widget();
+
+        parent.addChild(child);
+
+        assert.isTrue(child.initialized);
+    }
+
 }//class WidgetTest
