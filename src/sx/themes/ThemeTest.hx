@@ -10,6 +10,14 @@ import sx.themes.Theme;
  */
 class ThemeTest extends TestCase
 {
+    /**
+     * Clean up test environtment
+     */
+    override public function tearDown () : Void
+    {
+        sx.Sx.theme = null;
+    }
+
 
     @test
     public function ready_onReadyListenerAddedWhenThemeIsReady_listenerCalledImmediately () : Void
