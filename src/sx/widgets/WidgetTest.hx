@@ -1322,6 +1322,19 @@ class WidgetTest extends TestCase
 
 
     @test
+    public function dispose_hasActiveTweens_stopsAllTweens () : Void
+    {
+        var widget = new Widget();
+        widget.tween.tween(1, widget.rotation = 90);
+        assert.isTrue(widget.tween.active);
+
+        widget.dispose();
+
+        assert.isFalse(widget.tween.active);
+    }
+
+
+    @test
     public function skin_setByName_usesRegisteredSkin () : Void
     {
         var name = 'test';
