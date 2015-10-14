@@ -2,6 +2,7 @@ package sx;
 
 import hunit.TestCase;
 import sx.skins.Skin;
+import sx.widgets.Widget;
 
 
 
@@ -35,6 +36,29 @@ class SxTest extends TestCase
         var skin = Sx.skin(name);
 
         assert.notNull(skin);
+    }
+
+
+    @test
+    public function root_noCustomRoot_returnsRootByBackendManager () : Void
+    {
+        var defaultRoot = Sx.backendManager.getRoot();
+
+        var currentRoot = Sx.root;
+
+        assert.equal(defaultRoot, currentRoot);
+    }
+
+
+    @test
+    public function root_customRootSpecified_returnsCustomRoot () : Void
+    {
+        var customRoot = new Widget();
+        Sx.root = customRoot;
+
+        var currentRoot = Sx.root;
+
+        assert.equal(customRoot, currentRoot);
     }
 
 }//class SxTest
