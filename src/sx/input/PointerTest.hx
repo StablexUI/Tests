@@ -410,4 +410,47 @@ class PointerTest extends TestCase
         assert.notEqual(0, touchId);
     }
 
+
+    @test
+    public function onNextPress_pressedMultipleTimes_callsListenerOnce () : Void
+    {
+        var callCount = 0;
+        Pointer.onNextPress.add(function (w, i) callCount++);
+
+        for (i in 0...3) {
+            Pointer.pressed(null);
+        }
+
+        assert.equal(1, callCount);
+    }
+
+
+    @test
+    public function onNextRelease_releasedMultipleTimes_callsListenerOnce () : Void
+    {
+        var callCount = 0;
+        Pointer.onNextRelease.add(function (w, i) callCount++);
+
+        for (i in 0...3) {
+            Pointer.released(null);
+        }
+
+        assert.equal(1, callCount);
+    }
+
+
+    @test
+    public function onNextMove_movedMultipleTimes_callsListenerOnce () : Void
+    {
+        var callCount = 0;
+        Pointer.onNextMove.add(function (w, i) callCount++);
+
+        for (i in 0...3) {
+            Pointer.moved(null);
+        }
+
+        assert.equal(1, callCount);
+    }
+
+
 }//class PointerTest
