@@ -16,7 +16,7 @@ class TweenerTest extends TestCase
     /** Default `Tweener.getTime` implementation */
     private var defaultGetTime : Void->Float;
     /** Time counter for test implementation of `Tweener.getTime` */
-    private var time : Int = 1;
+    private var time : Int = 0;
 
 
     /**
@@ -44,8 +44,7 @@ class TweenerTest extends TestCase
      */
     override public function setup () : Void
     {
-        //reset time
-        time = 0;
+
     }
 
 
@@ -55,6 +54,7 @@ class TweenerTest extends TestCase
     override public function tearDown () : Void
     {
         Tweener.resumeAll();
+        Tweener.stopAll();
     }
 
 
@@ -123,7 +123,8 @@ class TweenerTest extends TestCase
         var updated = 0;
         var tweener = new Tweener();
         var value = 0.5;
-        tweener.tween(5, value = 10).onUpdate(function() updated++);
+
+        var a = tweener.tween(5, value = 10).onUpdate(function() updated++);
 
         for (i in 0...10) {
             this.advanceTime();
