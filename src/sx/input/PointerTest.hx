@@ -2,15 +2,15 @@ package sx.input;
 
 import hunit.TestCase;
 import sx.widgets.Widget;
-import sx.input.PointerManager;
+import sx.input.Pointer;
 
 
 
 /**
- * sx.input.PointerManager
+ * sx.input.Pointer
  *
  */
-class PointerManagerTest extends TestCase
+class PointerTest extends TestCase
 {
 
     @test
@@ -26,7 +26,7 @@ class PointerManagerTest extends TestCase
         widget2.onPointerPress.add(callback);
         widget3.onPointerPress.add(callback);
 
-        PointerManager.pressed(widget3);
+        Pointer.pressed(widget3);
 
         assert.similar(
             [
@@ -49,13 +49,13 @@ class PointerManagerTest extends TestCase
         var dispatchOrder : Array<{processor:Widget, dispatcher:Widget}> = [];
         var callback = function (p, d, i) {
             dispatchOrder.push({processor:p, dispatcher:d});
-            if (p == widget2) PointerManager.stopCurrentSignal();
+            if (p == widget2) Pointer.stopCurrentSignal();
         }
         widget1.onPointerPress.add(callback);
         widget2.onPointerPress.add(callback);
         widget3.onPointerPress.add(callback);
 
-        PointerManager.pressed(widget3);
+        Pointer.pressed(widget3);
 
         assert.similar(
             [
@@ -81,7 +81,7 @@ class PointerManagerTest extends TestCase
         widget2.onPointerPress.add(callback);
         widget3.onPointerPress.add(callback);
 
-        PointerManager.pressed(widget3);
+        Pointer.pressed(widget3);
 
         assert.similar(
             [
@@ -105,7 +105,7 @@ class PointerManagerTest extends TestCase
         widget2.onPointerRelease.add(callback);
         widget3.onPointerRelease.add(callback);
 
-        PointerManager.released(widget3);
+        Pointer.released(widget3);
 
         assert.similar(
             [
@@ -128,13 +128,13 @@ class PointerManagerTest extends TestCase
         var dispatchOrder : Array<{processor:Widget, dispatcher:Widget}> = [];
         var callback = function (p, d, i) {
             dispatchOrder.push({processor:p, dispatcher:d});
-            if (p == widget2) PointerManager.stopCurrentSignal();
+            if (p == widget2) Pointer.stopCurrentSignal();
         }
         widget1.onPointerRelease.add(callback);
         widget2.onPointerRelease.add(callback);
         widget3.onPointerRelease.add(callback);
 
-        PointerManager.released(widget3);
+        Pointer.released(widget3);
 
         assert.similar(
             [
@@ -152,7 +152,7 @@ class PointerManagerTest extends TestCase
         var root1  = new Widget();
         var child1 = root1.addChild(new Widget());
         var child2 = child1.addChild(new Widget());
-        PointerManager.pressed(child2);
+        Pointer.pressed(child2);
 
         var root2 = new Widget();
         root2.addChild(child1);
@@ -164,8 +164,8 @@ class PointerManagerTest extends TestCase
         child1.onPointerTap.add(callback);
         child2.onPointerTap.add(callback);
 
-        PointerManager.released(child2);
-        PointerManager.released(root1);
+        Pointer.released(child2);
+        Pointer.released(root1);
 
         assert.similar(
             [
@@ -191,7 +191,7 @@ class PointerManagerTest extends TestCase
         widget2.onPointerRelease.add(callback);
         widget3.onPointerRelease.add(callback);
 
-        PointerManager.released(widget3);
+        Pointer.released(widget3);
 
         assert.similar(
             [
@@ -215,7 +215,7 @@ class PointerManagerTest extends TestCase
         widget2.onPointerOver.add(callback);
         widget3.onPointerOver.add(callback);
 
-        PointerManager.moved(widget3);
+        Pointer.moved(widget3);
 
         assert.similar(
             [
@@ -242,7 +242,7 @@ class PointerManagerTest extends TestCase
         widget2.onPointerOver.add(callback);
         widget3.onPointerOver.add(callback);
 
-        PointerManager.moved(widget3);
+        Pointer.moved(widget3);
 
         assert.similar(
             [
@@ -263,13 +263,13 @@ class PointerManagerTest extends TestCase
         var dispatchOrder : Array<{processor:Widget, dispatcher:Widget}> = [];
         var callback = function (p, d, i) {
             dispatchOrder.push({processor:p, dispatcher:d});
-            if (p == widget2) PointerManager.stopCurrentSignal();
+            if (p == widget2) Pointer.stopCurrentSignal();
         }
         widget1.onPointerOver.add(callback);
         widget2.onPointerOver.add(callback);
         widget3.onPointerOver.add(callback);
 
-        PointerManager.moved(widget3);
+        Pointer.moved(widget3);
 
         assert.similar(
             [
@@ -287,7 +287,7 @@ class PointerManagerTest extends TestCase
         var widget1 = new Widget();
         var widget2 = widget1.addChild(new Widget());
         var widget3 = widget2.addChild(new Widget());
-        PointerManager.moved(widget3);
+        Pointer.moved(widget3);
 
         var dispatchOrder : Array<{processor:Widget, dispatcher:Widget}> = [];
         var callback = function (p, d, i) dispatchOrder.push({processor:p, dispatcher:d});
@@ -295,7 +295,7 @@ class PointerManagerTest extends TestCase
         widget2.onPointerOut.add(callback);
         widget3.onPointerOut.add(callback);
 
-        PointerManager.moved(null);
+        Pointer.moved(null);
 
         assert.similar(
             [
@@ -314,18 +314,18 @@ class PointerManagerTest extends TestCase
         var widget1 = new Widget();
         var widget2 = widget1.addChild(new Widget());
         var widget3 = widget2.addChild(new Widget());
-        PointerManager.moved(widget3);
+        Pointer.moved(widget3);
 
         var dispatchOrder : Array<{processor:Widget, dispatcher:Widget}> = [];
         var callback = function (p, d, i) {
             dispatchOrder.push({processor:p, dispatcher:d});
-            if (p == widget2) PointerManager.stopCurrentSignal();
+            if (p == widget2) Pointer.stopCurrentSignal();
         }
         widget1.onPointerOut.add(callback);
         widget2.onPointerOut.add(callback);
         widget3.onPointerOut.add(callback);
 
-        PointerManager.moved(null);
+        Pointer.moved(null);
 
         assert.similar(
             [
@@ -350,7 +350,7 @@ class PointerManagerTest extends TestCase
         widget2.onPointerMove.add(callback);
         widget3.onPointerMove.add(callback);
 
-        PointerManager.moved(widget3);
+        Pointer.moved(widget3);
 
         assert.similar(
             [
@@ -373,13 +373,13 @@ class PointerManagerTest extends TestCase
         var dispatchOrder : Array<{processor:Widget, dispatcher:Widget}> = [];
         var callback = function (p, d, i) {
             dispatchOrder.push({processor:p, dispatcher:d});
-            if (p == widget2) PointerManager.stopCurrentSignal();
+            if (p == widget2) Pointer.stopCurrentSignal();
         }
         widget1.onPointerMove.add(callback);
         widget2.onPointerMove.add(callback);
         widget3.onPointerMove.add(callback);
 
-        PointerManager.moved(widget3);
+        Pointer.moved(widget3);
 
         assert.similar(
             [
@@ -401,13 +401,13 @@ class PointerManagerTest extends TestCase
         widget.onPointerMove.add(function (p, d, id) keptTheSame = (touchId == id));
         widget.onPointerRelease.add(function (p, d, id) keptTheSame = (touchId == id));
 
-        //mouse events allowed to not pass touchId to PointerManager
-        PointerManager.pressed(widget);
-        PointerManager.moved(widget);
-        PointerManager.released(widget);
+        //mouse events allowed to not pass touchId to Pointer
+        Pointer.pressed(widget);
+        Pointer.moved(widget);
+        Pointer.released(widget);
 
         assert.isTrue(keptTheSame);
         assert.notEqual(0, touchId);
     }
 
-}//class PointerManagerTest
+}//class PointerTest
