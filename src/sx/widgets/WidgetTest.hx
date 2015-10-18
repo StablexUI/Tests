@@ -1296,6 +1296,20 @@ class WidgetTest extends TestCase
 
 
     @test
+    public function overflow_changed_backendNotified () : Void
+    {
+        var widget = mock(Widget).create();
+        var backend = mock(Backend).create(widget);
+        modify(widget).backend = backend;
+        widget.initialize();
+
+        expect(backend).widgetOverflowChanged().once();
+
+        widget.overflow = false;
+    }
+
+
+    @test
     public function dispose_dontDisposeChildren_childrenRemovedButNotDisposed () : Void
     {
         var parent = new Widget();
