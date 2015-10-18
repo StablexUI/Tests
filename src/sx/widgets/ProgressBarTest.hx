@@ -1,7 +1,7 @@
 package sx.widgets;
 
 import hunit.TestCase;
-import sx.widgets.Progress;
+import sx.widgets.ProgressBar;
 import sx.properties.Orientation;
 
 using sx.tools.PropertiesTools;
@@ -12,13 +12,13 @@ using sx.tools.PropertiesTools;
  *
  */
 @group('progress')
-class ProgressTest extends TestCase
+class ProgressBarTest extends TestCase
 {
 
     @test
     public function value_changed_barSizeAdjusted () : Void
     {
-        var progress = new Progress();
+        var progress = new ProgressBar();
         progress.orientation = Horizontal;
         progress.min         = 0;
         progress.max         = 100;
@@ -38,7 +38,7 @@ class ProgressTest extends TestCase
     @test
     public function max_changed_barSizeAdjusted () : Void
     {
-        var progress = new Progress();
+        var progress = new ProgressBar();
         progress.orientation = Horizontal;
         progress.min        = 0;
         progress.max        = 100;
@@ -59,7 +59,7 @@ class ProgressTest extends TestCase
     @test
     public function min_changed_barSizeAdjusted () : Void
     {
-        var progress = new Progress();
+        var progress = new ProgressBar();
         progress.orientation = Horizontal;
         progress.min        = 0;
         progress.max        = 100;
@@ -76,4 +76,4 @@ class ProgressTest extends TestCase
         assert.equal(0, diff);
     }
 
-}//class ProgressTest
+}//class ProgressBarTest
