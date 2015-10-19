@@ -76,4 +76,28 @@ class ProgressBarTest extends TestCase
         assert.equal(0, diff);
     }
 
+
+    @test
+    public function value_setLessThanMin_valueConstrainedToMin () : Void
+    {
+        var progress = new ProgressBar();
+        progress.min = 0;
+
+        progress.value = -100;
+
+        assert.equal(0., progress.value);
+    }
+
+
+    @test
+    public function value_setGreaterThanMax_valueConstrainedToMax () : Void
+    {
+        var progress = new ProgressBar();
+        progress.max = 100;
+
+        progress.value = 200;
+
+        assert.equal(100., progress.value);
+    }
+
 }//class ProgressBarTest
