@@ -1,6 +1,7 @@
 package sx.widgets;
 
 import hunit.TestCase;
+import sx.input.Pointer;
 import sx.layout.LineLayout;
 import sx.skins.Skin;
 import sx.widgets.Button;
@@ -249,6 +250,35 @@ class ButtonTest extends TestCase
         assert.isTrue(layout.autoSize.neither());
         assert.equal(100., button.width.dip);
         assert.equal(50., button.height.dip);
+    }
+
+
+    @test
+    public function releaseOnPointerOut_isFalse_stayPressedAfterPointerRollOut () : Void
+    {
+        var button = new Button();
+        button.releaseOnPointerOut = false;
+        button.onPointerOver.dispatch(button, button, 0);
+        button.onPointerPress.dispatch(button, button, 0);
+
+        button.onPointerOut.dispatch(button, button, 0);
+
+        assert.isTrue(button.pressed);
+    }
+
+
+    @test
+    public function releaseOnPointerOut_isFalse_releasedAfterPointerReleaseOutsideButton () : Void
+    {
+        var button = new Button();
+        button.releaseOnPointerOut = false;
+        button.onPointerOver.dispatch(button, button, 0);
+        button.onPointerPress.dispatch(button, button, 0);
+        button.onPointerOut.dispatch(button, button, 0);
+
+        Pointer.released(null, 0);
+
+        assert.isFalse(button.pressed);
     }
 
 }//class ButtonTest
