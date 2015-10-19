@@ -89,4 +89,19 @@ class SliderTest extends TestCase
         assert.equal(100., slider.value);
     }
 
+    @test
+    public function value_setInTheMiddleBetweenMinAndMax_movesThumbToTheMiddleOfSlider () : Void
+    {
+        var slider = new Slider();
+        slider.min = 0;
+        slider.max = 100;
+        slider.width.dip = 100;
+        slider.thumb.width.dip = 10;
+        slider.initialize();
+
+        slider.value = 50;
+
+        assert.equal(45., slider.thumb.left.dip);
+    }
+
 }//class SliderTest
