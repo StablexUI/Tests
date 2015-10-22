@@ -36,7 +36,7 @@ class BmpTest extends TestCase
         stub(renderer).getBitmapDataHeight().returns(10.);
         modify(bmp).renderer = renderer;
 
-        expect(renderer).setScale(1., 1.).once();
+        expect(renderer).setBitmapScale(1., 1.).once();
 
         bmp.autoSize.set(true, true);
     }
@@ -53,7 +53,7 @@ class BmpTest extends TestCase
         bmp.autoSize   = false;
         bmp.keepAspect = true;
 
-        expect(renderer).setScale(1., 1.).once();
+        expect(renderer).setBitmapScale(1., 1.).once();
 
         bmp.autoSize.width = true;
     }
@@ -70,7 +70,7 @@ class BmpTest extends TestCase
         bmp.autoSize   = false;
         bmp.keepAspect = true;
 
-        expect(renderer).setScale(1., 1.).once();
+        expect(renderer).setBitmapScale(1., 1.).once();
 
         bmp.autoSize.height = true;
     }
@@ -87,10 +87,10 @@ class BmpTest extends TestCase
         bmp.padding.px = 5;
         bmp.keepAspect = false;
 
-        expect(renderer).setScale(2., 1.).once();
+        expect(renderer).setBitmapScale(2., 1.).once();
         bmp.width.px = 30;
 
-        expect(renderer).setScale(2., 3.).once();
+        expect(renderer).setBitmapScale(2., 3.).once();
         bmp.height.px = 40;
     }
 
