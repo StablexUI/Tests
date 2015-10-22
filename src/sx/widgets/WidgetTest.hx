@@ -8,6 +8,7 @@ import sx.properties.metric.Size;
 import sx.properties.metric.Coordinate;
 import sx.skins.Skin;
 import sx.Sx;
+import sx.widgets.HBox;
 import sx.widgets.Widget;
 
 
@@ -1527,6 +1528,76 @@ class WidgetTest extends TestCase
         parent.addChild(child);
 
         assert.isTrue(child.initialized);
+    }
+
+
+    @test
+    public function getChild_hasChildWithSuchName_returnsCorrectChild () : Void
+    {
+        var widget = new Widget();
+        var child = widget.addChild(new Widget()).addChild(new Widget());
+        child.name = 'test';
+
+        var found = widget.getChild(child.name);
+
+        assert.equal(child, found);
+    }
+
+
+    @test
+    public function getChild_hasMultipleChilddrenWithSuchName_returnsNearestInDisplayList () : Void
+    {
+        var widget = new Widget();
+        var nearest = widget.addChild(new Widget()).addChild(new Widget());
+        nearest.name = 'test';
+        widget.addChild(new Widget()).addChild(new Widget()).name = nearest.name;
+
+        var found = widget.getChild(nearest.name);
+
+        assert.equal(nearest, found);
+    }
+
+
+    @test
+    public function getChildAs_alsoHasChildOfAnotherTypeWithSuchName_returnsCorrectChildOfRequestedTypeWithSuchName () : Void
+    {
+        var widget = new Widget();
+        var nearest = widget.addChild(new Widget()).addChild(new Widget());
+        nearest.name = 'test';
+        var correct = widget.addChild(new Widget()).addChild(new HBox());
+        correct.name = nearest.name;
+
+        var found = widget.getChildAs(nearest.name, HBox);
+
+        assert.equal(correct, found);
+    }
+
+
+    @test
+    public function getParent_hasParentWithSuchName_returnsCorrectParent () : Void
+    {
+        var parent = new Widget();
+        parent.name = 'test';
+        var widget = parent.addChild(new Widget()).addChild(new Widget());
+
+        var found = widget.getParent(parent.name);
+
+        assert.equal(parent, found);
+    }
+
+
+    @test
+    public function getParentAs_alsoHasParentOfAnotherTypeWithSuchName_returnsCorrectParent () : Void
+    {
+        var parent = new HBox();
+        parent.name = 'test';
+        var another = parent.addChild(new Widget());
+        another.name = parent.name;
+        var widget = another.addChild(new Widget()).addChild(new Widget());
+
+        var found = widget.getParentAs(another.name, HBox);
+
+        assert.equal(parent, found);
     }
 
 }//class WidgetTest
