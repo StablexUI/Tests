@@ -2,7 +2,6 @@ package sx.widgets;
 
 import hunit.TestCase;
 import sx.input.Pointer;
-import sx.layout.LineLayout;
 import sx.skins.Skin;
 import sx.widgets.Button;
 import sx.widgets.Text;
@@ -90,34 +89,6 @@ class ButtonTest extends TestCase
         button.down.skin = new Skin();
 
         assert.equal(button.skin, button.down.skin);
-    }
-
-
-    @test
-    public function layout_notAddedDisplayListYet_layoutIsNotCreated () : Void
-    {
-        var button = new Button();
-        var child1 = button.addChild(new Widget());
-        var child2 = button.addChild(new Widget());
-
-        child1.width = 30;
-        child2.width = 20;
-
-        assert.equal(0.0, child1.left);
-        assert.equal(0.0, child1.top);
-        assert.equal(0.0, child2.left);
-        assert.equal(0.0, child2.top);
-    }
-
-
-    @test
-    public function layout_buttonAddedToDisplayListWithoutUserDefinedLayout_createsDefaultLayout () : Void
-    {
-        var button = new Button();
-
-        new Widget().addChild(button);
-
-        assert.type(LineLayout, button.layout);
     }
 
 
@@ -235,21 +206,6 @@ class ButtonTest extends TestCase
         button.trigger();
 
         assert.isFalse(dispatched);
-    }
-
-
-    @test
-    public function layoutAutoSize_buttonWidthSpecifiedBeforeLayoutAssigned_layoutInitializedWithAutoSizeFalse () : Void
-    {
-        var button = new Button();
-        button.width.dip  = 100;
-        button.height.dip = 50;
-
-        var layout : LineLayout = cast button.layout;
-
-        assert.isTrue(layout.autoSize.neither());
-        assert.equal(100., button.width.dip);
-        assert.equal(50., button.height.dip);
     }
 
 
