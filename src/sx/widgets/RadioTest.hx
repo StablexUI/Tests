@@ -14,50 +14,16 @@ class RadioTest extends TestCase
 {
 
     @test
-    public function group_addSelectedRadio_groupSelectedChangedToNewRadio () : Void
+    public function selected_deselectWhileIsSelectedInGroup_selectedStaysTrue () : Void
     {
         var group = new RadioGroup();
-        var radio1 = new Radio();
-        radio1.selected = true;
-        radio1.group = group;
-        var radio2 = new Radio();
-        radio2.selected = true;
+        var radio = new Radio();
+        radio.selected = true;
+        radio.group = group;
 
-        radio2.group = group;
+        radio.selected = false;
 
-        assert.isFalse(radio1.selected);
-    }
-
-
-    @test
-    public function group_selectedAnotherRadio_previousOneDeselected () : Void
-    {
-        var group = new RadioGroup();
-        var radio1 = new Radio();
-        radio1.selected = true;
-        radio1.group = group;
-        var radio2 = new Radio();
-        radio2.group = group;
-
-        radio2.selected = true;
-
-        assert.isFalse(radio1.selected);
-    }
-
-
-    @test
-    public function group_removeSelectedRadio_groupSelectionBecomesNull () : Void
-    {
-        var group = new RadioGroup();
-        var radio1 = new Radio();
-        radio1.selected = true;
-        radio1.group = group;
-        var radio2 = new Radio();
-        radio2.group = group;
-
-        radio1.group = null;
-
-        assert.isNull(group.selected);
+        assert.isTrue(radio.selected);
     }
 
 }//class RadioTest
