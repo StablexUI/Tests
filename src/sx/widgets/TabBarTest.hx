@@ -74,11 +74,15 @@ class TabBarTest extends TestCase
     {
         var pages = new ViewStack();
         var view1 = pages.addChild(new Widget());
+        view1.name = 'view1';
         var view2 = pages.addChild(new Widget());
+        view2.name = 'view2';
 
         var tabs = new TabBar();
         var tab1 = tabs.createTab('Tab 1');
+        tab1.name = view1.name;
         var tab2 = tabs.createTab('Tab 2');
+        tab2.name = view2.name;
         tabs.viewStack = pages;
 
         tab2.selected = true;
