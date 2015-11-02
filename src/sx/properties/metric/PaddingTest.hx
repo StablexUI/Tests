@@ -51,14 +51,14 @@ class PaddingTest extends TestCase
             onChangeWithTrueFalse = (h && !v);
         });
 
-        padding.horizontal.pct = 10;
+        padding.horizontal.px = 10;
 
         assert.equal(1, callCount);
         assert.isTrue(onChangeWithTrueFalse);
-        assert.equal(Percent, padding.left.units);
-        assert.equal(Percent, padding.right.units);
-        assert.equal(10., padding.left.pct);
-        assert.equal(10., padding.right.pct);
+        assert.equal(Pixel, padding.left.units);
+        assert.equal(Pixel, padding.right.units);
+        assert.equal(10., padding.left.px);
+        assert.equal(10., padding.right.px);
     }
 
 
@@ -73,14 +73,14 @@ class PaddingTest extends TestCase
             onChangeWithFalseTrue = (!h && v);
         });
 
-        padding.vertical.pct = 10;
+        padding.vertical.px = 10;
 
         assert.equal(1, callCount);
         assert.isTrue(onChangeWithFalseTrue);
-        assert.equal(Percent, padding.top.units);
-        assert.equal(Percent, padding.bottom.units);
-        assert.equal(10., padding.top.pct);
-        assert.equal(10., padding.bottom.pct);
+        assert.equal(Pixel, padding.top.units);
+        assert.equal(Pixel, padding.bottom.units);
+        assert.equal(10., padding.top.px);
+        assert.equal(10., padding.bottom.px);
     }
 
 }//class PaddingTest

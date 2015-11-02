@@ -251,4 +251,106 @@ class SizeTest extends TestCase
         assert.equal(10., value);
     }
 
+
+    @test
+    public function pct_setLessThanMin_minValueAssigned () : Void
+    {
+        var size = new Size();
+        size.min.pct = 10;
+
+        size.pct = 0;
+
+        assert.equal(10., size.pct);
+    }
+
+
+    @test
+    public function dip_setLessThanMin_minValueAssigned () : Void
+    {
+        var size = new Size();
+        size.min.dip = 10;
+
+        size.dip = 0;
+
+        assert.equal(10., size.dip);
+    }
+
+
+    @test
+    public function px_setLessThanMin_minValueAssigned () : Void
+    {
+        var size = new Size();
+        size.min.px = 10;
+
+        size.px = 0;
+
+        assert.equal(10., size.px);
+    }
+
+
+    @test
+    public function min_changedSoThatSizeViolatesConstraint_valueAdjusted () : Void
+    {
+        var dispatched = false;
+        var size = new Size();
+        size.dip = 0;
+        size.onChange.add(function(s,u,v) dispatched = true);
+
+        size.min.dip = 10;
+
+        assert.isTrue(dispatched);
+        assert.equal(10., size.dip);
+    }
+
+
+    @test
+    public function pct_setGreaterThanMax_maxValueAssigned () : Void
+    {
+        var size = new Size();
+        size.max.pct = 10;
+
+        size.pct = 100;
+
+        assert.equal(10., size.pct);
+    }
+
+
+    @test
+    public function dip_setGreaterThanMax_maxValueAssigned () : Void
+    {
+        var size = new Size();
+        size.max.dip = 10;
+
+        size.dip = 100;
+
+        assert.equal(10., size.dip);
+    }
+
+
+    @test
+    public function px_setGreaterThanMax_maxValueAssigned () : Void
+    {
+        var size = new Size();
+        size.max.px = 10;
+
+        size.px = 100;
+
+        assert.equal(10., size.px);
+    }
+
+
+    @test
+    public function max_changedSoThatSizeViolatesConstraint_valueAdjusted () : Void
+    {
+        var dispatched = false;
+        var size = new Size();
+        size.dip = 100;
+        size.onChange.add(function(s,u,v) dispatched = true);
+
+        size.max.dip = 10;
+
+        assert.isTrue(dispatched);
+        assert.equal(10., size.dip);
+    }
+
 }//class SizeTest
