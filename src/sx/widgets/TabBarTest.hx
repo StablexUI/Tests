@@ -2,7 +2,7 @@ package sx.widgets;
 
 import hunit.TestCase;
 import sx.widgets.TabBar;
-import sx.widgets.TabButton;
+import sx.widgets.special.TabButton;
 import sx.widgets.ViewStack;
 
 
