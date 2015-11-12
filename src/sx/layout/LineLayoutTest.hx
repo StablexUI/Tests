@@ -322,4 +322,38 @@ class LineLayoutTest extends TestCase
         assert.equal(5. + 50, child2.left.px);
     }
 
+
+    @test
+    public function arrangeChildren_horizontalAndChildIsNotArrangeable_childIsIgnored () : Void
+    {
+        var layout = new LineLayout();
+        layout.autoSize = true;
+        layout.orientation = Horizontal;
+        layout.padding = 5;
+
+        child2.arrangeable = false;
+        widget.layout = layout;
+
+        assert.equal(5. + 5 + child1.width.px, widget.width.px);
+        assert.equal(0., child2.left.px);
+        assert.equal(0., child2.top.px);
+    }
+
+
+    @test
+    public function arrangeChildren_verticalAndChildIsNotArrangeable_childIsIgnored () : Void
+    {
+        var layout = new LineLayout();
+        layout.autoSize = true;
+        layout.orientation = Vertical;
+        layout.padding = 5;
+
+        child2.arrangeable = false;
+        widget.layout = layout;
+
+        assert.equal(5. + 5 + child1.height.px, widget.height.px);
+        assert.equal(0., child2.left.px);
+        assert.equal(0., child2.top.px);
+    }
+
 }//class LineLayoutTest
