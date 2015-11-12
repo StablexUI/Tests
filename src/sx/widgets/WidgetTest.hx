@@ -4,6 +4,7 @@ import hunit.TestCase;
 import sx.backend.Backend;
 import sx.exceptions.NotChildException;
 import sx.exceptions.OutOfBoundsException;
+import sx.layout.Layout;
 import sx.properties.metric.Size;
 import sx.properties.metric.Coordinate;
 import sx.skins.Skin;
@@ -1598,6 +1599,38 @@ class WidgetTest extends TestCase
         var found = widget.getParentAs(another.name, HBox);
 
         assert.equal(parent, found);
+    }
+
+
+    @test
+    public function arrangeable_changed_callsParentLayoutArrangeChildren () : Void
+    {
+        var layout = mock(Layout).create();
+        var parent = new Widget();
+        parent.layout = layout;
+        var child = parent.addChild(new Widget());
+        child.arrangeable = true;
+        parent.initialize();
+
+        expect(layout).arrangeChildren().once();
+
+        child.arrangeable = false;
+    }
+
+
+    @test
+    public function visible_changed_callsParentLayoutArrangeChildren () : Void
+    {
+        var layout = mock(Layout).create();
+        var parent = new Widget();
+        parent.layout = layout;
+        var child = parent.addChild(new Widget());
+        child.visible = true;
+        parent.initialize();
+
+        expect(layout).arrangeChildren().once();
+
+        child.visible = false;
     }
 
 }//class WidgetTest
