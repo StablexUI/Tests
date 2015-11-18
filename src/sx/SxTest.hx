@@ -1,6 +1,6 @@
 package sx;
 
-import hunit.TestCase;
+import sx.TestCase;
 import sx.skins.Skin;
 import sx.widgets.Widget;
 

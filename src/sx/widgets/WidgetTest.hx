@@ -1,6 +1,6 @@
 package sx.widgets;
 
-import hunit.TestCase;
+import sx.TestCase;
 import sx.backend.Backend;
 import sx.exceptions.NotChildException;
 import sx.exceptions.OutOfBoundsException;

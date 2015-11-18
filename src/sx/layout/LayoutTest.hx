@@ -1,6 +1,6 @@
 package sx.layout;
 
-import hunit.TestCase;
+import sx.TestCase;
 import sx.layout.Layout;
 import sx.widgets.Widget;
 

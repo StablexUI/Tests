@@ -1,6 +1,6 @@
 package sx.groups;
 
-import hunit.TestCase;
+import sx.TestCase;
 import sx.groups.RadioGroup;
 import sx.widgets.Radio;
 

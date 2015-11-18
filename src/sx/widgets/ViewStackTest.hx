@@ -1,6 +1,6 @@
 package sx.widgets;
 
-import hunit.TestCase;
+import sx.TestCase;
 import sx.transitions.Transition;
 import sx.widgets.ViewStack;
 import sx.widgets.Widget;

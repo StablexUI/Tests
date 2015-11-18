@@ -1,6 +1,6 @@
 package sx.ds;
 
-import hunit.TestCase;
+import sx.TestCase;
 
 
 typedef TestList = sx.ds.LinkedList<String>;

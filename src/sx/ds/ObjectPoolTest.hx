@@ -1,6 +1,6 @@
 package sx.ds;
 
-import hunit.TestCase;
+import sx.TestCase;
 import sx.ds.ObjectPool;
 
 

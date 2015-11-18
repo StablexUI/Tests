@@ -1,6 +1,6 @@
 package sx.signals;
 
-import hunit.TestCase;
+import sx.TestCase;
 import sx.widgets.Widget;
 
 

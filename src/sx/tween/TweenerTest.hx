@@ -1,6 +1,6 @@
 package sx.tween;
 
-import hunit.TestCase;
+import sx.TestCase;
 import sx.tween.Tweener;
 
 

@@ -1,6 +1,6 @@
 package sx.properties.displaylist;
 
-import hunit.TestCase;
+import sx.TestCase;
 import sx.exceptions.NotChildException;
 import sx.exceptions.OutOfBoundsException;
 import sx.widgets.Widget;

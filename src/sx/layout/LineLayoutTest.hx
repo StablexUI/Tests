@@ -2,7 +2,7 @@ package sx.layout;
 
 import sx.properties.Align;
 import sx.properties.Orientation;
-import hunit.TestCase;
+import sx.TestCase;
 import sx.layout.LineLayout;
 import sx.widgets.Widget;
 

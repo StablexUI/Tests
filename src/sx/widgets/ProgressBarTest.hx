@@ -1,6 +1,6 @@
 package sx.widgets;
 
-import hunit.TestCase;
+import sx.TestCase;
 import sx.widgets.ProgressBar;
 import sx.properties.Orientation;
 
@@ -28,7 +28,7 @@ class ProgressBarTest extends TestCase
 
         progress.value = 30;
 
-        var expected = (progress.width.dip - progress.padding.sum(Horizontal)) * progress.value / (progress.max - progress.min);
+        var expected = (progress.width.dip - progress.padding.sumDip(Horizontal)) * progress.value / (progress.max - progress.min);
         var actual   = progress.bar.width.dip;
         var diff     = Math.round(Math.abs(actual - expected));
         assert.equal(0, diff);
@@ -49,7 +49,7 @@ class ProgressBarTest extends TestCase
 
         progress.max = 90;
 
-        var expected = (progress.width.dip - progress.padding.sum(Horizontal)) * progress.value / (progress.max - progress.min);
+        var expected = (progress.width.dip - progress.padding.sumDip(Horizontal)) * progress.value / (progress.max - progress.min);
         var actual   = progress.bar.width.dip;
         var diff     = Math.round(Math.abs(actual - expected));
         assert.equal(0, diff);
@@ -70,7 +70,7 @@ class ProgressBarTest extends TestCase
 
         progress.min = 20;
 
-        var expected = (progress.width.dip - progress.padding.sum(Horizontal)) * progress.value / (progress.max - progress.min);
+        var expected = (progress.width.dip - progress.padding.sumDip(Horizontal)) * progress.value / (progress.max - progress.min);
         var actual   = progress.bar.width.dip;
         var diff     = Math.round(Math.abs(actual - expected));
         assert.equal(0, diff);

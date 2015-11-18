@@ -1,6 +1,6 @@
 package sx.properties.abstracts;
 
-import hunit.TestCase;
+import sx.TestCase;
 import sx.properties.abstracts.ACoordinate;
 import sx.properties.metric.Coordinate;
 

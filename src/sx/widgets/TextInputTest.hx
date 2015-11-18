@@ -1,6 +1,6 @@
 package sx.widgets;
 
-import hunit.TestCase;
+import sx.TestCase;
 import sx.backend.TextInputRenderer;
 import sx.widgets.TextInput;
 

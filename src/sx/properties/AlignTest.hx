@@ -1,6 +1,6 @@
 package sx.properties;
 
-import hunit.TestCase;
+import sx.TestCase;
 import sx.properties.Align;
 
 

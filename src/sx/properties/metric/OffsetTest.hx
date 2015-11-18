@@ -1,6 +1,6 @@
 package sx.properties.metric;
 
-import hunit.TestCase;
+import sx.TestCase;
 import sx.properties.metric.Offset;
 import sx.properties.metric.Size;
 import sx.Sx;

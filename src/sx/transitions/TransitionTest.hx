@@ -1,6 +1,6 @@
 package sx.transitions;
 
-import hunit.TestCase;
+import sx.TestCase;
 import sx.transitions.Transition;
 import sx.tween.Tweener;
 import sx.widgets.Widget;

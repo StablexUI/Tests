@@ -1,6 +1,6 @@
 package sx.input;
 
-import hunit.TestCase;
+import sx.TestCase;
 import sx.widgets.Widget;
 import sx.input.Pointer;
 

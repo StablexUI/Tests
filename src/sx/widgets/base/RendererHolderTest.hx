@@ -1,6 +1,6 @@
 package sx.widgets.base;
 
-import hunit.TestCase;
+import sx.TestCase;
 import sx.properties.metric.Units;
 import sx.backend.Renderer;
 import sx.widgets.base.RendererHolder;

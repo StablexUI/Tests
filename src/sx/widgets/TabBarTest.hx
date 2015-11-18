@@ -1,6 +1,6 @@
 package sx.widgets;
 
-import hunit.TestCase;
+import sx.TestCase;
 import sx.widgets.TabBar;
 import sx.widgets.special.TabButton;
 import sx.widgets.ViewStack;

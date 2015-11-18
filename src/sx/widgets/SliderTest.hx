@@ -1,6 +1,6 @@
 package sx.widgets;
 
-import hunit.TestCase;
+import sx.TestCase;
 import sx.widgets.Slider;
 import sx.properties.Orientation;
 
