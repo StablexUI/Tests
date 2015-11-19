@@ -2,7 +2,7 @@ package sx.widgets.base;
 
 import sx.TestCase;
 import sx.properties.metric.Units;
-import sx.backend.Renderer;
+import sx.backend.interfaces.IRenderer;
 import sx.widgets.base.RendererHolder;
 
 
@@ -16,7 +16,7 @@ class RendererHolderTest extends TestCase
     @test
     public function constructor_rendererHasInitialSize_setHolderInitialSize () : Void
     {
-        var renderer = mock(Renderer).create();
+        var renderer = mock(IRenderer).create();
         stub(renderer).getWidth().returns(100);
         stub(renderer).getHeight().returns(200);
 
@@ -30,7 +30,7 @@ class RendererHolderTest extends TestCase
     @test
     public function autoSize_autoSizeIsTrueRendererResized_widgetResized () : Void
     {
-        var renderer = mock(Renderer).create();
+        var renderer = mock(IRenderer).create();
         var rendererResized = null;
         stub(renderer).getWidth().returns(100);
         stub(renderer).getHeight().returns(200);
@@ -53,7 +53,7 @@ class RendererHolderTest extends TestCase
     @test
     public function autoSize_autoSizeIsFalseRendererResized_rendererOnResizeListenerIsDisabled () : Void
     {
-        var renderer = mock(Renderer).create();
+        var renderer = mock(IRenderer).create();
         var rendererResized = null;
         stub(renderer).onResize().implement(function (callback) rendererResized = callback);
 
@@ -67,7 +67,7 @@ class RendererHolderTest extends TestCase
     @test
     public function autoSize_autoSizeIsFalseChangedToTrue_widgetResized () : Void
     {
-        var renderer = mock(Renderer).create();
+        var renderer = mock(IRenderer).create();
         stub(renderer).getWidth().returns(100);
         stub(renderer).getHeight().returns(200);
         var holder = new TestingRendererHolder(renderer);
@@ -82,7 +82,7 @@ class RendererHolderTest extends TestCase
     @test
     public function autoSize_onlyWidthIsTrueRendererResized_onlyWidgetWidthChanged () : Void
     {
-        var renderer = mock(Renderer).create();
+        var renderer = mock(IRenderer).create();
         var rendererResized = null;
         stub(renderer).onResize().implement(function (callback) rendererResized = callback);
 
@@ -101,7 +101,7 @@ class RendererHolderTest extends TestCase
     @test
     public function autoSize_onlyHeightIsTrueRendererResized_onlyWidgetHeightChanged () : Void
     {
-        var renderer = mock(Renderer).create();
+        var renderer = mock(IRenderer).create();
         var rendererResized = null;
         stub(renderer).onResize().implement(function (callback) rendererResized = callback);
 
@@ -120,7 +120,7 @@ class RendererHolderTest extends TestCase
     @test
     public function autoSize_changedToFalse_invokesRendererSetAvailableArea () : Void
     {
-        var renderer = mock(Renderer).create();
+        var renderer = mock(IRenderer).create();
         stub(renderer).getWidth().returns(100);
         stub(renderer).getHeight().returns(50);
         var holder = new TestingRendererHolder(renderer);
@@ -135,7 +135,7 @@ class RendererHolderTest extends TestCase
     @test
     public function width_setWidthDirectly_changesAutoSizeWidthToFalse () : Void
     {
-        var holder = new TestingRendererHolder(mock(Renderer).create());
+        var holder = new TestingRendererHolder(mock(IRenderer).create());
         holder.autoSize.width = true;
 
         holder.width.px = 100;
@@ -147,7 +147,7 @@ class RendererHolderTest extends TestCase
     @test
     public function width_setWidthDirectly_invokesRendererSetAvailableAreaWidth () : Void
     {
-        var renderer = mock(Renderer).create();
+        var renderer = mock(IRenderer).create();
         var holder = new TestingRendererHolder(renderer);
         holder.padding.horizontal.px = 10;
 
@@ -160,7 +160,7 @@ class RendererHolderTest extends TestCase
     @test
     public function height_setHeightDirectly_changesAutoSizeHeightToFalse () : Void
     {
-        var holder = new TestingRendererHolder(mock(Renderer).create());
+        var holder = new TestingRendererHolder(mock(IRenderer).create());
         holder.autoSize.height = true;
 
         holder.height.px = 100;
@@ -172,7 +172,7 @@ class RendererHolderTest extends TestCase
     @test
     public function height_setHeightDirectly_invokesRendererSetAvailableAreaHeight () : Void
     {
-        var renderer = mock(Renderer).create();
+        var renderer = mock(IRenderer).create();
         var holder = new TestingRendererHolder(renderer);
         holder.padding.vertical.px = 10;
 
@@ -185,7 +185,7 @@ class RendererHolderTest extends TestCase
     @test
     public function paddingHorizontal_changedWhileAutoSizeWidthIsFalse_invokesRendererSetAvailableAreaWidth () : Void
     {
-        var renderer = mock(Renderer).create();
+        var renderer = mock(IRenderer).create();
         var holder = new TestingRendererHolder(renderer);
         holder.autoSize.width = false;
         holder.width.px = 100;
@@ -199,7 +199,7 @@ class RendererHolderTest extends TestCase
     @test
     public function paddingVertical_changedWhileAutoSizeHeightIsFalse_invokesRendererSetAvailableAreaHeight () : Void
     {
-        var renderer = mock(Renderer).create();
+        var renderer = mock(IRenderer).create();
         var holder = new TestingRendererHolder(renderer);
         holder.autoSize.height = false;
         holder.height.px = 100;
@@ -214,7 +214,7 @@ class RendererHolderTest extends TestCase
     public function paddingHorizontal_changedWhileAutoSizeWidthIsTrue_dispatchesOnResizeSignalWithHolderWidth () : Void
     {
         var dispatched = 0;
-        var renderer = mock(Renderer).create();
+        var renderer = mock(IRenderer).create();
         stub(renderer).getWidth().returns(100);
         var holder = new TestingRendererHolder(renderer);
         holder.autoSize.width = true;
@@ -233,7 +233,7 @@ class RendererHolderTest extends TestCase
     public function paddingVertical_changedWhileAutoSizeHeightIsTrue_dispatchesOnResizeSignalWithHolderHeight () : Void
     {
         var dispatched = 0;
-        var renderer = mock(Renderer).create();
+        var renderer = mock(IRenderer).create();
         stub(renderer).getHeight().returns(100);
         var holder = new TestingRendererHolder(renderer);
         holder.autoSize.height = true;
@@ -251,7 +251,7 @@ class RendererHolderTest extends TestCase
     @test
     public function padding_setToPercentWhileAutoSizeIsTrue_holderSizeAndPaddingCalculatedCorrectly () : Void
     {
-        var renderer = mock(Renderer).create();
+        var renderer = mock(IRenderer).create();
         stub(renderer).getWidth().returns(800);
         stub(renderer).getHeight().returns(40);
         var holder = new TestingRendererHolder(renderer);
@@ -274,9 +274,9 @@ class RendererHolderTest extends TestCase
 
 private class TestingRendererHolder extends RendererHolder
 {
-    private var testRenderer : Renderer;
+    private var testRenderer : IRenderer;
 
-    public function new (renderer:Renderer) : Void
+    public function new (renderer:IRenderer) : Void
     {
         testRenderer = renderer;
         super();
