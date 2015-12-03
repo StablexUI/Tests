@@ -152,4 +152,36 @@ class PopupTest extends TestCase
         assert.isFalse(popup.shown);
     }
 
+
+    @test
+    public function close_noCloseEffect_immediatelyDispatchesOnCloseSignal () : Void
+    {
+        var dispatched = false;
+        var popup = new Popup();
+        popup.show();
+        popup.onClose.add(function(p) dispatched = true);
+
+        popup.close();
+
+        assert.isTrue(dispatched);
+    }
+
+
+    @test
+    public function close_hasCloseEffect_dispatchesOnCloseSignalAfterShowEffectFinished () : Void
+    {
+        var dispatched = false;
+        var actuator = null;
+        var popup = new Popup();
+        popup.show();
+        popup.closeEffect = function(p) return actuator = p.tween.linear(10, p.alpha = 1);
+        popup.onClose.add(function(p) dispatched = true);
+
+        popup.close();
+        assert.isFalse(dispatched);
+
+        actuator.complete();
+        assert.isTrue(dispatched);
+    }
+
 }//class PopupTest
