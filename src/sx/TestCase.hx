@@ -1,6 +1,7 @@
 package sx;
 
 import sx.Sx;
+import sx.tween.Tweener;
 
 
 /**
@@ -28,7 +29,9 @@ class TestCase extends hunit.TestCase
     override public function tearDown () : Void
     {
         super.tearDown();
+        Tweener.stopAll();
         Sx.dipFactor = 1;
+        Sx.root.removeChildren();
     }
 
 }//class TestCase
