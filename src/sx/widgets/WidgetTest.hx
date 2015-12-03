@@ -749,6 +749,21 @@ class WidgetTest extends TestCase
 
 
     @test
+    public function setChildIndex_minusOne_childMovedToTheTopOfDisplayList () : Void
+    {
+        var parent = new Widget();
+        var child  = parent.addChild(new Widget());
+        parent.addChild(new Widget());
+        parent.addChild(new Widget());
+
+        var index = parent.setChildIndex(child, -1);
+
+        var actual = parent.getChildIndex(child);
+        assert.equal(2, actual);
+    }
+
+
+    @test
     public function setChildIndex_negativeIndexInBounds_childMovedToCorrectIndex () : Void
     {
         var parent = new Widget();

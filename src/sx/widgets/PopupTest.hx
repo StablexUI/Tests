@@ -84,6 +84,82 @@ class PopupTest extends TestCase
 
 
     @test
+    public function show_hasOverlay_showsOverlayBehindPopup () : Void
+    {
+        var popup = new Popup();
+
+        popup.show();
+
+        var expected = popup.parent.getChildIndex(popup) - 1;
+        var actual = popup.parent.getChildIndex(popup.overlay);
+        assert.equal(expected, actual);
+        assert.isTrue(popup.overlay.visible);
+    }
+
+
+    @test
+    public function show_sxRootHasOtherChildren_popupIsOnTop () : Void
+    {
+        var popup = new Popup();
+        Sx.root.addChild(new Widget());
+        Sx.root.addChild(new Widget());
+
+        popup.show();
+
+        var expected = Sx.root.getChildAt(-1);
+        assert.equal(expected, popup);
+    }
+
+
+    @test
+    public function show_sxRootHasOtherChildren_overlayIsNextBehindPopup () : Void
+    {
+        var popup = new Popup();
+        Sx.root.addChild(new Widget());
+        Sx.root.addChild(new Widget());
+
+        popup.show();
+
+        var expected = Sx.root.getChildIndex(popup) - 1;
+        var actual = Sx.root.getChildIndex(popup.overlay);
+        assert.equal(expected, actual);
+    }
+
+
+    @test
+    public function show_nonSxRootParentHasOtherChildren_popupIsOnTop () : Void
+    {
+        var parent = new Widget();
+        var popup = new Popup();
+        parent.addChild(popup);
+        parent.addChild(new Widget());
+        parent.addChild(new Widget());
+
+        popup.show();
+
+        var expected = parent.getChildAt(-1);
+        assert.equal(expected, popup);
+    }
+
+
+    @test
+    public function show_nonSxRootHParentasOtherChildren_overlayIsNextBehindPopup () : Void
+    {
+        var parent = new Widget();
+        var popup = new Popup();
+        parent.addChild(popup);
+        parent.addChild(new Widget());
+        parent.addChild(new Widget());
+
+        popup.show();
+
+        var expected = parent.getChildIndex(popup) - 1;
+        var actual = parent.getChildIndex(popup.overlay);
+        assert.equal(expected, actual);
+    }
+
+
+    @test
     public function close_isChildOfSxRoot_removedFromSxRoot () : Void
     {
         var popup = new Popup();
@@ -182,6 +258,21 @@ class PopupTest extends TestCase
 
         actuator.complete();
         assert.isTrue(dispatched);
+    }
+
+
+    @test
+    public function close_hasOverlay_hidesOverlayBeforeDispatchingOnClose () : Void
+    {
+        var popup = new Popup();
+        popup.show();
+
+        popup.onClose.add(function(p) {
+            assert.isFalse(popup.overlay.visible);
+            assert.equal(popup.parent, popup.overlay.parent);
+        });
+
+        popup.close();
     }
 
 }//class PopupTest
