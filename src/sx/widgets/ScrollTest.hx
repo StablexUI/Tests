@@ -80,4 +80,17 @@ class ScrollTest extends TestCase
         assert.equal(-600., content.left.dip);
     }
 
+
+    @test
+    public function addChild_childAddedAboveScrollBars_movesChildBehindScrollBars () : Void
+    {
+        var scroll = new Scroll();
+        var child = scroll.addChild(new Widget());
+
+        var index = scroll.getChildIndex(child);
+
+        assert.equal(3, scroll.numChildren); //child + vertical and horizontal scroll bars
+        assert.equal(0, index);
+    }
+
 }//class ScrollTest

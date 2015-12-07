@@ -113,16 +113,14 @@ class WidgetTest extends TestCase
     {
         var correct : {
             parent : Bool,
-            child  : Bool,
-            index  : Bool
+            child  : Bool
         } = null;
         var parent = new Widget();
         var child  = new Widget();
-        parent.onChildAdded.add(function (p, c, i) {
+        parent.onChildAdded.add(function (p, c) {
             correct = {
                 parent : (p == parent),
-                child  : (c == child),
-                index  : (i == 0)
+                child  : (c == child)
             }
         });
 
@@ -130,7 +128,6 @@ class WidgetTest extends TestCase
 
         assert.isTrue(correct.parent, 'Incorrect parent in onChildAdded signal');
         assert.isTrue(correct.child, 'Incorrect child in onChildAdded signal');
-        assert.isTrue(correct.index, 'Incorrect index in onChildAdded signal');
     }
 
 
@@ -139,16 +136,14 @@ class WidgetTest extends TestCase
     {
         var correct : {
             parent : Bool,
-            child  : Bool,
-            index  : Bool
+            child  : Bool
         } = null;
         var parent = new Widget();
         var child  = new Widget();
-        child.onParentChanged.add(function (p, c, i) {
+        child.onParentChanged.add(function (p, c) {
             correct = {
                 parent : (p == parent),
-                child  : (c == child),
-                index  : (i == 0)
+                child  : (c == child)
             }
         });
 
@@ -156,7 +151,6 @@ class WidgetTest extends TestCase
 
         assert.isTrue(correct.parent, 'Incorrect parent in onParentChanged signal');
         assert.isTrue(correct.child, 'Incorrect child in onParentChanged signal');
-        assert.isTrue(correct.index, 'Incorrect index in onParentChanged signal');
     }
 
 
@@ -212,16 +206,14 @@ class WidgetTest extends TestCase
     {
         var correct : {
             parent : Bool,
-            child  : Bool,
-            index  : Bool
+            child  : Bool
         } = null;
         var parent = new Widget();
         var child  = parent.addChild(new Widget());
-        parent.onChildRemoved.add(function (p, c, i) {
+        parent.onChildRemoved.add(function (p, c) {
             correct = {
                 parent : (p == parent),
-                child  : (c == child),
-                index  : (i == 0)
+                child  : (c == child)
             }
         });
 
@@ -229,7 +221,6 @@ class WidgetTest extends TestCase
 
         assert.isTrue(correct.parent, 'Incorrect parent in onChildRemoved signal');
         assert.isTrue(correct.child, 'Incorrect child in onChildRemoved signal');
-        assert.isTrue(correct.index, 'Incorrect index in onChildRemoved signal');
     }
 
 
@@ -238,16 +229,14 @@ class WidgetTest extends TestCase
     {
         var correct : {
             parent : Bool,
-            child  : Bool,
-            index  : Bool
+            child  : Bool
         } = null;
         var parent = new Widget();
         var child  = parent.addChild(new Widget());
-        child.onParentChanged.add(function (p, c, i) {
+        child.onParentChanged.add(function (p, c) {
             correct = {
                 parent : (p == null),
-                child  : (c == child),
-                index  : (i == 0)
+                child  : (c == child)
             }
         });
 
@@ -255,7 +244,6 @@ class WidgetTest extends TestCase
 
         assert.isTrue(correct.parent, 'Incorrect parent in onParentChanged signal');
         assert.isTrue(correct.child, 'Incorrect child in onParentChanged signal');
-        assert.isTrue(correct.index, 'Incorrect index in onParentChanged signal');
     }
 
 
@@ -425,16 +413,14 @@ class WidgetTest extends TestCase
     {
         var correct : {
             parent : Bool,
-            child  : Bool,
-            index  : Bool
+            child  : Bool
         } = null;
         var parent = new Widget();
         var child  = new Widget();
-        parent.onChildAdded.add(function (p, c, i) {
+        parent.onChildAdded.add(function (p, c) {
             correct = {
                 parent : (p == parent),
-                child  : (c == child),
-                index  : (i == 0)
+                child  : (c == child)
             }
         });
 
@@ -442,7 +428,6 @@ class WidgetTest extends TestCase
 
         assert.isTrue(correct.parent, 'Incorrect parent in onChildAdded signal');
         assert.isTrue(correct.child, 'Incorrect child in onChildAdded signal');
-        assert.isTrue(correct.index, 'Incorrect index in onChildAdded signal');
     }
 
 
@@ -451,16 +436,14 @@ class WidgetTest extends TestCase
     {
         var correct : {
             parent : Bool,
-            child  : Bool,
-            index  : Bool
+            child  : Bool
         } = null;
         var parent = new Widget();
         var child  = new Widget();
-        child.onParentChanged.add(function (p, c, i) {
+        child.onParentChanged.add(function (p, c) {
             correct = {
                 parent : (p == parent),
-                child  : (c == child),
-                index  : (i == 0)
+                child  : (c == child)
             }
         });
 
@@ -468,7 +451,6 @@ class WidgetTest extends TestCase
 
         assert.isTrue(correct.parent, 'Incorrect parent in onParentChanged signal');
         assert.isTrue(correct.child, 'Incorrect child in onParentChanged signal');
-        assert.isTrue(correct.index, 'Incorrect index in onParentChanged signal');
     }
 
 
@@ -552,16 +534,14 @@ class WidgetTest extends TestCase
     {
         var correct : {
             parent : Bool,
-            child  : Bool,
-            index  : Bool
+            child  : Bool
         } = null;
         var parent = new Widget();
         var child  = parent.addChild(new Widget());
-        parent.onChildRemoved.add(function (p, c, i) {
+        parent.onChildRemoved.add(function (p, c) {
             correct = {
                 parent : (p == parent),
-                child  : (c == child),
-                index  : (i == 0)
+                child  : (c == child)
             }
         });
 
@@ -569,7 +549,6 @@ class WidgetTest extends TestCase
 
         assert.isTrue(correct.parent, 'Incorrect parent in onChildRemoved signal');
         assert.isTrue(correct.child, 'Incorrect child in onChildRemoved signal');
-        assert.isTrue(correct.index, 'Incorrect index in onChildRemoved signal');
     }
 
 
@@ -578,16 +557,14 @@ class WidgetTest extends TestCase
     {
         var correct : {
             parent : Bool,
-            child  : Bool,
-            index  : Bool
+            child  : Bool
         } = null;
         var parent = new Widget();
         var child  = parent.addChild(new Widget());
-        child.onParentChanged.add(function (p, c, i) {
+        child.onParentChanged.add(function (p, c) {
             correct = {
                 parent : (p == null),
-                child  : (c == child),
-                index  : (i == 0)
+                child  : (c == child)
             }
         });
 
@@ -595,7 +572,6 @@ class WidgetTest extends TestCase
 
         assert.isTrue(correct.parent, 'Incorrect parent in onParentChanged signal');
         assert.isTrue(correct.child, 'Incorrect child in onParentChanged signal');
-        assert.isTrue(correct.index, 'Incorrect index in onParentChanged signal');
     }
 
 
