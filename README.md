@@ -8,7 +8,7 @@ These are common tests for StablexUI. All backends should pass these tests in ad
 Installation
 -----------------------
 ```
-haxelib git https://github.com/StablexUI/Tests stablexui-tests
+haxelib git stablexui-tests https://github.com/StablexUI/Tests master
 ```
 
 
