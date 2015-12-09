@@ -37,22 +37,22 @@ class OffsetTest extends TestCase
         );
 
         assert.equal(offset.right, (offset.left:Coordinate).pair());
-        assert.isNull((offset.left:Coordinate).ownerSize);
+        assert.equal(width, (offset.left:Coordinate).ownerSize());
         assert.equal(width, (offset.left:Coordinate).pctSource());
         assert.isTrue(offset.left.selected);
 
         assert.equal(offset.left, (offset.right:Coordinate).pair());
-        assert.isNull((offset.right:Coordinate).ownerSize);
+        assert.equal(width, (offset.right:Coordinate).ownerSize());
         assert.equal(width, (offset.right:Coordinate).pctSource());
         assert.isFalse(offset.right.selected);
 
         assert.equal(offset.bottom, (offset.top:Coordinate).pair());
-        assert.isNull((offset.top:Coordinate).ownerSize);
+        assert.equal(height, (offset.top:Coordinate).ownerSize());
         assert.equal(height, (offset.top:Coordinate).pctSource());
         assert.isTrue(offset.top.selected);
 
         assert.equal(offset.top, (offset.bottom:Coordinate).pair());
-        assert.isNull((offset.bottom:Coordinate).ownerSize);
+        assert.equal(height, (offset.bottom:Coordinate).ownerSize());
         assert.equal(height, (offset.bottom:Coordinate).pctSource());
         assert.isFalse(offset.bottom.selected);
     }
