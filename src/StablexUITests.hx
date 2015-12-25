@@ -26,6 +26,7 @@ class StablexUITests
         suite.addDirectory('sx');
         HUnit.addTestsFromHUnitFlag(suite);
         suite.run();
+        suite.exitWithCode();
     }
 
 }//class StablexUITests
