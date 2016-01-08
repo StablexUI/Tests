@@ -1,4 +1,6 @@
--main StablexUITests
 --no-inline
 -dce full
 -debug
+
+#add this line to test builds:
+#-main StablexUITests
