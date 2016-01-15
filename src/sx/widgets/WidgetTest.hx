@@ -784,6 +784,148 @@ class WidgetTest extends TestCase
 
 
     @test
+    public function moveChildAfter_childIndexIsLessThanAfterIndex_movesCorrectly () : Void
+    {
+        var parent = new Widget();
+        var child = parent.addChild(new Widget());
+        var after = parent.addChild(new Widget());
+
+        var newIndex = parent.moveChildAfter(child, after);
+
+        assert.equal(1, newIndex);
+        assert.equal(after, parent.getChildAt(0));
+        assert.equal(child, parent.getChildAt(1));
+    }
+
+
+    @test
+    public function moveChildAfter_childIndexIsGreaterThanAfterIndex_movesCorrectly () : Void
+    {
+        var parent = new Widget();
+        var after = parent.addChild(new Widget());
+        var child = parent.addChild(new Widget());
+
+        var newIndex = parent.moveChildAfter(child, after);
+
+        assert.equal(1, newIndex);
+        assert.equal(after, parent.getChildAt(0));
+        assert.equal(child, parent.getChildAt(1));
+    }
+
+
+    @test
+    public function moveChildAfter_afterIsTheSameChild_doesNothing () : Void
+    {
+        var parent = new Widget();
+        parent.addChild(new Widget());
+        var child = parent.addChild(new Widget());
+        parent.addChild(new Widget());
+
+        var newIndex = parent.moveChildAfter(child, child);
+
+        assert.equal(1, newIndex);
+        assert.equal(child, parent.getChildAt(1));
+    }
+
+
+    @test
+    public function moveChildAfter_childIsNotAChild_throwsException () : Void
+    {
+        var parent = new Widget();
+        var child = new Widget();
+        var after = parent.addChild(new Widget());
+
+        expectException(match.type(NotChildException));
+
+        parent.moveChildAfter(child, after);
+    }
+
+
+    @test
+    public function moveChildAfter_afterIsNotAChild_throwsException () : Void
+    {
+        var parent = new Widget();
+        var child = parent.addChild(new Widget());
+        var after = new Widget();
+
+        expectException(match.type(NotChildException));
+
+        parent.moveChildAfter(child, after);
+    }
+
+
+    @test
+    public function moveChildBefore_childIndexIsLessThanBeforeIndex_movesCorrectly () : Void
+    {
+        var parent = new Widget();
+        var child = parent.addChild(new Widget());
+        var before = parent.addChild(new Widget());
+
+        var newIndex = parent.moveChildBefore(child, before);
+
+        assert.equal(0, newIndex);
+        assert.equal(child, parent.getChildAt(0));
+        assert.equal(before, parent.getChildAt(1));
+    }
+
+
+    @test
+    public function moveChildBefore_childIndexIsGreaterThanBeforeIndex_movesCorrectly () : Void
+    {
+        var parent = new Widget();
+        var before = parent.addChild(new Widget());
+        var child = parent.addChild(new Widget());
+
+        var newIndex = parent.moveChildBefore(child, before);
+
+        assert.equal(0, newIndex);
+        assert.equal(child, parent.getChildAt(0));
+        assert.equal(before, parent.getChildAt(1));
+    }
+
+
+    @test
+    public function moveChildBefore_beforeIsTheSameChild_doesNothing () : Void
+    {
+        var parent = new Widget();
+        parent.addChild(new Widget());
+        var child = parent.addChild(new Widget());
+        parent.addChild(new Widget());
+
+        var newIndex = parent.moveChildBefore(child, child);
+
+        assert.equal(1, newIndex);
+        assert.equal(child, parent.getChildAt(1));
+    }
+
+
+    @test
+    public function moveChildBefore_childIsNotAChild_throwsException () : Void
+    {
+        var parent = new Widget();
+        var child = new Widget();
+        var before = parent.addChild(new Widget());
+
+        expectException(match.type(NotChildException));
+
+        parent.moveChildBefore(child, before);
+    }
+
+
+    @test
+    public function moveChildBefore_beforeIsNotAChild_throwsException () : Void
+    {
+        var parent = new Widget();
+        var child = parent.addChild(new Widget());
+        var before = new Widget();
+
+        expectException(match.type(NotChildException));
+
+        parent.moveChildBefore(child, before);
+    }
+
+
+    @test
     public function getChildAt_positiveIndexInBounds_returnsCorrectChild () : Void
     {
         var parent = new Widget();
