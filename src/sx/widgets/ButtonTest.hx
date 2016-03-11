@@ -237,4 +237,19 @@ class ButtonTest extends TestCase
         assert.isFalse(button.pressed);
     }
 
+
+    @test
+    public function onRelease_userPressedThenMovedOutWhileReleaseOnPointerOutIsTrue_onReleaseDispatched () : Void
+    {
+        var dispatched = false;
+        var button = new Button();
+        button.releaseOnPointerOut = true;
+        button.onRelease.add(function(b) dispatched = true);
+
+        button.onPointerPress.dispatch(button, button, 0);
+        button.onPointerOut.dispatch(button, button, 0);
+
+        assert.isTrue(dispatched);
+    }
+
 }//class ButtonTest
