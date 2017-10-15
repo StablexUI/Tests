@@ -138,4 +138,50 @@ class TweenerTest extends TestCase
         assert.equal(5, updated);
     }
 
+    @test
+    public function tween_onTweenerComplete_validValuesSet () : Void
+    {
+
+        var tweener = new Tweener();
+        var completed = false;
+        var value = 0.5;
+        tweener.tween(5, value = 10).onComplete(function() {
+            completed = true;
+            assert.equal(10.0, value);
+        });
+
+        for (i in 0...10) {
+            this.advanceTime();
+            Tweener.update();
+        }
+
+        assert.isTrue(completed);
+    }
+
+    @test
+    public function tween_reverseCompleted_validValuesSet () : Void
+    {
+
+        var tweener = new Tweener();
+        var completed = false;
+        var reversed = false;
+        var value = 0.5;
+        tweener.tween(5, value = 10).reverse()
+            .onReverse(function() {
+                reversed = true;
+                assert.isTrue(value > (10 - 0.5) / 2); //`value` is closer to `10` than to `0.5`
+            })
+            .onComplete(function() {
+                completed = true;
+                assert.equal(0.5, value);
+            });
+
+        for (i in 0...10) {
+            this.advanceTime();
+            Tweener.update();
+        }
+
+        assert.isTrue(completed);
+    }
+
 }//class TweenerTest
